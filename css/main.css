@@ -1,0 +1,277 @@
+body {
+	display: block;
+}
+.WH {
+	font-family: "Open Sans", Helvetica, Calibri, Arial, sans-serif;
+	font-size: 14px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+
+
+
+
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#a4b357+0,75890c+100;Olive+3D+%233 */
+	background: #a4b357; /* Old browsers */
+	background: -moz-linear-gradient(top,  #a4b357 0%, #75890c 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a4b357), color-stop(100%,#75890c)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #a4b357 0%,#75890c 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #a4b357 0%,#75890c 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #a4b357 0%,#75890c 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #a4b357 0%,#75890c 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a4b357', endColorstr='#75890c',GradientType=0 ); /* IE6-9 */
+
+
+}
+.WH_rosters {
+	float: left;
+	width: 270px;
+	border-right: 1px solid #666;
+	box-shadow: 1px 0 2px rgba(0,0,0,0.3);
+	height: 100%;
+	background-color: rgb(252, 252, 252);
+	font-size: 13px;
+}
+.WH_roster {
+	line-height: 17px;
+}
+.WH_roster--opened {
+	background: #f5f5f5;
+	/*border-top: 1px solid #eaeaea;
+	border-bottom: 1px solid #eaeaea;*/
+}
+.WH_roster_header {
+	display: block;
+	padding: 8px 8px 8px 33px;
+	height: 17px;
+	background-image: url("../pics/roster.gif");
+	background-position: 9px 9px;
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+.WH_roster_open_closed {
+	width:  16px;
+	height: 16px;
+	right:   8px;
+	top:     8px;
+	background-image: url("../pics/list.png");
+	float: right;
+	display: inline-block;
+}
+.WH_roster_add {
+	padding: 8px;
+	height: 17px;
+	text-align: center;
+	color: #0082c6;
+}
+.WH_roster_body {
+	display: none;
+}
+
+.WH_roster_army {
+	display: block;
+	padding: 8px 8px 8px 41px;
+	height: 17px;
+	background-position: 17px 9px;
+	background-repeat: no-repeat;
+	background-size: 16px 16px;
+	cursor: pointer;
+}
+.WH_roster_army--CD {
+	background-image: url("../pics/CD_symbol_chaos.jpg");
+}
+.WH_roster_army--selected {
+	background-color: darkgrey;
+	color: #FFF;
+}
+
+
+
+#WH_army {
+	position: absolute;
+	left: 278px;
+	right: 16px;
+	height: 100%;
+
+}
+#WH_army.WH_army--small {
+	right: 368px;
+
+}
+.WH_army_group {
+	
+}
+.WH_army_group_name {
+	margin-top: 16px;
+	margin-bottom: 10px;
+	padding: 3px;
+	border-radius: 3px;
+	word-wrap: break-word;
+	word-break: break-word;
+	font-size: 11px;
+	color: #fff;
+	background-color: rgba(0,0,0,0.3);
+}
+
+
+
+/*--------------------*/
+.popup__overlay {
+	display: none;
+    position: fixed;
+    left:  0;
+    top:  0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    text-align: center
+    }
+.popup {
+    display: inline-block;
+    vertical-align: middle;
+    width:100px;
+    height:100px;
+    background-color: #FFF;
+    } 
+.popup__overlay:after {
+    display: inline-block;
+    width:  0;
+    height: 100%;
+    vertical-align: middle;
+    content: ''
+    } 
+
+/*------armiesList----*/
+#armiesList {
+	display: none;
+}
+
+.WH_army_slot {
+	min-height: 38px;
+	background-color: #fff;
+	margin: 1px 0 0 1px;
+}
+.WH_army_slot:first-child {
+	border-radius: 3px 3px  0px 0px ;
+}
+.WH_army_slot:last-child {
+	border-radius: 0px 0px  3px 3px ;
+}
+.WH_army_unit {
+	min-height: 38px;
+}
+.WH_army_unit_name {
+	height: 16px;
+	padding: 11px;
+}
+.WH_army_unit_header_expand {
+	background-image: url('../pics/controls/expand.png')
+}
+.WH_army_unit_header_collapse {
+	background-image: url('../pics/controls/collapse.png')
+}
+
+.WH_army_unit_header_expand ,
+.WH_army_unit_header_collapse {
+	float: right;
+	position: relative;
+	width: 16px;
+	height: 16px;
+}
+.WH_army_unit_header_unit {
+	padding:11px 11px 11px 11px;
+	border-top: 1px dashed #bdbcbb;
+	font-size: 13px;
+	display: none;
+}
+
+#WH_options {
+	width: 368px;
+	float: right;
+	font-size: 13px;
+	height: 100%;
+	padding: 16px;
+	box-sizing:border-box;
+}
+
+.WH_options {
+	background-color: rgb(246, 246, 246);
+	border-radius: 3px;
+	height: 100%;
+}
+
+.WH_options_header {
+	background-color: rgb(252, 252, 252);
+	min-height: 24px;
+	overflow: hidden;
+	padding: 16px 16px 14px;
+	-webkit-border-radius: 5px 5px 0 0;
+	border-radius: 5px 5px 0 0;
+	font-size: 16px;
+	line-height: 24px;
+	font-weight: bold;
+	border-bottom: 1px solid rgba(0,0,0,0.12);
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+	box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+	text-shadow: 0 1px 0 #fff;
+	word-wrap: break-word;
+}
+.WH_options_body {
+	background: #f6f6f6;
+	padding: 10px;
+	overflow-x: auto;
+}
+
+
+.WH_option {
+	background: #fff;
+	margin-bottom: 10px;
+	border: 1px solid #dedddc;
+
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+	box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+.WH_option_header {
+	border-radius: 2px;
+	position: relative;
+	padding: 5px 8px 5px 8px;
+	background: #fff;	
+	min-height: 16px;
+	border-bottom: 1px solid #cccbca;
+}
+.WH_suboption_header {
+	border-radius: 2px;
+	position: relative;
+	padding: 5px 8px 5px 8px;
+	background: #fff;	
+	min-height: 16px;
+}
+.WH_suboption .WH_option_action{
+	border-top: 1px dashed #bdbcbb;
+}
+.WH_suboption:first-child .WH_option_action{
+	border-top: none;
+}
+
+.WH_option_action--used {
+	background-color: grey;
+	color: #FFF;
+}
+.WH_option_action {
+	border-radius: 2px;
+	position: relative;
+	padding: 5px 8px 5px 32px;
+	min-height: 16px;
+	background-repeat: no-repeat;
+	background-position: 8px 5px;
+}
+
+.WH_option_action--used:hover ,
+.WH_option_action:hover {
+	background-color: darkgrey;
+	color: #FFF;
+}
