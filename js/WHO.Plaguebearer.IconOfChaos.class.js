@@ -26,7 +26,7 @@ DeamonIconOfChaos.prototype.on  = function() {
         this.usedCount++;
         break;
     }
-    this.iUupdated();
+    this.iUpdated();
 }
 
 
@@ -41,6 +41,6 @@ DeamonIconOfChaos.prototype.off  = function() {
             break;
         }
     }
-    this.iUupdated();
+    this.iUpdated();
 }
 

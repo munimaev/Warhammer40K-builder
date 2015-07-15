@@ -18,6 +18,7 @@ var WHGroupe = function(o) {
 
     this.$link = o.$link;
     this.army = o.army;
+    this.groupName = o.structure.name;
     this.$this = $('<div />',{
         'class': 'WH_army_group',
     }); 
@@ -63,18 +64,52 @@ var WHGroupe = function(o) {
 }
 
 WHGroupe.prototype.check = function () {
-    var hasFirstEmptyOptional = false;
-    for (var i in this.slots) {
-        if (this.slots[i].slotType === 'necessarily') {
 
+    if (this.groupName == 'Dedicated transport') {
+        var allEmpty = true;
+        for (var i = this.slots.length-1; i >= 0 ; i--) {
+            if (!this.slots[i].isEmpty()) {
+                allEmpty = false;
+            }else {
+                this.slots.splice(i,1);
+            }
+        }
+        if (allEmpty) {
+            for (var i in this.army.structure) {
+                if (this.army.structure[i] === this) {
+                    this.$this.detach();
+                    this.army.structure.splice(i,1);
+                    break;
+                }
+            }
+        }
+        return true;
+    }
+
+    var hasFirstEmptyOptional = false;
+    var allNecessarilyIsFull = true;
+    for (var i in this.slots) {
+        if (this.slots[i].slotType === 'necessarily' && this.slots[i].isEmpty()) {
+            allNecessarilyIsFull = false;
+            break
+        }
+    }
+    for (var i in this.slots) {
+            
+        if (this.slots[i].slotType === 'necessarily') {
         }
         else if (this.slots[i].slotType === 'optional') {
-            if (this.slots[i].isEmpty() && hasFirstEmptyOptional) {
+            if (!allNecessarilyIsFull || (this.slots[i].isEmpty() && hasFirstEmptyOptional)) {
                 this.slots[i].notNeeden();
+            } else {
+                this.slots[i].needen();
             }
             if (this.slots[i].isEmpty()) {
                 hasFirstEmptyOptional = true;
             }
+        }
+        else if (this.slots[i].slotType === 'dedicated') {
+
         }
         else {
             throw {'text':'Unexpected slotType'};
@@ -86,8 +121,6 @@ WHGroupe.prototype.unselectAllUnit = function () {
         this.slots[sl].unselectUnit();
     }
 }
-
-
 
 // Методы хранятся в прототипе
 

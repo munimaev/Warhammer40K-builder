@@ -36,7 +36,7 @@ RewardsOfChaosGreaterRewardsDisable.prototype.enable = function () {
 						this.superOption.superOption[o].usedCount--;
 					}
 				}
-				this.iUupdated();
+				this.iUpdated();
 			}
 		}
 	}

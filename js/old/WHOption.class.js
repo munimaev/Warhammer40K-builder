@@ -100,7 +100,7 @@ WHOption.prototype.enable  = function() {
             this.superOption.usedCount++;
         }
         // this.setIsUsed(true);
-        this.iUupdated();
+        this.iUpdated();
     }
 }
 
@@ -121,7 +121,7 @@ WHOption.prototype.disable  = function() {
             this.superOption.usedCount--;
         }
         // this.setIsUsed(false);
-        this.iUupdated();
+        this.iUpdated();
     }
     //this.unit.printUnit();
 }
@@ -152,7 +152,7 @@ WHOption.prototype.isNeedShow = function() {
     return !this.defaultHide;
 }
 
-WHOption.prototype.iUupdated = function() {
+WHOption.prototype.iUpdated = function() {
     this.unit.updateAllOptions();
     this.unit.updateModels();
 }

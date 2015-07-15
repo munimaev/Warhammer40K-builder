@@ -29,7 +29,7 @@ DeamonInstrumentOfChaos.prototype.on  = function() {
         this.usedCount++;
         break;
     }
-    this.iUupdated();
+    this.iUpdated();
 }
 
 
@@ -45,6 +45,6 @@ DeamonInstrumentOfChaos.prototype.off  = function() {
             break;
         }
     }
-    this.iUupdated();
+    this.iUpdated();
 }
 

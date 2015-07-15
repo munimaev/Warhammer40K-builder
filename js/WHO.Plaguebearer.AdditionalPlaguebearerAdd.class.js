@@ -4,6 +4,7 @@ var PlaguebearerAdditionalPlaguebearerAdd = function(o) {
     this.cost = 9;
     this.actionText = 'Добавить чумоносца.';
     this.actionIcon = 'add_unit';
+    
     WHOption.apply(this, arguments);
     
     var _this = this;
@@ -37,6 +38,6 @@ PlaguebearerAdditionalPlaguebearerAdd.prototype.enable = function() {
                 createBy: this.superOption
             })
         )
-        this.iUpdated();
+        this.iUupdated();
     }
 }

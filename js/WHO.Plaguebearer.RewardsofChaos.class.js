@@ -47,7 +47,7 @@ PlaguebearerRewardsofChaos.prototype.enableReward = function(option){
                 break;
             }
         }
-        this.iUupdated();
+        this.iUpdated();
     }
 };
 
@@ -97,7 +97,7 @@ PlaguebearerRewardsofChaos.prototype.disableReward = function(option){
                 break;
             }
         }
-        this.iUupdated();
+        this.iUpdated();
     }
 };
 

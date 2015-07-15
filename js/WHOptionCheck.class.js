@@ -1,9 +1,6 @@
 // --------- Класс-потомок WHOptionSuper -----------
 var OptionChek = function(o) {
-
-
     WHOption.apply(this, arguments);
-
 	var _this = this;
 }
 
@@ -26,6 +23,7 @@ OptionChek.prototype.enable = function() {
 
 OptionChek.prototype.update = function() {
     WHOption.prototype.update.apply(this, arguments);
+    // console.log('this.usedCount',this.usedCount)
     if (this.usedCount > 0) {
     	this.setIsUsed(true);
     }
@@ -39,7 +37,7 @@ OptionChek.prototype.on = function() {
 		this.usedCount++;
 	}
 }
-OptionChek.prototype.on = function() {
+OptionChek.prototype.off = function() {
 	if (this.canEnable()) {
 		this.usedCount--;
 	}

@@ -30,7 +30,7 @@ PlaguebearerUpgradeToPlaguer.prototype.on  = function() {
         break;
     }
     
-    this.iUupdated();
+    this.iUpdated();
 }
 
 
@@ -47,7 +47,7 @@ PlaguebearerUpgradeToPlaguer.prototype.off  = function() {
         this.usedCount--;
         break;
     }
-    this.iUupdated();
+    this.iUpdated();
 }
 
 

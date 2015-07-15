@@ -3,6 +3,10 @@ var WHRoster = function(o) {
 
     this.$rosters = $('#rosters');
     this.armies = [];
+    this.armyList = ['DarkAngels','DeamonsOfChaos'];
+
+    this.$popup = $('#popup');
+    this.$popupBG = $('#popup__overlay');
 
     var _this = this;
     this.rosterOpenClosedClass = 'WH_roster_open_closed';
@@ -76,6 +80,57 @@ WHRoster.prototype.showBody = function() {
 WHRoster.prototype.addArmy = function() {
     this.armies.push(new DeamonsOfChaos({'roster':this}));
 }
+
+
+WHRoster.prototype.addArmy= function() {
+    this.$popup.empty();
+    for (var a in this.armyList) {
+        this.$popup.append(this.getArmySelectOptions(this,this.armyList[a]));
+    }
+    var _this = this;
+    var close = $('<div />', {
+        'text': 'close',
+        'click':function() {
+            var __this = _this
+            return function() {
+                __this.closePopup();
+            }
+        }()
+    });
+    this.$popup.append(close);
+    this.$popupBG.show();
+}
+WHRoster.prototype.closePopup = function() {
+    this.$popupBG.hide();
+    this.$popup.empty();
+}
+WHRoster.prototype.getArmySelectOptions = function(slot,obj) {
+    var result = $('<div />',{
+        'class':"WH_army_slot"
+    });
+    var unit = $('<div />',{
+        'class':"WH_army_unit"
+    });
+    var name = $('<div />',{
+        'class':"WH_army_unit_name",
+        'text': window[obj].prototype.visibleName,
+        'click':function() {
+            var __this = slot;
+            var __obj = obj;
+            return function() {
+                __this.armies.push(new window[__obj]({
+                    roster : __this
+                }));
+                // __this.army.checkAllGroup();
+                __this.closePopup();
+            }
+        }()
+    });
+    unit.append(name);
+    result.append(unit);
+    return result;
+}
+
 WHRoster.prototype.unselectAllArmy = function() {
     for (var i in this.armies) {
         this.armies[i].unselect();

@@ -50,6 +50,6 @@ PlaguebearerAdditionalPlaguebearerRemove.prototype.enable = function() {
             this.unit.models.splice(i,1);
             break;
         }
-        this.iUpdated();
+        this.iUupdated();
     }
 }

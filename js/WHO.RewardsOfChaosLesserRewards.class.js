@@ -31,9 +31,6 @@ var RewardsOfChaosLesserRewards = function(o) {
         return this.superOption.superOption.disableReward(this);   
     }
 
-
-
-
     this.funIsNeedShow = this.funCanDisable;
 
     OptionCounter.apply(this, arguments);
@@ -45,27 +42,6 @@ RewardsOfChaosLesserRewards.prototype = Object.create(OptionCounter.prototype);
 
 // Желательно и constructor сохранить
 RewardsOfChaosLesserRewards.prototype.constructor = RewardsOfChaosLesserRewards;
-
-// RewardsOfChaosLesserRewards.prototype.canEnable = function () {
-//     if (!this.superOption.canEnable()) {
-//     	return false;
-//     }
-//     return this.superOption.canEnableRewardsOfChaos(this.optionName);
-// }
-
-// RewardsOfChaosLesserRewards.prototype.enable = function () {
-//     if (this.canEnable()) {
-//     	for (var i in this.unit.models) {
-//     		if (this.unit.models[i].modelName == 'Plaguer') {
-//     			this.unit.models[i].getedOptions.push('Lesser Rewards')
-//     		}
-//     	}
-//     	WHOption.prototype.enable.apply(this);
-//     }
-// }
-
-
-
 
 
 

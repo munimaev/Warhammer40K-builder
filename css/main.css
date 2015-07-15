@@ -80,7 +80,11 @@ body {
 	cursor: pointer;
 }
 .WH_roster_army--CD {
-	background-image: url("../pics/CD_symbol_chaos.jpg");
+	background-image: url("../pics/armies/chaos_deamon.jpg");
+}
+.WH_roster_army--DarkAngel {
+	background-image: url("../pics/armies/dark_angels.png");
+
 }
 .WH_roster_army--selected {
 	background-color: darkgrey;
@@ -119,6 +123,8 @@ body {
 
 /*--------------------*/
 .popup__overlay {
+	font-family: "Open Sans", Helvetica, Calibri, Arial, sans-serif;
+	font-size: 14px;
 	display: none;
     position: fixed;
     left:  0;
@@ -126,14 +132,18 @@ body {
     width: 100%;
     height: 100%;
     z-index: 999;
-    text-align: center
+    text-align: center;
+    background-color:rgba(0,0,0,0.5);
     }
 .popup {
     display: inline-block;
     vertical-align: middle;
-    width:100px;
-    height:100px;
-    background-color: #FFF;
+    position: absolute;
+    top:15px;
+    right:15px;
+    bottom:15px;
+    left:15px;
+    background-color:rgba(255,255,255,0.5);
     } 
 .popup__overlay:after {
     display: inline-block;
@@ -154,17 +164,22 @@ body {
 	margin: 1px 0 0 1px;
 }
 .WH_army_slot:first-child {
-	border-radius: 3px 3px  0px 0px ;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
 }
 .WH_army_slot:last-child {
-	border-radius: 0px 0px  3px 3px ;
+	border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px;
 }
-.WH_army_unit {
+.WH_army_unit,
+.WH_popup_unit {
 	min-height: 38px;
 }
-.WH_army_unit_name {
+.WH_army_unit_name,
+.WH_popup_unit_name {
 	height: 16px;
 	padding: 11px;
+	text-align: left;
 }
 .WH_army_unit_header_expand {
 	background-image: url('../pics/controls/expand.png')
@@ -183,8 +198,22 @@ body {
 .WH_army_unit_header_unit {
 	padding:11px 11px 11px 11px;
 	border-top: 1px dashed #bdbcbb;
+
 	font-size: 13px;
 	display: none;
+}
+
+.WH_army_unit_header_special {
+	padding:11px 11px 11px 11px;
+	border-top: 1px dashed #bdbcbb;
+
+	font-size: 13px;
+	display: none;
+}
+
+.WH_army_unit_wargear_span--readyToChange {
+	color: darkred;
+	font-weight: bold;
 }
 
 #WH_options {
@@ -221,9 +250,19 @@ body {
 .WH_options_body {
 	background: #f6f6f6;
 	padding: 10px;
-	overflow-x: auto;
+	overflow: auto;
+	height: 100%;
+	box-sizing: border-box;
 }
 
+
+.WH_options_body0 {
+	height: 100%;
+	margin-top: -45px;
+	padding-top: 45px;
+	/*padding-bottom: 15px;*/
+	box-sizing: border-box;
+}
 
 .WH_option {
 	background: #fff;
@@ -250,10 +289,12 @@ body {
 	background: #fff;	
 	min-height: 16px;
 }
+.WH_suboption ,
 .WH_suboption .WH_option_action{
 	border-top: 1px dashed #bdbcbb;
 }
-.WH_suboption:first-child .WH_option_action{
+.WH_suboption:first-child ,
+ .WH_option_body  .WH_option_action:first-child{
 	border-top: none;
 }
 

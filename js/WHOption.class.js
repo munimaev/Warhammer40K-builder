@@ -12,6 +12,8 @@ var WHOption = function(o) {
     this.defaultHide =  this.defaultHide || o.defaultHide || false;
     this.isShow = !this.defaultHide;
 
+    this.autoSelectOption = this.autoSelectOption || false;
+
     this.actionText = this.actionText || o.actionText || null;
     this.headerText = this.headerText || o.headerText || null;
     this.actionIcon = this.actionIcon || o.actionIcon || 'default';
@@ -124,7 +126,7 @@ WHOption.prototype.enable  = function() {
     //         this.superOption.usedCount++;
     //     }
     //     // this.setIsUsed(true);
-    //     this.iUupdated();
+    //     this.iUpdated();
     // }
 }
 
@@ -145,7 +147,7 @@ WHOption.prototype.disable  = function() {
     //         this.superOption.usedCount--;
     //     }
     //     // this.setIsUsed(false);
-    //     this.iUupdated();
+    //     this.iUpdated();
     // }
     // //this.unit.printUnit();
 }
@@ -176,9 +178,10 @@ WHOption.prototype.isNeedShow = function() {
     return !this.defaultHide;
 }
 
-WHOption.prototype.iUupdated = function() {
+WHOption.prototype.iUpdated = function() {
     this.unit.updateAllOptions();
     this.unit.updateModels();
+
 }
 WHOption.prototype.update = function() {
     // console.log(this.optionName, this.isShow , this.isNeedShow)
@@ -223,4 +226,10 @@ WHOption.prototype.setIsUsed = function(b) {
     }
 }
 
-
+WHOption.prototype.autoSelect = function(b) {
+    for (var i in this.subOptions) {
+        if (this.subOptions[i].autoSelectOption) {
+            this.subOptions[i].on();
+        }
+    }
+}
