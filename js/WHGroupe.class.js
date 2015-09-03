@@ -24,8 +24,8 @@ var WHGroupe = function(o) {
     }); 
 
     this.$groupName = $('<div />',{
-        'class': 'WH_army_group_name',
-        'text' :  o.structure.name
+        'class': 'WH_army_group_name WH_army_group_name__'+o.structure.htmlClass,
+        'text' : o.structure.name,
     }); 
 
     this.$groupPool = $('<div />',{

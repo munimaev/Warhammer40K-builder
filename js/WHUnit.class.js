@@ -14,6 +14,7 @@ var WHUnit = function(o) {
     this.$alink = $('#WH_army');
     this.$scrollValue = 0;
     this.army = o.army;
+    // this.unique = this.unique || false;
     this.dedicatedTo = this.dedicatedTo || null;
     this.dedicatedTransport = this.dedicatedTransport || null; 
     var _this = this;
@@ -21,6 +22,8 @@ var WHUnit = function(o) {
 	this.models = [];
 	this.options = [];
 	this.unitWargear = [];
+	this.speccialRules = {general:[]};
+	this.warlordTraits = [];
 	this.price = this.price || 0;
 	this.isShowModels = false;
 	var _this = this;
@@ -92,6 +95,8 @@ var WHUnit = function(o) {
     this.defaultUnitWargear = this.defaultUnitWargear || [];
 	this.addDefaultStructure();
 	this.addDefaultOptions();
+	this.addDefaultSpecialRules();
+	this.addDefaultWarlordTraits();
 	this.updateHeaderPrice();
 	for (var i in this.options) {
 		this.options[i].autoSelect();
@@ -121,7 +126,52 @@ WHUnit.prototype.addDefaultOptions  = function() {
 		this.options.push(new window[this.optionsDefault[i]]({unit:this,$link:this.$oBody}));
 	};
 };
+WHUnit.prototype.addDefaultSpecialRules  = function() {
+	for (var i in this.defaultSpecialRules) {
+		if (typeof this.defaultSpecialRules[i] === 'string') {
+			if (window[this.defaultSpecialRules[i]]) {
+				this.speccialRules.general.push(new window[this.defaultSpecialRules[i]]({unit:this,createBy:this}));
+			}
+			else {
+				console.log("{specialRuleName: '"+this.defaultSpecialRules[i]+"',visibleName: '"+this.defaultSpecialRules[i]+"',},")
+			}
+		}
+		else if (typeof this.defaultSpecialRules[i] === 'object') {
+			console.log(this.defaultSpecialRules[i])
+			if (this.defaultSpecialRules[i].type === 'onModelName') {
+				if (!this.speccialRules.hasOwnProperty('onModelName')) {
+					this.speccialRules.onModelName = {};
+				}
+				for (var n in this.defaultSpecialRules[i].names) {
+					if (!this.speccialRules.onModelName.hasOwnProperty(this.defaultSpecialRules[i].names[n])) {
+						this.speccialRules.onModelName[this.defaultSpecialRules[i].names[n]] = [];
+					}
+					for (var r in this.defaultSpecialRules[i].rules) {
+						if (window[this.defaultSpecialRules[i].names[n]]) {
+							this.speccialRules.onModelName[this.defaultSpecialRules[i].names[n]].push(new window[this.defaultSpecialRules[i].rules[r]]({unit:this,createBy:this}))
+						}
+						else {
+							console.log("{specialRuleName: '"+this.defaultSpecialRules[i]+"',visibleName: '"+this.defaultSpecialRules[i]+"',},")
+						}
+					}
+				}
+			}
+		} 
+	}
+};
 
+WHUnit.prototype.addDefaultWarlordTraits  = function() {
+	for (var i in this.defaultWarlordTrait) {
+		if (typeof this.defaultWarlordTrait[i] === 'string') {
+			if (window[this.defaultWarlordTrait[i]]) {
+				this.warlordTraits.push(new window[this.defaultWarlordTrait[i]]({unit:this,createBy:this}));
+			}
+			else {
+				console.log("{warlordTraitName: '"+this.defaultWarlordTrait[i]+"',visibleName: '"+this.defaultWarlordTrait[i]+"',},")
+			}
+		}
+	}
+}
 WHUnit.prototype.printUnit  = function() {
 	console.clear();
 	console.log("==================");
@@ -139,6 +189,8 @@ WHUnit.prototype.printUnit  = function() {
 WHUnit.prototype.select  = function() {
 	this.army.unselectAllUnit();
 	this.$alink.addClass('WH_army--small');
+	this.updateAllOptions();
+	this.updateModels();
 	this.$olink.append(this.$options);
     this.$oBody.scrollTop(this.$scrollValue);
 };
@@ -166,6 +218,11 @@ WHUnit.prototype.updateAllOptions = function() {
 }
 WHUnit.prototype.getAdditionalCost = function() {
 	var additionalCost = 0;
+	for (var m in this.models) {
+		for (var c in this.models[m].changedWargear) {
+			additionalCost += this.models[m].changedWargear[c].cost;
+		}
+	}
 	for (var o in this.options) {
 		additionalCost += this.options[o].getAdditionalCost();
 	}
@@ -185,15 +242,57 @@ WHUnit.prototype.updateHeaderPrice = function(p) {
 }
 
 WHUnit.prototype.updateModels = function() {
+	var modelsArr = this.getUnicModelArr();
+	this.$lModels.empty();
+	for (var m in modelsArr) {
+		this.$lModels.append(modelsArr[m].model.printModel({count:modelsArr[m].count}));
+	}
+	this.$lSpecial.empty()
+
+	if (this.speccialRules.general.length) {
+		var $general = $('<div />');
+		$general.append($('<h5>',{text:'Special Rules'}));
+		for (var r in this.speccialRules.general) {
+			$general.append(this.speccialRules.general[r].getSpan());
+		}
+		this.$lSpecial.append($general);
+	}
+
+	if (this.speccialRules.hasOwnProperty('onModelName')) {
+		// console.log(this.speccialRules.onModelName)
+		for (var n in this.speccialRules.onModelName) {
+			var $onModelName = $('<div />');
+			$onModelName.append($('<h5>',{text: 'Special Rules - '+window[n].prototype.visibleModelName}));
+			for (var r in this.speccialRules.onModelName[n]) {
+				$onModelName.append(this.speccialRules.onModelName[n][r].getSpan());	
+			}
+			this.$lSpecial.append($onModelName);
+		}
+	}
+	if (this.warlordTraits.length) {
+		var $lWarlordTraits = $('<div />');
+		$lWarlordTraits.append($('<h5>',{text:'Warlord Trait'}));
+		for (var r in this.warlordTraits) {
+			$lWarlordTraits.append(this.warlordTraits[r].getSpan());
+		}
+		this.$lSpecial.append($lWarlordTraits);
+	}
+
+	// this.$lSpecial.html('Special Riles <br><small>' +this.defaultSpecialRules.join(', ')+'</small>');
+	// this.$lModels.html(modelsText);
+}
+
+WHUnit.prototype.getUnicModelArr = function(models) {
 	var modelsArr = [];
-	for (var M in this.models) {
-		this.models[M].clearWargear();
-		var m2 = this.modelDataForm(this.models[M]);
+	var models = models || this.models;
+	for (var M in models) {
+		models[M].clearWargear();
+		var m2 = this.modelDataForm(models[M]);
 		var equals = false;
 		for (var m in modelsArr) {
 			if (this.modelDataEquals(modelsArr[m], m2)) {
 				modelsArr[m].count++;
-				modelsArr[m].model = this.models[M];
+				modelsArr[m].model = models[M];
 				equals = true;
 				break;
 			}
@@ -202,12 +301,9 @@ WHUnit.prototype.updateModels = function() {
 			modelsArr.push(m2);
 		}
 	}
-	this.$lModels.empty();
-	for (var m in modelsArr) {
-		this.$lModels.append(modelsArr[m].model.printModel({count:modelsArr[m].count}));
-	}
-	// this.$lModels.html(modelsText);
+	return modelsArr;
 }
+
 WHUnit.prototype.modelDataEquals = function(m1, m2) {
 	if (m1.model.modelName != m2.model.modelName) {
 		return false;
@@ -299,7 +395,7 @@ var Plaguebearers = function(o) {
 	];
 
     this.structureDefault = {
-            "Plaguebearer": 10
+		"Plaguebearer": 10
     };
     this.defaultUnitWargear = [
     	'PlagueSword'
@@ -334,190 +430,15 @@ Plaguebearers.prototype.hasPlguer = function() {
 }
 
 
-// --------- Класс-потомок -----------
-var Belials = function(o) {
-	this.unitName = 'Belials';
-	this.price = 190;
-	this.optionsDefault = [
-		'BelialsWeaponReplace'
-	];
-	
-	this.structureDefault = {
-		'Belial' : 1
-	}
-    this.defaultUnitWargear = [
-    	'TerminatorArmor',
-    	// 'StromBolter',
-    	'IronHalo',
-    	'TeleportHommer',
-    ];
-	this.defaultSpecialRules = [
-		'Deathwing',
-		'GrimResolve', 
-		'Independent Character', 
-		'Marked for Retribution', 
-		'Tactical Precision',
-	];
-	WHUnit_Infantry.apply(this, arguments);
-}
-// Унаследовать
-Belials.prototype = Object.create(WHUnit_Infantry.prototype);
-// Желательно и constructor сохранить
-Belials.prototype.constructor = Belials;
-// Методы потомка 
-Belials.prototype.visibleName = 'Belial';
 
 
-
-
-// --------- Класс-потомок -----------
-var DA_VeteranSquade = function(o) {
-	this.unitName = 'DA_VeteranSquade';
-	this.price = 90;
-	this.optionsDefault = [
-		'DA_VeteranSquade_addVeteran',
-		'DA_RangedWeapons',
-		'DA_MeleeWeapons',
-		'DA_SpecialWeapons',
-		'DA_HeavyWeapons',
-		'DA_AddWargearBomb',
-		'DA_AddWargearShield',
-		'DA_DedicatedTransport',
-	];
-	this.structureDefault = {
-		'DA_Veteran_Sergant' : 1,
-		'DA_Veteran' : 4,
-	}
-    this.defaultUnitWargear = [
-    	'Boltgun',
-    	'BoltPistol',
-    	'FragGrenades',
-    	'KrakGrenades',
-    ];
-	this.defaultSpecialRules = [
-		'AndTheyShallKnowNoFear',
-		'CombatSquade', 
-		'GrimResolve', 
-	];
-	WHUnit_Infantry.apply(this, arguments);
-}
-// Унаследовать
-DA_VeteranSquade.prototype = Object.create(WHUnit_Infantry.prototype);
-// Желательно и constructor сохранить
-DA_VeteranSquade.prototype.constructor = DA_VeteranSquade;
-// Методы потомка 
-DA_VeteranSquade.prototype.visibleName = 'Veteran Squade';
-
-
-
-// --------- Класс-потомок -----------
-var DA_DropPod = function(o) {
-	this.unitName = 'DA_DropPod';
-	this.price = 35;
-	this.optionsDefault = [
-		// 'DA_DropPod_addVeteran',
-		// 'DA_RangedWeapons',
-		// 'DA_MeleeWeapons',
-		// 'DA_SpecialWeapons',
-		// 'DA_HeavyWeapons',
-		// 'DA_AddWargearBomb',
-		// 'DA_AddWargearShield',
-		// 'DA_DedicatedTransport',
-	];
-	this.structureDefault = {
-		'DropPod' : 1,
-	}
-    this.defaultUnitWargear = [
-    	// 'Boltgun',
-    	// 'BoltPistol',
-    	// 'FragGrenades',
-    	// 'KrakGrenades',
-    ];
-	this.defaultSpecialRules = [
-		// 'AndTheyShallKnowNoFear',
-		// 'CombatSquade', 
-		// 'GrimResolve', 
-	];
-	WHUnit_Vehicle.apply(this, arguments);
-}
-// Унаследовать
-DA_DropPod.prototype = Object.create(WHUnit_Vehicle.prototype);
-// Желательно и constructor сохранить
-DA_DropPod.prototype.constructor = DA_DropPod;
-// Методы потомка 
-DA_DropPod.prototype.visibleName = 'Drop Pod';
-DA_DropPod.prototype.price = 35;
-
-
-
-
-
-// --------- Класс-потомок -----------
-var DA_Rhino = function(o) {
-	this.unitName = 'DA_Rhino';
-	this.optionsDefault = [
-		'DA_VehicleEquipment'
-	];
-	this.structureDefault = {
-		'Rhino' : 1,
-	}
-    this.defaultUnitWargear = [
-		'StromBolter',
-		'Searchlight',
-		'SmokeLounchers',
-    ];
-	this.defaultSpecialRules = [
-		// 'Repair', 
-	];
-	WHUnit_Vehicle.apply(this, arguments);
-}
-// Унаследовать
-DA_Rhino.prototype = Object.create(WHUnit_Vehicle.prototype);
-// Желательно и constructor сохранить
-DA_Rhino.prototype.constructor = DA_Rhino;
-// Методы потомка 
-DA_Rhino.prototype.visibleName = 'Rhino';
-DA_Rhino.prototype.price = 35;
-
-
-
-
-// --------- Класс-потомок -----------
-var DA_Razorback = function(o) {
-	this.unitName = 'DA_Razorback';
-	this.price = 55;
-	this.optionsDefault = [
-		// 'DA_Razorback_addVeteran',
-		// 'DA_RangedWeapons',
-		// 'DA_MeleeWeapons',
-		// 'DA_SpecialWeapons',
-		// 'DA_HeavyWeapons',
-		// 'DA_AddWargearBomb',
-		// 'DA_AddWargearShield',
-		// 'DA_DedicatedTransport',
-	];
-	this.structureDefault = {
-		'Razorback' : 1,
-	}
-    this.defaultUnitWargear = [
-    	// 'Boltgun',
-    	// 'BoltPistol',
-    	// 'FragGrenades',
-    	// 'KrakGrenades',
-    ];
-	this.defaultSpecialRules = [
-		// 'AndTheyShallKnowNoFear',
-		// 'CombatSquade', 
-		// 'GrimResolve', 
-	];
-	WHUnit_Vehicle.apply(this, arguments);
-}
-// Унаследовать
-DA_Razorback.prototype = Object.create(WHUnit_Vehicle.prototype);
-// Желательно и constructor сохранить
-DA_Razorback.prototype.constructor = DA_Razorback;
-// Методы потомка 
-DA_Razorback.prototype.visibleName = 'Razorback';
-DA_Razorback.prototype.price = 55;
-
-
+/*
+WHOptionAddModelFabric([{
+    'optionName' : 'PlaguebearerAdditionalPlaguebearer',
+    'cost' : 9,
+    'actionTextUp' : 'Добавить чумоносца.',
+    'actionTextDown' : 'Удалить чумоносца.',
+    'maxCountAdding' : 10,
+    'modelToAdd' : 'Plaguebearer',
+}]);
+*/

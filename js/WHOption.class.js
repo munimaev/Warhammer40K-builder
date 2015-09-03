@@ -5,7 +5,7 @@ var WHOption = function(o) {
     this.unit = o.unit;
     this.optionName = this.optionName || '';
     this.cost = this.cost || 0;
-    this.text =  this.text || null;
+    // this.text =  this.text || null;
     this.usedCount = 0;
     this.usedCountMax = 1;
 
@@ -18,6 +18,9 @@ var WHOption = function(o) {
     this.headerText = this.headerText || o.headerText || null;
     this.actionIcon = this.actionIcon || o.actionIcon || 'default';
     this.superOption = o.hasOwnProperty('superOption') ? o.superOption : 'core' ;
+
+    this.blockedDisable = [];
+    this.blockedEnable = [];
 
     if (o.enable) {
         this.enable = o.enable;
@@ -32,6 +35,11 @@ var WHOption = function(o) {
     this.isUsed = false;
     this.canSetUsed = true;
     var _this = this;
+
+    this.$action = [];
+
+
+    this.$indicator = $action = $('<div />',{'class':'WH_option_action_indicator'});
 
     if (this.superOption === 'core') {
         this.$this = $('<div />',{
@@ -52,7 +60,8 @@ var WHOption = function(o) {
 
         if (this.actionText !== null) {
             this.$action = $('<div />',{
-                'class':'WH_option_action','text': this.getVisibleText(),
+                'class':'WH_option_action',
+                // 'text': this.getVisibleText(),
                 'style':"background-image:url('./pics/options/"+this.actionIcon+".png')",
                 'click' : function() {
                     var __this = _this;
@@ -61,7 +70,9 @@ var WHOption = function(o) {
                     }
                 }()
             });
+            this.$action.html(this.getVisibleText());
             this.$body.append(this.$action);
+                this.$action.append(this.$indicator);
         }
     }
     else {
@@ -69,6 +80,13 @@ var WHOption = function(o) {
             'class':'WH_suboption'
         });
 
+        if (this.headerText !== null) {
+            this.$header = $('<div />',{
+                'class':'WH_option_header','text': this.getVisibleHeader()
+            });
+            this.$this.append(this.$header);
+        }
+        
         this.$body = $('<div />',{
             'class':'WH_option_body'
         });
@@ -76,7 +94,8 @@ var WHOption = function(o) {
 
         if (this.actionText !== null) {
             this.$action = $('<div />',{
-                'class' : 'WH_option_action','text': this.getVisibleText(),
+                'class' : 'WH_option_action',
+                // 'text': this.getVisibleText(),
                 'style' : "background-image:url('./pics/options/"+this.actionIcon+".png')",
                 'click' : function() {
                     var __this = _this;
@@ -85,7 +104,10 @@ var WHOption = function(o) {
                     }
                 }()
             });
+            
+            this.$action.html(this.getVisibleText());
             this.$body.append(this.$action);
+                this.$action.append(this.$indicator);
         }
     }
 
@@ -93,6 +115,10 @@ var WHOption = function(o) {
     if (!this.isNeedShow()) {  
         this.$this.hide();
     }
+    this.enableIndicatorClass = o.enableIndicatorClass || 'WH_option_action_indicator--plus';
+    this.disableIndicatorClass = 'WH_option_action_indicator--exclamation';
+    this.blockedIndicatorClass = 'WH_option_action_indicator--exclamation';
+    this.update();
 }
 
 // Методы хранятся в прототипе
@@ -109,61 +135,19 @@ WHOption.prototype.printOption  = function() {
 }
 
 WHOption.prototype.canEnable  = function() {
+    if (this.superOption && this.superOption !== 'core') {
+        return this.superOption.canEnable();
+    }
     return true;
-    // if (this.usedCount >= this.usedCountMax) {
-    //     return false;
-    // }
-    // if (this.superOption !== 'core') {
-    //     return this.superOption.canEnable();
-    // }
-    // return true;
 }
 
 WHOption.prototype.enable  = function() {
-    // if (this.canEnable()) {
-    //     this.usedCount++;
-    //     if (this.superOption !== 'core') {
-    //         this.superOption.usedCount++;
-    //     }
-    //     // this.setIsUsed(true);
-    //     this.iUpdated();
-    // }
 }
 
 WHOption.prototype.canDisable  = function() {
-    // if (this.usedCount < 1) {
-    //     return false;
-    // }
-    // if (this.superOption !== 'core') {
-    //     return this.superOption.canDisable();
-    // }
-    // return true;
 }
 
 WHOption.prototype.disable  = function() {
-    // if (this.canDisable()) {
-    //     this.usedCount--;
-    //     if (this.superOption !== 'core') {
-    //         this.superOption.usedCount--;
-    //     }
-    //     // this.setIsUsed(false);
-    //     this.iUpdated();
-    // }
-    // //this.unit.printUnit();
-}
-
-WHOption.prototype.getTabText  = function() {
-    var parent = this;
-    var parentCount=0;
-    while (parent.superOption !== 'core') {
-        parentCount++;
-        parent = this.superOption;
-    }
-    var tabText = '';
-    for (var i = 1; i<= parentCount; i++) {
-        tabText += '    '; 
-    }
-    return tabText;
 }
 
 
@@ -184,12 +168,20 @@ WHOption.prototype.iUpdated = function() {
 
 }
 WHOption.prototype.update = function() {
-    // console.log(this.optionName, this.isShow , this.isNeedShow)
     if (!this.isShow && this.isNeedShow()) {
         this.show();
     } 
     else if (this.isShow && !this.isNeedShow()) {
         this.hide();
+    }
+    if (this.isBlocked()) {
+        this.showBlockedIndicator();
+    }
+    else if (this.canEnable()) {
+        this.showEnableIndicator();
+    }
+    else {
+        this.showDisableIndicator();
     }
     for (var o in this.subOptions) {
         this.subOptions[o].update();
@@ -203,6 +195,23 @@ WHOption.prototype.show = function() {
 WHOption.prototype.hide = function() {
     this.$this.hide(125);
     this.isShow = false;
+}
+
+WHOption.prototype.showEnableIndicator = function() {
+    this.$indicator.removeClass(this.blockedIndicatorClass);
+    this.$indicator.removeClass(this.disableIndicatorClass);
+    this.$indicator.addClass(this.enableIndicatorClass);
+}
+WHOption.prototype.showDisableIndicator = function() {
+    this.$indicator.removeClass(this.blockedIndicatorClass);
+    this.$indicator.removeClass(this.enableIndicatorClass);
+    this.$indicator.addClass(this.disableIndicatorClass);
+}
+
+WHOption.prototype.showBlockedIndicator = function() {
+    this.$indicator.removeClass(this.enableIndicatorClass);
+    this.$indicator.removeClass(this.disableIndicatorClass);
+    this.$indicator.addClass(this.blockedIndicatorClass);
 }
 
 WHOption.prototype.getAdditionalCost = function() {
@@ -232,4 +241,11 @@ WHOption.prototype.autoSelect = function(b) {
             this.subOptions[i].on();
         }
     }
+}
+
+WHOption.prototype.isBlocked = function() {
+    if (this.superOption && this.superOption !== 'core') {
+        return this.superOption.isBlocked();
+    }
+    return false;
 }

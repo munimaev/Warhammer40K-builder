@@ -29,6 +29,7 @@ var WHArmy = function(o) {
 
     this.defaultStructure = this.defaultStructure || [{
         'name': 'HQ',
+        'htmlClass': 'HQ',
         'necessarily': [{
             'type': 'HQ'
         }],
@@ -37,6 +38,7 @@ var WHArmy = function(o) {
         }]
     }, {
         'name': 'Trs',
+        'htmlClass': 'Troops',
         'necessarily': [{
             'type': 'Troop'
         },{
@@ -53,10 +55,60 @@ var WHArmy = function(o) {
         },{
             'type': 'Troop'
         }]
+    }, {
+        'name': 'Fast',
+        'htmlClass': 'FastAttack',
+        'optional': [{
+            'type': 'Fast'
+        },{
+            'type': 'Fast'
+        },{
+            'type': 'Fast'
+        },{
+            'type': 'Fast'
+        },{
+            'type': 'Fast'
+        },{
+            'type': 'Fast'
+        }]
+    }, {
+        'name': 'Elite',
+        'htmlClass': 'Elite',
+        'optional': [{
+            'type': 'Elite'
+        },{
+            'type': 'Elite'
+        },{
+            'type': 'Elite'
+        },{
+            'type': 'Elite'
+        },{
+            'type': 'Elite'
+        },{
+            'type': 'Elite'
+        }]
+    }, {
+        'name': 'Heavy support',
+        'htmlClass': 'HeavySupport',
+        'optional': [{
+            'type': 'Heavy'
+        },{
+            'type': 'Heavy'
+        },{
+            'type': 'Heavy'
+        },{
+            'type': 'Heavy'
+        },{
+            'type': 'Heavy'
+        },{
+            'type': 'Heavy'
+        }]
     }];
 
     this.$armyDiv = $('#WH_army');
-    this.$this = $('<div />',{});
+    this.$this = $('<div />',{
+        'class':'WH_army_in'
+    });
 
     this.structure = [];
 
@@ -108,7 +160,25 @@ WHArmy.prototype.addUnit = function(o) {
     if (!o.roster) {
         throw {'text':'Not set rosters'};
     }
+}
 
+
+WHArmy.prototype.alreadyTakenUnit = function(o) {
+    if (!o) {
+        throw {'text':'Not set object'};
+    }
+    if (!o.name) {
+        throw {'text':'Not set name'};
+    }
+    for (var g in this.structure) {
+        for (var s in  this.structure[g].slots) {
+            if (this.structure[g].slots[s].unit !== null
+                && this.structure[g].slots[s].unit.unitName === o.name) {
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 
@@ -137,8 +207,55 @@ var DarkAngels = function() {
     this.armyName = 'DarkAngels';
     this.htmlClass = 'WH_roster_army--DarkAngel';
     this.unitList = {
-        'HQ' : ['Belials'],
-        'Troop' : ['DA_VeteranSquade'],
+        'HQ': [
+            'Belials',
+            'Sammaels',
+            'Sableclaws',
+            'DA_InterrogatorChaplain',
+            'Asmodais',
+            'DA_Librarian',
+            'Ezekiels',
+            'DA_Chaplain',
+            'DA_Techmarine',
+            'Azraels',
+        ],
+        'Troop': [
+            'DA_TacticalSquad',
+            'DA_ScoutSquad',
+        ],
+        'Elite' : [
+            'DA_VeteranSquad',
+            'DA_CommandSquad',
+            'DA_Dreadnoughts',
+            'DA_VenerableDreadnoughts',
+            'DA_DeathwingTerminatorSquad',
+            'DA_DeathwingCommandSquad',
+            'DA_DeathwingKnightSquad',
+            'DA_RavenwingCommandSquad',
+        ],
+        'Fast': [
+            'DA_Rhino',
+            'DA_Razorback',
+            'DA_DropPod',
+            'DA_AssaultSquad',
+            'DA_RavenwingSquad',
+            'DA_RavenwingAttackBikeSquad',
+            'DA_RavenwingLandSpeeder',
+            'DA_RavenwingDarkshroud',
+            'DA_NephilimJetfighter',
+            'DA_RavenwingDarkTalon',
+            'DA_RavenwingBlackKnights',
+        ],
+        'Heavy': [
+            'DA_DevastatorSquad',
+            'DA_Predator',
+            'DA_Whirlwind',
+            'DA_Vindicator',
+            'DA_LandRaider',
+            'DA_LandRaiderCrusader',
+            'DA_LandRaiderRedeemer',
+        ],
+
     }
     WHArmy.apply(this, arguments);
 }

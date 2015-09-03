@@ -36,7 +36,8 @@ var OptionCounter = function(o) {
 		enable: this.funDisable,
 		actionIcon: this.actionIconDown,
 		defaultHide : true,
-		isNeedShow: this.funIsNeedShow
+		isNeedShow: this.funIsNeedShow,
+		enableIndicatorClass : 'WH_option_action_indicator--minus'
 	}));
 
 }

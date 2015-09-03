@@ -20,6 +20,7 @@ ChangeFromWargear_class.prototype.enableWeapon = function(option, superOption){
     if (this.canEnableWeapon(option, superOption)) {
 
         for (var m in this.unit.models) {
+            this.unit.models[m].readyToChange = null;
             for (var w =this.unit.models[m].wargear.length-1; w >= 0; w--) {
                 if (this.isWargearToChange(this.unit.models[m].wargear[w], this.unit.models[m])) {
                     this.unit.models[m].wargear[w].readyToChange = {
@@ -62,13 +63,15 @@ ChangeFromWargear_class.prototype.disableWeapon = function(option){
     //option.superOption - RewardsOfChaosLesserRewards 
     //option.superOption.superOption - ChangeFromWargear_class 
     if (this.canDisableWeapon(option)) {
-
+        var wargearToChange = [];
         for (var m in this.unit.models) {
+            this.unit.models[m].readyToChange = null;
             for (var w in this.unit.models[m].wargear) {
                 if (
                     this.unit.models[m].wargear[w].createBy === option.superOption
                 ) {
                     this.unit.models[m].wargear[w].readyToChange = this.unit.models[m].wargear[w].changedFrom;
+                    wargearToChange.push(this.unit.models[m].wargear[w]);
                 } 
                 else {
                     this.unit.models[m].wargear[w].readyToChange = null;
@@ -78,6 +81,9 @@ ChangeFromWargear_class.prototype.disableWeapon = function(option){
         this.unit.isShowModels = true;
         this.unit.$lModels.show();
         this.unit.updateModels();
+        if (wargearToChange.length === 1) {
+            wargearToChange[0].click();
+        }
         // this.iUpdated();
     }
 };
@@ -149,19 +155,17 @@ AddFromWargear_class.prototype.enableWeapon = function(option, superOption){
     //option - WHOption - on/off
     //option.superOption - DA_RangedWeapons_Boltgun 
     //option.superOption.superOption - DA_RangedWeapons / AddFromWargear_class / this 
+    //
     var superOption = option !== null ? option.superOption : superOption;
     if (this.canEnableWeapon(option, superOption)) {
-
+        var modelsHoCanGet = [];
         for (var m in this.unit.models) {
-
-
+            this.unit.models[m].readyToChange = null;
             for (var w in this.unit.models[m].wargear){
-                // this.unit.models[m].wargear[w].readyToChange = null;
                 if (this.unit.models[m].wargear[w].wargearName == 'emptySlot' ) {
                     this.unit.models[m].wargear.splice(w,1);
                 }
             }
-
             if (this.isModelCanGet(this.unit.models[m], superOption)) {
 
                 this.unit.models[m].addWargear({name:'emptySlot',createBy:this})
@@ -173,56 +177,29 @@ AddFromWargear_class.prototype.enableWeapon = function(option, superOption){
                 };
 
                 this.unit.models[m].wargear[this.unit.models[m].wargear.length-1].readyToChange.needChekEnambleEachTime = true;
+
+                modelsHoCanGet.push(this.unit.models[m].wargear[this.unit.models[m].wargear.length-1]);
                 
-            } 
+            }
             else {
                 for (var w in this.unit.models[m].wargear){
-                //     console.log(this.unit.models[m].wargear.wargearName);
                     this.unit.models[m].wargear[w].readyToChange = null;
-                //     if (this.unit.models[m].wargear[w].wargearName == 'emptySlot' ) {
-                //         this.unit.models[m].wargear.splice(w,1);
-                //     }
                 }
             }
         }
+
+
         this.unit.isShowModels = true;
         this.unit.$lModels.show();
         this.unit.updateModels();
+        if (modelsHoCanGet.length === 1) {
+            modelsHoCanGet[0].click();
+        }
         // this.iUpdated();
     }
 };
 
 
-
-
-
-
-var DA_AddWargearBomb = function(o) {
-    this.defaultSubOptions = [
-        'DA_AddWargearBomb_MeltaBomb'
-    ]
-    this.optionName = 'DA_AddWargearBomb';
-    this.cost = 0;
-    this.headerText = 'Любая модель взять следующее';
-    this.isModelCanGet =  function(m, superOption) {
-        for (var i in m.wargear) {
-            console.log(m.wargear[i].wargearName)
-            console.log(m.wargear[i].createBy === superOption)
-
-            if (m.wargear[i].createBy === superOption
-                && m.wargear[i].wargearName !== 'emptySlot') {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    AddFromWargear_class.apply(this, arguments);
-}
-// Унаследовать
-DA_AddWargearBomb.prototype = Object.create(AddFromWargear_class.prototype);
-// Желательно и constructor сохранить
-DA_AddWargearBomb.prototype.constructor = DA_AddWargearBomb;
 
 
 
@@ -237,10 +214,6 @@ var DA_AddWargearShield = function(o) {
     this.headerText = 'Любая модель взять следующее';
     this.isModelCanGet =  function(m, superOption) {
         for (var i in m.wargear) {
-            console.log(m.wargear[i].wargearName)
-            console.log(m.wargear[i].createBy === superOption, m.wargear[i].wargearName !== 'emptySlot')
-            console.log(m.wargear[i].createBy,superOption)
-
             if (m.wargear[i].createBy.superOption === superOption.superOption
                 && m.wargear[i].wargearName !== 'emptySlot') {
                 return false;
@@ -267,7 +240,7 @@ DA_AddWargearShield.prototype.constructor = DA_AddWargearShield;
 var DA_RangedWeapons = function(o) {
     this.defaultSubOptions = [
         'DA_RangedWeapons_Boltgun',
-        'DA_RangedWeapons_StromBolter',
+        'DA_RangedWeapons_StormBolter',
         'DA_RangedWeapons_CombiFlamer',
         'DA_RangedWeapons_CombiGrav',
         'DA_RangedWeapons_CombiMelta',
@@ -275,10 +248,10 @@ var DA_RangedWeapons = function(o) {
         'DA_RangedWeapons_GraviPistol',
         'DA_RangedWeapons_PlasmaPistol',
     ]
-    this.optionName = 'DA_RangedWeapons';
+    this.optionName = this.optionName || 'DA_RangedWeapons';
     this.cost = 0;
-    this.headerText = 'Любая модель может заменить свой boltgun, bolt pistool и/или оружие ближнего боя на одно из cледующего';
-    this.isWargearToChange = function(w,m) {
+    this.headerText = this.headerText || 'Любая модель может заменить свой boltgun, bolt pistool и/или оружие ближнего боя на одно из списка Ranged Weapons';
+    this.isWargearToChange = this.isWargearToChange || function(w,m) {
         if ((w.wargearName == 'Boltgun' 
             || w.wargearName == 'BoltPistol' 
             || w.wargearType == 'MeleeWeapon'
@@ -297,10 +270,6 @@ DA_RangedWeapons.prototype = Object.create(ChangeFromWargear_class.prototype);
 DA_RangedWeapons.prototype.constructor = DA_RangedWeapons;
 
 
-
-
-
-// --------- Класс-потомок ChangeFromWargear_class -----------
 var DA_MeleeWeapons = function(o) {
     this.defaultSubOptions = [
         'DA_MeleeWeapons_Chainsword',
@@ -309,13 +278,14 @@ var DA_MeleeWeapons = function(o) {
         'DA_MeleeWeapons_PowerFist',
         'DA_MeleeWeapons_ThunderHammer',
     ]
-    this.optionName = 'DA_MeleeWeapons';
+    this.optionName = this.optionName || 'DA_MeleeWeapons';
     this.cost = 0;
-    this.headerText = 'Любая модель может заменить свой boltgun, bolt pistool и/или оружие ближнего боя на одно из cледующего';
-    this.isWargearToChange = function(w,m) {
+    this.headerText = this.headerText || 'Любая модель может заменить свой boltgun, bolt pistool и/или оружие ближнего боя на одно из списка Melee Weapons';
+    this.isWargearToChange  = this.isWargearToChange || function(w,m) {
         if ((w.wargearName == 'Boltgun' 
             || w.wargearName == 'BoltPistol' 
-            || w.wargearType == 'MeleeWeapon'
+            || w.wargearType == 'PowerWeapon'
+            || w.wargearType == 'MeleeWeapon' 
             ) && w.createBy === m
         ) {
             return true;
@@ -331,25 +301,21 @@ DA_MeleeWeapons.prototype = Object.create(ChangeFromWargear_class.prototype);
 DA_MeleeWeapons.prototype.constructor = DA_MeleeWeapons;
 
 
-
-
-// --------- Класс-потомок ChangeFromWargear_class -----------
-var DA_SpecialWeapons = function(o) {
+var DA_RelicsOfCliban_Replasced = function(o) {
     this.defaultSubOptions = [
-        'DA_SpecialWeapons_Flamer',
-        'DA_SpecialWeapons_MeltaGun',
-        'DA_SpecialWeapons_GravGun',
-        'DA_SpecialWeapons_PlasmsGun',
+        'DA_RelicsOfCliban_FoeSmitter',
+        'DA_RelicsOfCliban_LionsRoar',
+        'DA_RelicsOfCliban_MaceOfRedemption',
+        'DA_RelicsOfCliban_MonsterSlayerOfCaliban',
     ]
-    this.optionName = 'DA_SpecialWeapons';
+    this.optionName = 'DA_RelicsOfCliban_Replasced';
     this.cost = 0;
-    this.headerText = 'За каждые пять моделей в отряде один Ветеран может заменить свой boltgun или Melee weapon одно из следующего:';
-    this.needChekEnambleEachTime = true;
+    this.headerText = 'Модель может заменить свое одно оружие на одно из следующего';
     this.isWargearToChange = function(w,m) {
-        if (m.modelName == 'DA_Veteran'
-            && (w.wargearName == 'Boltgun' 
-                || w.wargearType == 'MeleeWeapon') 
-            && w.createBy === m
+        if ((w.wargearType == 'RangedWeapon' 
+            || w.wargearType == 'MeleeWeapon' 
+            || w.wargearType == 'PowerWeapon'
+            ) && w.createBy === m
         ) {
             return true;
         }
@@ -359,67 +325,63 @@ var DA_SpecialWeapons = function(o) {
     ChangeFromWargear_class.apply(this, arguments);
 }
 // Унаследовать
-DA_SpecialWeapons.prototype = Object.create(ChangeFromWargear_class.prototype);
+DA_RelicsOfCliban_Replasced.prototype = Object.create(ChangeFromWargear_class.prototype);
 // Желательно и constructor сохранить
-DA_SpecialWeapons.prototype.constructor = DA_SpecialWeapons;
+DA_RelicsOfCliban_Replasced.prototype.constructor = DA_RelicsOfCliban_Replasced;
 
 
 
-DA_SpecialWeapons.prototype.canEnableWeapon = function(option,superOption){
-    // option.superOption - DA_RangedWeapons_Boltgun 
-    // 
-    // console.log('---------------------------')
-    // console.log(option)
-    var superOption = option !== null ? option.superOption : superOption;
-    var models = this.unit.models.length;
-    for (var m in this.unit.models) {
-        for (var w in this.unit.models[m].wargear) {
-            if (this.unit.models[m].wargear[w].createBy.superOption == superOption.superOption) {    
-               models -= 5;
-            }
-        }
-    }
-
-    if (models >= 5 ) {
-        return ChangeFromWargear_class.prototype.canEnableWeapon.apply(this,arguments);
-    }
-    else {
-        return false;
-    }
-};
-
-
-
-
-
-
-
-
-
-
-
-
-// --------- Класс-потомок ChangeFromWargear_class -----------
-var DA_HeavyWeapons = function(o) {
+var DA_RelicsOfCliban_Add = function(o) {
+    this.headerText = 'Модель может взять следующе';
+    this.optionName = 'DA_RelicsOfCliban_Add';
     this.defaultSubOptions = [
-        'DA_HeavyWeapons_HeavyBolter',
-        'DA_HeavyWeapons_MultyMelta',
-        'DA_HeavyWeapons_MissleLuauncher',
-        'DA_HeavyWeapons_MissleLuauncherFlakk',
-        'DA_HeavyWeapons_PlasmaCanon',
-        'DA_HeavyWeapons_Lasanon',
-        'DA_HeavyWeapons_GravCanonWithAmp',
+        'DA_RelicsOfCliban_ShroudOfHeroes',
+        'DA_RelicsOfCliban_TheEyeOfTheUnseen',
     ]
-    this.optionName = 'DA_HeavyWeapons';
+    MultiChangeFromWargear_class.apply(this, arguments);
+}
+// Унаследовать
+DA_RelicsOfCliban_Add.prototype = Object.create(MultiChangeFromWargear_class.prototype);
+// Желательно и constructor сохранить
+DA_RelicsOfCliban_Add.prototype.constructor = DA_RelicsOfCliban_Add;
+
+
+
+
+var DA_RelicsOfCliban = function(o) {
+    this.headerText = 'В армии может быть толкьо один экземпляр предмета из списка Relics of Cliban';
+    this.optionName = 'DA_RelicsOfCliban';
+    this.defaultSubOptions = [
+        'DA_RelicsOfCliban_Replasced',
+        'DA_RelicsOfCliban_Add',
+    ]
+    WHOptionSuper.apply(this, arguments);
+}
+// Унаследовать
+DA_RelicsOfCliban.prototype = Object.create(WHOptionSuper.prototype);
+// Желательно и constructor сохранить
+DA_RelicsOfCliban.prototype.constructor = DA_RelicsOfCliban;
+
+
+
+
+
+var DA_TerminatorWeapons_powerWeaponReplace = function(o) {
+    this.defaultSubOptions = [
+        'DA_TerminatorWeapons_powerWeaponReplace_LightningClaws',
+        'DA_TerminatorWeapons_powerWeaponReplace_StormShield',
+        'DA_TerminatorWeapons_powerWeaponReplace_PowerFist',
+        'DA_TerminatorWeapons_powerWeaponReplace_Chainfist',
+        'DA_TerminatorWeapons_powerWeaponReplace_ThunderHammer',
+    ]
+    this.optionName = 'DA_TerminatorWeapons_powerWeaponReplace';
     this.cost = 0;
-    this.headerText = 'Один Ветеран может заменить свой boltgun на одно из следующего:';
-    this.needChekEnambleEachTime = true;
+    this.headerText = 'Модель в Terminator armour может заменить power weapon на одно из списка Terminator Weapon.';
     this.isWargearToChange = function(w,m) {
-        if (m.modelName == 'DA_Veteran'
-            && w.wargearName == 'Boltgun'
-            && w.createBy === m
-        ) {
-            return true;
+        if (~m.hasWargear({name:'TerminatorArmour'})) {
+            if ( w.wargearType == 'PowerWeapon') {
+                return true;
+            }
         }
         return false;
     }
@@ -427,152 +389,77 @@ var DA_HeavyWeapons = function(o) {
     ChangeFromWargear_class.apply(this, arguments);
 }
 // Унаследовать
-DA_HeavyWeapons.prototype = Object.create(ChangeFromWargear_class.prototype);
+DA_TerminatorWeapons_powerWeaponReplace.prototype = Object.create(ChangeFromWargear_class.prototype);
 // Желательно и constructor сохранить
-DA_HeavyWeapons.prototype.constructor = DA_HeavyWeapons;
-
-
-
-DA_HeavyWeapons.prototype.canEnableWeapon = function(option,superOption){
-    // option.superOption - DA_RangedWeapons_Boltgun 
-    // 
-    // console.log('---------------------------')
-    // console.log(option)
-    var superOption = option !== null ? option.superOption : superOption;
-    var models = this.unit.models.length;
-    for (var m in this.unit.models) {
-        for (var w in this.unit.models[m].wargear) {
-            if (this.unit.models[m].wargear[w].createBy.superOption == superOption.superOption) {    
-                return false;
-            }
-        }
-    }
-    return true;
-};
+DA_TerminatorWeapons_powerWeaponReplace.prototype.constructor = DA_TerminatorWeapons_powerWeaponReplace;
 
 
 
 
 
+// var DA_VehicleEquipment = function(o) {
+//     this.defaultSubOptions = [
+//         'DA_VehicleEquipment_DozerBlade',
+//         'DA_VehicleEquipment_StormBolter',
+//         'DA_VehicleEquipment_ExtraArmour',
+//         'DA_VehicleEquipment_HunterKillerMissle',
+//     ]
+//     this.optionName = 'DA_VehicleEquipment';
+//     this.cost = 0;
+//     this.headerText = 'Можно взять следующее';
+//     this.isModelCanGet =  function(m, superOption) {
+//         for (var i in m.wargear) {
+//             //Каждая подопция может быть взята отдельно
+//             if (m.wargear[i].createBy === superOption
+//                  && m.wargear[i].wargearName !== 'emptySlot'
+//             ) {
+//                 return false;
+//             }
+//         }
+//         return true;
+//     }
 
-var DA_VehicleEquipment = function(o) {
-    this.defaultSubOptions = [
-        'DA_HeavyWeapons_DozerBlade',
-        'DA_HeavyWeapons_StromBolter',
-        'DA_HeavyWeapons_ExtraArmour',
-        'DA_HeavyWeapons_HunterKillerMissle',
-    ]
-    this.optionName = 'DA_HeavyWeapons';
-    this.cost = 0;
-    this.headerText = 'Любая модель взять следующее';
-    this.isModelCanGet =  function(m, superOption) {
-        for (var i in m.wargear) {
-            if (m.wargear[i].createBy.superOption === superOption.superOption
-                && m.wargear[i].wargearName !== 'emptySlot') {
-                return false;
-            }
-        }
-        return true;
-    }
+//     AddFromWargear_class.apply(this, arguments);
+// }
 
-    AddFromWargear_class.apply(this, arguments);
+// // Унаследовать
+// DA_VehicleEquipment.prototype = Object.create(AddFromWargear_class.prototype);
+// // Желательно и constructor сохранить
+// DA_VehicleEquipment.prototype.constructor = DA_VehicleEquipment;
+
+
+fabric_option_multiChange([
+{
+    optionName: 'DA_VehicleEquipment',
+    cost: 0,
+    headerText : 'Любая модель может взять следующее',
+    defaultSubOptions: [
+        'DA_VehicleEquipment_DozerBlade',
+        'DA_VehicleEquipment_StormBolter',
+        'DA_VehicleEquipment_ExtraArmour',
+        'DA_VehicleEquipment_HunterKillerMissle',
+    ],
 }
-
-// Унаследовать
-DA_VehicleEquipment.prototype = Object.create(AddFromWargear_class.prototype);
-// Желательно и constructor сохранить
-DA_VehicleEquipment.prototype.constructor = DA_VehicleEquipment;
-
-
-
+]);
 
 //==============================================
 
-
-// --------- Класс-потомок WHOption -----------
-var DA_RangedWeapons_Class = function(o) {
-
-    this.funCanEnable = function() {
-        return this.superOption.superOption.canEnableWeapon(this);
-    }
-
-    this.funEnable = function() {
-        return this.superOption.superOption.enableWeapon(this);
-    }
-
-
-    this.funCanDisable = function() {
-        return this.superOption.superOption.canDisableWeapon(this);
-    }
-
-    this.funDisable = function() {
-        return this.superOption.superOption.disableWeapon(this);   
-    }
-
-    this.funIsNeedShow = this.funCanDisable;
-
-    OptionCounter.apply(this, arguments);
-
-}
-
-// Унаследовать
-DA_RangedWeapons_Class.prototype = Object.create(OptionCounter.prototype);
-
-// Желательно и constructor сохранить
-DA_RangedWeapons_Class.prototype.constructor = DA_RangedWeapons_Class;
-
-
-
-
-
-
-
-//==============================================
-
-
-var DA_RangedWeaponsFabric = function(a) {
-    for (var i in a) {
-        window[a[i].optionName] = function() {
-            var optionName =  a[i].optionName;
-            var cost = a[i].cost;
-            var changeTo = a[i].changeTo;
-            var actionTextUp = a[i].actionTextUp;
-            var actionIconUp = a[i].actionIconUp;
-            var actionTextDown = a[i].actionTextDown;
-            var actionIconDown = a[i].actionIconDown;
-            return function() {
-
-                this.optionName = optionName;
-                this.cost = cost;
-                this.changeTo = changeTo;
-                this.actionTextUp = actionTextUp;
-                this.actionIconUp = actionIconUp;
-                this.actionTextDown = actionTextDown;
-                this.actionIconDown = actionIconDown;
-
-                DA_RangedWeapons_Class.apply(this, arguments);
-            }
-        }()
-        window[a[i].optionName].prototype = Object.create(DA_RangedWeapons_Class.prototype);
-        window[a[i].optionName].prototype.constructor =  window[a[i].optionName];
-    }
-}
 
 DA_RangedWeaponsFabric([{
     'optionName'      : 'DA_RangedWeapons_Boltgun',
     'optionNameInModel': 'Boltgun',
     'cost' : 0,
     'changeTo' : 'Boltgun',
-    'actionTextUp' : 'Boltgun бесплатно.',
+    'actionTextUp' : '<b>Boltgun</b> <i>бесплатно.</i>',
     // 'actionIconUp' : 'def',
     'actionTextDown' : 'Удалить Boltgun.',
     // 'actionIconDown' : 'rewards1',
 },{
-    'optionName'      : 'DA_RangedWeapons_StromBolter',
-    'optionNameInModel': 'StromBolter',
+    'optionName'      : 'DA_RangedWeapons_StormBolter',
+    'optionNameInModel': 'StormBolter',
     'cost' : 5,
-    'changeTo' : 'StromBolter',
-    'actionTextUp' : 'Strom Bolter за 5 очков.',
+    'changeTo' : 'StormBolter',
+    'actionTextUp' : '<b>Strom Bolter</b> <i>за 5 очков.</i>',
     // 'actionIconUp' : 'def',
     'actionTextDown' : 'Удалить Strom Bolter.',
     // 'actionIconDown' : 'rewards1',
@@ -581,7 +468,7 @@ DA_RangedWeaponsFabric([{
     'optionNameInModel': 'CombiFlamer',
     'cost' : 10,
     'changeTo' : 'CombiFlamer',
-    'actionTextUp' : 'Combi-Flamer за 10 очков.',
+    'actionTextUp' : '<b>Combi-Flamer</b> <i>за 10 очков.</i>',
     // 'actionIconUp' : 'def',
     'actionTextDown' : 'Удалить Combi-Flamer.',
     // 'actionIconDown' : 'rewards1',
@@ -590,7 +477,7 @@ DA_RangedWeaponsFabric([{
     'optionNameInModel': 'CombiGrav',
     'cost' : 10,
     'changeTo' : 'CombiGrav',
-    'actionTextUp' : 'Combi-Grav за 10 очков.',
+    'actionTextUp' : '<b>Combi-Grav</b> <i>за 10 очков.</i>',
     // 'actionIconUp' : 'def',
     'actionTextDown' : 'Удалить Combi-Grav.',
     // 'actionIconDown' : 'rewards1',
@@ -599,7 +486,7 @@ DA_RangedWeaponsFabric([{
     'optionNameInModel': 'CombiMelta',
     'cost' : 10,
     'changeTo' : 'CombiMelta',
-    'actionTextUp' : 'Combi-Melta за 10 очков.',
+    'actionTextUp' : '<b>Combi-Melta</b> <i>за 10 очков.</i>',
     // 'actionIconUp' : 'def',
     'actionTextDown' : 'Удалить Combi-Melta.',
     // 'actionIconDown' : 'rewards1',
@@ -608,7 +495,7 @@ DA_RangedWeaponsFabric([{
     'optionNameInModel': 'CombiPlasma',
     'cost' : 10,
     'changeTo' : 'CombiPlasma',
-    'actionTextUp' : 'Combi-Plasma за 10 очков.',
+    'actionTextUp' : '<b>Combi-Plasma</b> <i>за 10 очков.</i>',
     // 'actionIconUp' : 'def',
     'actionTextDown' : 'Удалить Combi-Plasma.',
     // 'actionIconDown' : 'rewards1',
@@ -617,7 +504,7 @@ DA_RangedWeaponsFabric([{
     'optionNameInModel': 'GraviPistol',
     'cost' : 15,
     'changeTo' : 'GraviPistol',
-    'actionTextUp' : 'Gravi Pistol за 15 очков.',
+    'actionTextUp' : '<b>Gravi Pistol</b> <i>за 15 очков.</i>',
     // 'actionIconUp' : 'def',
     'actionTextDown' : 'Удалить Gravi Pistol.',
     // 'actionIconDown' : 'rewards1',
@@ -626,189 +513,330 @@ DA_RangedWeaponsFabric([{
     'optionNameInModel': 'PlasmaPistol',
     'cost' : 15,
     'changeTo' : 'PlasmaPistol',
-    'actionTextUp' : 'Plasma Pistol за 15 очков.',
+    'actionTextUp' : '<b>Plasma Pistol</b> <i>за 15 очков.</i>',
     // 'actionIconUp' : 'def',
     'actionTextDown' : 'Удалить Plasma Pistol.',
     // 'actionIconDown' : 'rewards1',
 }, 
 
 
+{
+    optionName : 'DA_AddMeltaBomb_MeltaBomb',
+    cost : 5,
+    changeTo : 'MeltaBomb',
+    addItems: ['MeltaBomb'],
+},
 
 {
     'optionName': 'DA_MeleeWeapons_Chainsword',
     'optionNameInModel': 'Chainsword',
     'cost': 0,
     'changeTo': 'Chainsword',
-    'actionTextUp': 'Chainsword за 0 очков.',
+    'actionTextUp': '<b>Chainsword</b> <i>бесплатно</i>.',
     'actionTextDown': 'Убрать Chainsword.'
+}, {
+    optionName: 'DA_MeleeWeapons_ChainswordWithAnEviscerator',
+    cost: 25,
+    addItems: ['ChainswordWithAnEviscerator'],
+    removeItems: ['Boltgun'],
+    'actionTextUp': '<b>Chainsword with an eviscerator</b> <i>за 25 очков</i>.',
 }, {
     'optionName': 'DA_MeleeWeapons_LightningClaws',
     'optionNameInModel': 'LightningClaws',
     'cost': 15,
     'changeTo': 'LightningClaws',
-    'actionTextUp': 'LightningClaws за 15 очков.',
+    'actionTextUp': '<b>LightningClaws</b> <i>за 15 очков</i>.',
     'actionTextDown': 'Убрать LightningClaws.'
 }, {
     'optionName': 'DA_MeleeWeapons_PowerWeapon',
     'optionNameInModel': 'PowerWeapon',
     'cost': 15,
     'changeTo': 'PowerWeapon',
-    'actionTextUp': 'PowerWeapon за 15 очков.',
+    'actionTextUp': '<b>PowerWeapon</b> <i>за 15 очков</i>.',
     'actionTextDown': 'Убрать PowerWeapon.'
 }, {
     'optionName': 'DA_MeleeWeapons_PowerFist',
     'optionNameInModel': 'PowerFist',
     'cost': 25,
     'changeTo': 'PowerFist',
-    'actionTextUp': 'PowerFist за 25 очков.',
+    'actionTextUp': '<b>PowerFist</b> <i>за 25 очков</i>.',
     'actionTextDown': 'Убрать PowerFist.'
 }, {
     'optionName': 'DA_MeleeWeapons_ThunderHammer',
     'optionNameInModel': 'ThunderHammer',
     'cost': 30,
     'changeTo': 'ThunderHammer',
-    'actionTextUp': 'ThunderHammer за 30 очков.',
+    'actionTextUp': '<b>ThunderHammer</b> <i>за 30 очков</i>.',
     'actionTextDown': 'Убрать ThunderHammer.'
 },
 
 
 
-
 {
-    'optionName': 'DA_SpecialWeapons_Flamer',
-    'optionNameInModel': 'Flamer',
-    'cost': 5,
-    'changeTo': 'Flamer',
-    'actionTextUp': 'Flamer за 5 очков',
-    'actionTextDown': 'Убрать Flamer.'
+    optionName: 'DA_SpecialWeapons_Flamer',
+    cost: 5,
+    changeTo: 'Flamer',
+    removeItems : ['Boltgun'],
 }, {
-    'optionName': 'DA_SpecialWeapons_MeltaGun',
-    'optionNameInModel': 'MeltaGun',
-    'cost': 10,
-    'changeTo': 'MeltaGun',
-    'actionTextUp': 'MeltaGun за 10 очков',
-    'actionTextDown': 'Убрать MeltaGun.'
+    optionName: 'DA_SpecialWeapons_MeltaGun',
+    cost: 10,
+    changeTo: 'MeltaGun',
+    removeItems : ['Boltgun'],
 }, {
-    'optionName': 'DA_SpecialWeapons_GravGun',
-    'optionNameInModel': 'GravGun',
-    'cost': 15,
-    'changeTo': 'GravGun',
-    'actionTextUp': 'GravGun за 15 очков',
-    'actionTextDown': 'Убрать GravGun.'
+    optionName: 'DA_SpecialWeapons_GravGun',
+    cost: 15,
+    changeTo: 'GravGun',
+    removeItems : ['Boltgun'],
 }, {
-    'optionName': 'DA_SpecialWeapons_PlasmsGun',
-    'optionNameInModel': 'PlasmsGun',
-    'cost': 15,
-    'changeTo': 'PlasmsGun',
-    'actionTextUp': 'PlasmsGun за 15 очков',
-    'actionTextDown': 'Убрать PlasmsGun.'
+    optionName: 'DA_SpecialWeapons_PlasmsGun',
+    cost: 15,
+    changeTo: 'PlasmsGun',
+    removeItems : ['Boltgun'],
+},{
+    optionName: 'DA_SpecialWeapons_PlasmaPistol',
+    cost: 15,
+    changeTo: 'PlasmaPistol',
+    removeItems : ['Boltgun'],
 },
 
 
 
 
 {
-    'optionName' : 'DA_HeavyWeapons_HeavyBolter',
-    'optionNameInModel' : 'HeavyBolter',
-    'cost' : 10,
-    'changeTo' : 'HeavyBolter',
-    'actionTextUp' : 'Heavy bolter за 10 очков',
-    'actionTextDown' : 'Убрать Heavy bolter'
+    optionName : 'DA_HeavyWeapons_HeavyBolter',
+    cost : 10,
+    changeTo : 'HeavyBolter',
+    removeItems : ['Boltgun'],
+    actionIconUp : 'bolter',
 }, {
-    'optionName' : 'DA_HeavyWeapons_MultyMelta',
-    'optionNameInModel' : 'Multy-melta',
-    'cost' : 10,
-    'changeTo' : 'MultyMelta',
-    'actionTextUp' : 'Multy-melta за 10 очков',
-    'actionTextDown' : 'Убрать Multy-melta'
+    optionName : 'DA_HeavyWeapons_MultiMelta',
+    cost : 10,
+    changeTo : 'MultiMelta',
+    removeItems : ['Boltgun'],
 }, {
-    'optionName' : 'DA_HeavyWeapons_MissleLuauncher',
-    'optionNameInModel' : 'MissleLuauncher',
-    'cost' : 15,
-    'changeTo' : 'MissleLuauncher',
-    'actionTextUp' : 'Missle luauncher с frag и krak ракетами за 15 очков',
-    'actionTextDown' : 'Убрать Missle luauncher'
+    optionName : 'DA_HeavyWeapons_MissleLuauncher',
+    cost : 15,
+    changeTo : 'MissleLuauncher',
+    removeItems : ['Boltgun'],
 }, {
-    'optionName' : 'DA_HeavyWeapons_MissleLuauncherFlakk',
-    'optionNameInModel' : 'MissleLuauncherFlakk',
-    'cost' : 25,
-    'changeTo' : 'MissleLuauncherFlakk',
-    'actionTextUp' : 'Missle luauncher с frag, krak и flakk ракетами за 25 очков',
-    'actionTextDown' : 'Убрать MissleLuauncherFlakk'
+    optionName : 'DA_HeavyWeapons_MissleLuauncherFlakk',
+    cost : 25,
+    changeTo : 'MissleLuauncherFlakk',
+    removeItems : ['Boltgun'],
 }, {
-    'optionName' : 'DA_HeavyWeapons_PlasmaCanon',
-    'optionNameInModel' : 'PlasmaCanon',
-    'cost' : 15,
-    'changeTo' : 'PlasmaCanon',
-    'actionTextUp' : 'Plasma canon за 15 очков',
-    'actionTextDown' : 'Убрать Plasma canon'
+    optionName : 'DA_HeavyWeapons_PlasmaCannon',
+    cost : 15,
+    changeTo : 'PlasmaCannon',
+    removeItems : ['Boltgun'],
 }, {
-    'optionName' : 'DA_HeavyWeapons_Lasanon',
-    'optionNameInModel' : 'Lasanon',
-    'cost' : 20,
-    'changeTo' : 'Lasanon',
-    'actionTextUp' : 'Lasanon за 20 очков',
-    'actionTextDown' : 'Убрать Lasanon'
+    optionName : 'DA_HeavyWeapons_Lascannon',
+    cost : 20,
+    changeTo : 'Lascannon',
+    removeItems : ['Boltgun'],
 }, {
-    'optionName' : 'DA_HeavyWeapons_GravCanonWithAmp',
-    'optionNameInModel' : 'GravCanonWithAmp',
-    'cost' : 35,
-    'changeTo' : 'GravCanonWithAmp',
-    'actionTextUp' : 'Grav-canon c grav-amp за 35 очков',
-    'actionTextDown' : 'Убрать Grav-canon c grav-amp'
+    optionName : 'DA_HeavyWeapons_GravCannonWithAmp',
+    cost : 35,
+    changeTo : 'GravCannonWithAmp',
+    removeItems : ['Boltgun'],
 }, 
 
-
-{
-    'optionName' : 'DA_AddWargearBomb_MeltaBomb',
-    'optionNameInModel' : 'MeltaBomb',
-    'cost' : 5,
-    'changeTo' : 'MeltaBomb',
-    'actionTextUp' : 'Melta bomb за 5 очков',
-    'actionTextDown' : 'Убрать Melta bomb'
-},  {
+  {
     'optionName' : 'DA_AddWargearShield_CombatShield',
     'optionNameInModel' : 'CombatShield',
     'cost' : 5,
     'changeTo' : 'CombatShield',
-    'actionTextUp' : 'Combat shield за 5 очков',
+    'actionTextUp' : '<b>Combat shield</b> <i>за 5 очков</i>',
     'actionTextDown' : 'Убрать Combat shield'
 },  {
     'optionName' : 'DA_AddWargearShield_StormShield',
     'optionNameInModel' : 'StormShield',
     'cost' : 10,
     'changeTo' : 'StormShield',
-    'actionTextUp' : 'Storm shield за 10 очков',
+    'actionTextUp' : '<b>Storm shield</b> <i>за 10 очков</i>',
     'actionTextDown' : 'Убрать Storm shield'
 }, 
 
 {
-    'optionName' : 'DA_HeavyWeapons_DozerBlade',
+    'optionName' : 'DA_VehicleEquipment_DozerBlade',
     'optionNameInModel' : 'DozerBlade',
     'cost': 5,
     'changeTo' : 'DozerBlade',
-    'actionTextUp' : 'DozerBlade за 5 очков.',
+    'actionTextUp' : '<b>DozerBlade</b> <i>за 5 очков.</i>',
     'actionTextDown': 'Убрать DozerBlade'
 }, {
-    'optionName' : 'DA_HeavyWeapons_StromBolter',
-    'optionNameInModel' : 'StromBolter',
+    'optionName' : 'DA_VehicleEquipment_StormBolter',
+    'optionNameInModel' : 'StormBolter',
     'cost': 5,
-    'changeTo' : 'StromBolter',
-    'actionTextUp' : 'StromBolter за 5 очков.',
-    'actionTextDown': 'Убрать StromBolter'
+    'changeTo' : 'StormBolter',
+    'actionTextUp' : '<b>StormBolter</b> <i>за 5 очков.</i>',
+    'actionTextDown': 'Убрать StormBolter'
 }, {
-    'optionName' : 'DA_HeavyWeapons_ExtraArmour',
+    'optionName' : 'DA_VehicleEquipment_ExtraArmour',
     'optionNameInModel' : 'ExtraArmour',
     'cost': 5,
     'changeTo' : 'ExtraArmour',
-    'actionTextUp' : 'ExtraArmour за 5 очков.',
+    'actionTextUp' : '<b>ExtraArmour</b> <i>за 5 очков.</i>',
     'actionTextDown': 'Убрать ExtraArmour'
 }, {
-    'optionName' : 'DA_HeavyWeapons_HunterKillerMissle',
+    'optionName' : 'DA_VehicleEquipment_HunterKillerMissle',
     'optionNameInModel' : 'HunterKillerMissle',
     'cost': 5,
     'changeTo' : 'HunterKillerMissle',
-    'actionTextUp' : 'HunterKillerMissle за 5 очков.',
+    'actionTextUp' : '<b>HunterKillerMissle</b> <i>за 5 очков.</i>',
     'actionTextDown': 'Убрать HunterKillerMissle'
 }, 
+
+
+{
+    'optionName' : 'DA_DropPod_Locatorbeacon',
+    'optionNameInModel' : 'LocatorBeacon',
+    'cost': 10,
+    'changeTo' : 'LocatorBeacon',
+    'actionTextUp' : '<b>Locator beacon</b> <i>за 10 очков.</i>',
+    'actionTextDown': 'Убрать Locator beacon'
+}, 
+
+
+
+{
+    optionName : 'DA_RelicsOfCliban_ShroudOfHeroes',
+    cost : 10,
+    changeTo : 'ShroudOfHeroes',
+    onePerArmie : true
+},
+{
+    optionName : 'DA_RelicsOfCliban_FoeSmitter',
+    cost : 15,
+    changeTo : 'FoeSmitter',
+    onePerArmie : true
+},
+{
+    optionName : 'DA_RelicsOfCliban_LionsRoar',
+    cost : 20,
+    changeTo : 'LionsRoar',
+    onePerArmie : true
+},
+{
+    optionName : 'DA_RelicsOfCliban_MaceOfRedemption',
+    cost : 30,
+    changeTo : 'MaceOfRedemption',
+    onePerArmie : true
+},
+{
+    optionName : 'DA_RelicsOfCliban_MonsterSlayerOfCaliban',
+    cost : 40,
+    changeTo : 'MonsterSlayerOfCaliban',
+    onePerArmie : true
+},
+{
+    optionName : 'DA_RelicsOfCliban_TheEyeOfTheUnseen',
+    cost : 40,
+    changeTo : 'TheEyeOfTheUnseen',
+    onePerArmie : true
+},
+
+
+{
+    optionName: 'DA_SpecilaIssueWargear_Auspex',
+    cost: 5,
+    addItems: ['Auspex'],
+},{
+    optionName: 'DA_SpecilaIssueWargear_CombatShield',
+    cost: 5,
+    addItems: ['CombatShield'],
+},{
+    optionName: 'DA_SpecilaIssueWargear_MeltaBomb',
+    cost: 5,
+    addItems: ['MeltaBomb'],
+},{
+    optionName: 'DA_SpecilaIssueWargear_DigitalWeapon',
+    cost: 10,
+    addItems: ['DigitalWeapon'],
+},
+{
+    optionName: 'DA_SpecilaIssueWargear_JumpPack',
+    cost: 15,
+    actionTextUp: '<b>Jump pack</b> <i>за 15 очков</i><br><small>Не может быть взят моделью с Space marine bike или c Terminator armour</small>',
+    addItems: ['JumpPack'],
+},
+{
+    optionName: 'DA_SpecilaIssueWargear_ConversionField',
+    cost: 20,
+    addItems: ['ConversionField'],
+}
+
+
+
+,{
+    optionName: 'DA_TerminatorWeapons_CombiMelta',
+    cost : 5,
+    changeTo : 'CombiMelta'
+},{
+    optionName: 'DA_TerminatorWeapons_CombiPlasma',
+    cost : 5,
+    changeTo : 'CombiPlasma'
+},{
+    optionName: 'DA_TerminatorWeapons_CombiFlamer',
+    cost : 5,
+    changeTo : 'CombiFlamer'
+},{
+    optionName: 'DA_TerminatorWeapons_LightningClaws',
+    cost : 5,
+    changeTo : 'LightningClaws'
+},{
+    optionName: 'DA_TerminatorWeapons_ThunderHammer',
+    cost : 5,
+    changeTo : 'ThunderHammer'
+}
+
+
+
+,{
+    optionName:'DA_TerminatorWeapons_powerWeaponReplace_LightningClaws',
+    cost:5,
+    changeTo:'LightningClaws',
+},{
+    optionName:'DA_TerminatorWeapons_powerWeaponReplace_StormShield',
+    cost:5,
+    changeTo:'StormShield',
+},{
+    optionName:'DA_TerminatorWeapons_powerWeaponReplace_PowerFist',
+    cost:10,
+    changeTo:'PowerFist',
+},{
+    optionName:'DA_TerminatorWeapons_powerWeaponReplace_Chainfist',
+    cost:15,
+    changeTo:'Chainfist',
+},{
+    optionName:'DA_TerminatorWeapons_powerWeaponReplace_ThunderHammer',
+    cost:15,
+    changeTo:'ThunderHammer',
+}
 ]);
+
+
+
+var ReplaceFromWargear_subOtion_fabric = function (a) {
+    for (var i in a) {
+        window[a[i].optionName] = function() {
+            var optionName =  a[i].optionName;
+            var actionText = a[i].actionText || '';
+            var cost = a[i].cost;
+            var autoSelectOption = a[i].autoSelectOption || false;
+            return function() {
+
+                this.optionName = optionName;
+                this.cost = cost;
+                this.autoSelectOption = autoSelectOption;
+                this.actionText = actionText;
+
+                ReplaceFromWargear_subOtion_class.apply(this, arguments);
+            }
+        }()
+        window[a[i].optionName].prototype = Object.create(ReplaceFromWargear_subOtion_class.prototype);
+        window[a[i].optionName].prototype.constructor =  window[a[i].optionName];
+        if (a[i].hasOwnProperty('funOn')) {
+            window[a[i].optionName].prototype.on = a[i].funOn;
+        }
+    }
+}

@@ -6,14 +6,14 @@ WHOptionAdditionalModel = function(o) {
     this.actionIconDown = this.actionIconDown || 'remove_unit';
     this.maxCountAdding  = this.maxCountAdding || 0;
 
-    this.funCanEnable = function() {
+    this.funCanEnable = this.funCanEnable || function() {
 	    if (this.superOption.getCount() < this.superOption.maxCountAdding) {
 	        return true;
 	    }
 	    return false;
     }
 
-    this.funEnable = function() {
+    this.funEnable = this.funEnable || function() {
 	    if (this.canEnable()) {
 	        this.unit.models.push(
 	            new window[this.superOption.modelToAdd]({
@@ -26,14 +26,14 @@ WHOptionAdditionalModel = function(o) {
 	    }
     }
 
-    this.funCanDisable = function() {
+    this.funCanDisable = this.funCanDisable || function() {
 	    if (this.superOption.getCount() > 0) {
 	        return true;
 	    }
 	    return false;
     }
 
-    this.funDisable = function() {
+    this.funDisable = this.funDisable || function() {
 	    if (this.canEnable()) {
 	        for (var i in this.unit.models) {
 	            if (this.unit.models[i].createBy !== this.superOption) {
@@ -69,25 +69,105 @@ WHOptionAdditionalModel.prototype.getCount = function() {
     return count;
 }
 
+var costToText = function(cost) {
+
+    var modelsCost = 'бесплатно';
+    if (cost > 0) {
+        var tCost = String(cost);
+        if (cost < 10 || tCost.indexOf(-2) != 1) {
+            if (tCost.indexOf(-1) === '1') {
+                modelsCost = 'очку'
+            }
+            else if (tCost.indexOf(-1) === '2' || tCost.indexOf(-1) === '3' || tCost.indexOf(-1) === '4') {
+                modelsCost = 'очка'
+            }
+            else {
+                modelsCost = 'очков'
+            }
+        }
+        else {
+            modelsCost = 'очков'
+        }
+
+    }
+    return modelsCost;
+}
 
 var WHOptionAddModelFabric = function(a) {
     for (var i in a) {
         window[a[i].optionName] = function() {
-    		var _optionName = a[i].optionName;
-    		var _headerText = a[i].headerText;
-    		var _cost = a[i].cost;
-    		var _actionTextUp = a[i].actionTextUp;
-    		var _actionTextDown = a[i].actionTextDown;
-    		var _maxCountAdding = a[i].maxCountAdding;
-    		var _modelToAdd = a[i].modelToAdd;
+    		var optionName = a[i].optionName;
+    		var headerText = a[i].headerText;
+    		var cost = a[i].cost;
+    		var actionTextUp = a[i].actionTextUp;
+    		var actionTextDown = a[i].actionTextDown;
+
+
+    		var maxCountAdding = a[i].maxCountAdding;
+            var modelToAdd = a[i].modelToAdd
+
+
+
+            var maxCountAddingArr = {
+                '1' : 'одного',
+                '2' : 'двух',
+                '3' : 'трех',
+                '4' : 'четырех',
+                '5' : 'пяти',
+                '6' : 'шести',
+                '7' : 'семи',
+                '8' : 'восьми',
+                '9' : 'девяти',
+                '10': 'десяти',
+            }
+            var modelNameAdd = 'моделей';
+            var modelNameRemove = 'модель';
+            if (window[modelToAdd].prototype.modelNames) {
+                if (window[modelToAdd].prototype.modelNames.addHeader) {
+                    modelNameAdd = window[modelToAdd].prototype.modelNames.addHeader;
+                }
+                if (window[modelToAdd].prototype.modelNames.addHeader) {
+                    modelNameRemove = window[modelToAdd].prototype.modelNames.removeHeader;
+                }
+            } 
+            var modelsCost = costToText(cost)
+            var headerText = null;
+            var actionTextUp = a[i].actionTextUp ||  'Можно включить до '
+                + maxCountAddingArr[maxCountAdding]
+                + ' дополнительных <b>' + modelNameAdd + '</b> <i>по '
+                + cost + ' ' + modelsCost
+                + ' за модель</i>';
+            var actionTextDown = a[i].actionTextDown ||'Удалить ' + modelNameRemove;
+
+
+
+            var funDisable = a[i].hasOwnProperty('funDisable') ? a[i].funDisable : null ;
+            var funCanDisable = a[i].hasOwnProperty('funCanDisable') ? a[i].funCanDisable : null ;
+            var funEnable = a[i].hasOwnProperty('funEnable') ? a[i].funEnable : null ;
+            var funCanEnable = a[i].hasOwnProperty('funCanEnable') ? a[i].funCanEnable : null ;
             return function() {
-                this.optionName = _optionName;
-				this.headerText = _headerText;
-				this.cost = _cost;
-				this.actionTextUp = _actionTextUp;
-				this.actionTextDown = _actionTextDown;
-				this.maxCountAdding = _maxCountAdding;
-				this.modelToAdd = _modelToAdd;
+
+                this.optionName = optionName;
+				this.headerText = headerText;
+				this.cost = cost;
+				this.actionTextDown = actionTextDown;
+				this.maxCountAdding = maxCountAdding;
+				this.modelToAdd = modelToAdd;
+
+                this.actionTextUp = actionTextUp;
+
+                if (funDisable) {
+                    this.funDisable = funDisable;
+                }
+                if (funCanDisable) {
+                    this.funCanDisable = funCanDisable;
+                }
+                if (funEnable) {
+                    this.funEnable = funEnable;
+                }
+                if (funCanEnable) {
+                    this.funCanEnable = funCanEnable;
+                }
 
                 WHOptionAdditionalModel.apply(this, arguments);
             }
@@ -97,21 +177,4 @@ var WHOptionAddModelFabric = function(a) {
     }
 }
 
-WHOptionAddModelFabric([{
-    'optionName' : 'PlaguebearerAdditionalPlaguebearer',
-    'headerText' : 'Можно включить до десяти дополнительных чумоносцев по 9 очков за модель.',
-    'cost' : 9,
-    'actionTextUp' : 'Добавить чумоносца.',
-    'actionTextDown' : 'Удалить чумоносца.',
-    'maxCountAdding' : 10,
-    'modelToAdd' : 'Plaguebearer',
-},{
-    'optionName' : 'DA_VeteranSquade_addVeteran',
-    'headerText' : 'Можно включить до пяти дополнительных ветеранов по 18 очков за модель.',
-    'cost' : 18,
-    'actionTextUp' : 'Добавить ветерана.',
-    'actionTextDown' : 'Удалить ветерана.',
-    'maxCountAdding' : 5,
-    'modelToAdd' : 'DA_Veteran',
-}]);
 

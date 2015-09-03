@@ -92,10 +92,22 @@ WHSlot.prototype.getUnitSelectOptions = function(slot,obj) {
     var unit = $('<div />',{
         'class':"WH_army_unit"
     });
+
     var name = $('<div />',{
         'class':"WH_army_unit_name",
-        'text': window[obj].prototype.visibleName,
-        'click':function() {
+        'text': window[obj].prototype.visibleName
+    });
+    var enable = true;
+    if (window[obj].prototype.unique) {
+        for (var u in window[obj].prototype.unique) {
+            if (this.army.alreadyTakenUnit({name:window[obj].prototype.unique[u]})) {
+                enable = false;
+            }
+        }        
+    }
+
+    if (enable) {
+        var clickFunc = function() {
             var __this = slot;
             var __obj = obj;
             return function() {
@@ -106,8 +118,11 @@ WHSlot.prototype.getUnitSelectOptions = function(slot,obj) {
                 __this.army.checkAllGroup();
                 __this.closePopup();
             }
-        }()
-    });
+        }();
+        name.click(clickFunc);
+    } else {
+        name.addClass('WH_army_unit_name__disable')
+    }
     unit.append(name);
     result.append(unit);
     return result;

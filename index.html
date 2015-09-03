@@ -25,6 +25,7 @@
 	    <div id="popup" class="popup"></div>
 	</div> 
 
+	<script type="text/javascript" src="js/WHWargear.class.js" ></script>
 	<script type="text/javascript" src="js/jquery.min.js" ></script>
 	<script type="text/javascript" src="js/WHRoster.class.js" ></script>
 	<script type="text/javascript" src="js/WHGroupe.class.js" ></script>
@@ -35,6 +36,7 @@
 	<script type="text/javascript" src="js/WHOptionCounter.class.js" ></script>
 	<script type="text/javascript" src="js/WHOptionCheck.class.js" ></script>
 	<script type="text/javascript" src="js/WHOptionSelect.class.js" ></script>
+	<script type="text/javascript" src="js/WHOptionMultiChange.class.js" ></script>
 	<script type="text/javascript" src="js/WHO.Plaguebearer.AdditionalPlaguebearerNEW.class.js" ></script>
 	<script type="text/javascript" src="js/WHO.Plaguebearer.UpgradeToPlaguerNEW.class.js" ></script>
 	<script type="text/javascript" src="js/WHO.Plaguebearer.RewardsofChaos.class.js" ></script>
@@ -43,17 +45,71 @@
 	<script type="text/javascript" src="js/WHO.Plaguebearer.IconOfChaos.class.js" ></script>
 	<script type="text/javascript" src="js/WHO.Plaguebearer.InstrumentOfChaos.class.js" ></script>
 
-	<script type="text/javascript" src="js/WHO.DA_RangedWeapons.class.js" ></script>
+
 	<script type="text/javascript" src="js/WHWargear.class.js" ></script>
 	<script type="text/javascript" src="js/WHModel.raw.js" ></script>
-	<script type="text/javascript" src="js/WHUnit.raw.js" ></script>
 	<script type="text/javascript" src="js/WHModel.class.js" ></script>
 	<script type="text/javascript" src="js/WHUnit.class.js" ></script>
+
+
+	<script type="text/javascript" src="js/DA/models.js" ></script>
+	<script type="text/javascript" src="js/WHSpecialRules.class.js" ></script>
+	<script type="text/javascript" src="js/WHWarlordTrait.class.js" ></script>
+	<script type="text/javascript" src="js/DA/_functions.js" ></script>
+	<script type="text/javascript" src="js/WHO.DA_RangedWeapons.class.js" ></script>
+	<script type="text/javascript" src="js/DA/Belial.js" ></script>
+	<script type="text/javascript" src="js/DA/DropPod.js" ></script>
+	<script type="text/javascript" src="js/DA/Razorback.js" ></script>
+	<script type="text/javascript" src="js/DA/Rhino.js" ></script>
+	<script type="text/javascript" src="js/DA/VeteranSquad.js" ></script>
+	<script type="text/javascript" src="js/DA/TacticalSquad.js" ></script>
+	<script type="text/javascript" src="js/DA/ScoutSquad.js" ></script>
+	<script type="text/javascript" src="js/DA/CommandSquad.js" ></script>
+	<script type="text/javascript" src="js/DA/Dreadnought.js" ></script>
+	<script type="text/javascript" src="js/DA/VenerableDreadnought.js" ></script>
+	<script type="text/javascript" src="js/DA/DeathwingTerminatorSquad.js" ></script>
+	<script type="text/javascript" src="js/DA/LandRaider.js" ></script>
+	<script type="text/javascript" src="js/DA/LandRaiderCrusader.js" ></script>
+	<script type="text/javascript" src="js/DA/LandRaiderRedeemer.js" ></script>
+	<script type="text/javascript" src="js/DA/DeathwingCommandSquad.js" ></script>
+	<script type="text/javascript" src="js/DA/DeathwingKnightSquad.js" ></script>
+	<script type="text/javascript" src="js/DA/AssaultSquad.js" ></script>
+	<script type="text/javascript" src="js/DA/DevastatorSquad.js" ></script>
+	<script type="text/javascript" src="js/DA/RavenwingBikeSquad.js" ></script>
+	<script type="text/javascript" src="js/DA/RavenwingAttackBikeSquad.js" ></script>
+	<script type="text/javascript" src="js/DA/RavenwingBlackKnights.js" ></script>
+	<script type="text/javascript" src="js/DA/RavenwingCommandSquad.js"></script>
+	<script type="text/javascript" src="js/DA/Predator.js"></script>
+	<script type="text/javascript" src="js/DA/Vindicator.js"></script>
+	<script type="text/javascript" src="js/DA/Whirlwind.js"></script>
+	<script type="text/javascript" src="js/DA/RavenwingLandSpeeder.js"></script>
+	<script type="text/javascript" src="js/DA/RavenwingDarkshroud.js"></script>
+	<script type="text/javascript" src="js/DA/RavenwingDarkTalon.js"></script>
+	<script type="text/javascript" src="js/DA/NephilimJetfighter.js"></script>
+	<script type="text/javascript" src="js/DA/Librarian.js"></script>
+	<script type="text/javascript" src="js/DA/Techmarine.js"></script>
+	<script type="text/javascript" src="js/DA/Asmodai.js"></script>
+	<script type="text/javascript" src="js/DA/Azrael.js"></script>
+	<script type="text/javascript" src="js/DA/Chaplain.js"></script>
+	<script type="text/javascript" src="js/DA/InterrogatorChaplain.js"></script>
+	<script type="text/javascript" src="js/DA/Ezekiel.js"></script>
+	<script type="text/javascript" src="js/DA/Sableclaw.js"></script>
+	<script type="text/javascript" src="js/DA/Sammael.js"></script>
+
 	<script type="text/javascript">
 		//plaguebearers = new Plaguebearers();
 		var rosters = [
 			new WHRoster()
 		];
+		$('.WH_roster_open_closed').click();
+		$('.WH_roster_add').click();
+		$('.WH_army_unit_name')[0].click()
+		$('.WH_roster_army--DarkAngel').click();
+		// $('.WH_army_slot')[0].click();
+		// $('.WH_army_unit_name')[6].click();
+		// $('.WH_army_slot')[0].click();
+		// $('.WH_options_body').scrollTop(0)
+
 	</script>
 
 

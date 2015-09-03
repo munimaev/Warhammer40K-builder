@@ -2,6 +2,7 @@
 var OptionChek = function(o) {
     WHOption.apply(this, arguments);
 	var _this = this;
+	this.enableIndicatorMinusClass = 'WH_option_action_indicator--minus';
 }
 
 // Унаследовать
@@ -9,6 +10,14 @@ OptionChek.prototype = Object.create(WHOption.prototype);
 
 // Желательно и constructor сохранить
 OptionChek.prototype.constructor = OptionChek;
+
+OptionChek.prototype.canEnable = function() {
+    if (this.isBlocked()) {
+        return false;
+    }
+    return WHOption.prototype.canEnable(this, arguments)
+}
+
 
 OptionChek.prototype.enable = function() {
 	if (this.canEnable()) {
@@ -43,5 +52,15 @@ OptionChek.prototype.off = function() {
 	}
 }
 
+
+WHOption.prototype.showEnableIndicator = function() {
+	if (this.usedCount > 0) {
+	    this.$indicator.removeClass(this.enableIndicatorClass);
+	    this.$indicator.addClass(this.enableIndicatorMinusClass);
+	} else {
+	    this.$indicator.removeClass(this.enableIndicatorMinusClass);
+	    this.$indicator.addClass(this.enableIndicatorClass);
+	}
+}
 
 

@@ -17,77 +17,27 @@ OptionSelect.prototype.allOff = function() {
 
 
 
-
-
-var BelialsWeaponReplace = function(o) {
-	this.headerText = 'Можно выбрать одно из следюущего';
-	this.optionName = 'BelialsWeaponReplace';
-    this.defaultSubOptions = [
-        'BelialsWeaponReplaceSword',
-        'BelialsWeaponReplaceClaws',
-        'BelialsWeaponReplaceHammer',
-    ]
+var ReplaceFromWargear_class = function(o) {
     OptionSelect.apply(this, arguments);
 }
 // Унаследовать
-BelialsWeaponReplace.prototype = Object.create(OptionSelect.prototype);
+ReplaceFromWargear_class.prototype = Object.create(OptionSelect.prototype);
 // Желательно и constructor сохранить
-BelialsWeaponReplace.prototype.constructor = BelialsWeaponReplace;
+ReplaceFromWargear_class.prototype.constructor = ReplaceFromWargear_class;
 
 
 
 
-
-var BelialsWeaponReplaceSword = function(o) {
-	this.optionName = 'BelialsWeaponReplaceSword';
-	this.actionText = 'S + B';
-	this.autoSelectOption = true;
+var ReplaceFromWargear_subOtion_class = function() {
     OptionChek.apply(this, arguments);
-
 }
 // Унаследовать
-BelialsWeaponReplaceSword.prototype = Object.create(OptionChek.prototype);
+ReplaceFromWargear_subOtion_class.prototype = Object.create(OptionChek.prototype);
 // Желательно и constructor сохранить
-BelialsWeaponReplaceSword.prototype.constructor = BelialsWeaponReplaceSword;
-
-BelialsWeaponReplaceSword.prototype.off = function(){
-	for (var u in this.unit.models) {
-		for (var w = this.unit.models[u].wargear.length-1; w >= 0; w--) {
-			console.log(this.unit.models[u].wargear[w].createBy, this)
-			if (this.unit.models[u].wargear[w].createBy === this) {
-				this.unit.models[u].wargear.splice(w,1);
-			}
-		}
-	}
-	this.usedCount = 0;
-	this.iUpdated();
-}
-BelialsWeaponReplaceSword.prototype.on = function(){
-	this.superOption.allOff();
-	for (var u in this.unit.models) {
-        this.unit.models[u].addWargear({name:'StromBolter',   createBy:this})
-        this.unit.models[u].addWargear({name:'SwordOfSilence',createBy:this})
-	}
-	this.usedCount = 1;
-	this.iUpdated();
-}
+ReplaceFromWargear_subOtion_class.prototype.constructor = ReplaceFromWargear_subOtion_class;
 
 
-
-
-
-var BelialsWeaponReplaceClaws = function(o) {
-	this.optionName = 'BelialsWeaponReplaceClaws';
-	this.actionText = 'C + C';
-    OptionChek.apply(this, arguments);
-
-}
-// Унаследовать
-BelialsWeaponReplaceClaws.prototype = Object.create(OptionChek.prototype);
-// Желательно и constructor сохранить
-BelialsWeaponReplaceClaws.prototype.constructor = BelialsWeaponReplaceClaws;
-
-BelialsWeaponReplaceClaws.prototype.off = function(){
+ReplaceFromWargear_subOtion_class.prototype.off = function(){
 	for (var u in this.unit.models) {
 		for (var w = this.unit.models[u].wargear.length-1; w >= 0; w--) {
 			if (this.unit.models[u].wargear[w].createBy === this) {
@@ -98,52 +48,9 @@ BelialsWeaponReplaceClaws.prototype.off = function(){
 	this.usedCount = 0;
 	this.iUpdated();
 }
-BelialsWeaponReplaceClaws.prototype.on = function(){
-	this.superOption.allOff();
-	for (var u in this.unit.models) {
-        this.unit.models[u].addWargear({name:'LightningClaws',createBy:this})
-        this.unit.models[u].addWargear({name:'LightningClaws',createBy:this})
-	}
-	this.usedCount = 1;
-	this.iUpdated();
-}
 
 
 
-
-
-var BelialsWeaponReplaceHammer = function(o) {
-	this.optionName = 'BelialsWeaponReplaceHammer';
-	this.actionText = 'H + S';
-    OptionChek.apply(this, arguments);
-
-}
-// Унаследовать
-BelialsWeaponReplaceHammer.prototype = Object.create(OptionChek.prototype);
-// Желательно и constructor сохранить
-BelialsWeaponReplaceHammer.prototype.constructor = BelialsWeaponReplaceHammer;
-
-
-BelialsWeaponReplaceHammer.prototype.off = function(){
-	for (var u in this.unit.models) {
-		for (var w = this.unit.models[u].wargear.length-1; w >= 0; w--) {
-			if (this.unit.models[u].wargear[w].createBy === this) {
-				this.unit.models[u].wargear.splice(w,1);
-			}
-		}
-	}
-	this.usedCount = 0;
-	this.iUpdated();
-}
-BelialsWeaponReplaceHammer.prototype.on = function(){
-	this.superOption.allOff();
-	for (var u in this.unit.models) {
-        this.unit.models[u].addWargear({name:'ThunderHammer',createBy:this})
-        this.unit.models[u].addWargear({name:'StormShield',createBy:this})
-	}
-	this.usedCount = 1;
-	this.iUpdated();
-}
 
 
 
@@ -157,19 +64,46 @@ BelialsWeaponReplaceHammer.prototype.on = function(){
 
 
 var DA_DedicatedTransport = function(o) {
-	this.headerText = 'Отряд может выбратьв качестве прикомандированного транспорта одно из следующего';
-	this.optionName = 'DA_DedicatedTransport';
-    this.defaultSubOptions = [
-        'DA_DedicatedTransport_DropPod',
-        'DA_DedicatedTransport_Rhino',
-		'DA_DedicatedTransport_Razorback',
-    ]
     OptionSelect.apply(this, arguments);
 }
 // Унаследовать
 DA_DedicatedTransport.prototype = Object.create(OptionSelect.prototype);
 // Желательно и constructor сохранить
 DA_DedicatedTransport.prototype.constructor = DA_DedicatedTransport;
+
+
+
+var DA_DedicatedFastTransport = function(o) {
+	this.headerText = 'Отряд может выбратьв качестве прикомандированного транспорта одно из следующего';
+	this.optionName = 'DA_DedicatedFastTransport';
+    this.defaultSubOptions = [
+        'DA_DedicatedTransport_DropPod',
+        'DA_DedicatedTransport_Rhino',
+		'DA_DedicatedTransport_Razorback',
+    ]
+    DA_DedicatedTransport.apply(this, arguments);
+}
+// Унаследовать
+DA_DedicatedFastTransport.prototype = Object.create(DA_DedicatedTransport.prototype);
+// Желательно и constructor сохранить
+DA_DedicatedFastTransport.prototype.constructor = DA_DedicatedFastTransport;
+
+
+
+var DA_DedicatedHeavyTransport = function(o) {
+	this.headerText = 'Отряд может выбратьв качестве прикомандированного транспорта одно из следующего';
+	this.optionName = 'DA_DedicatedHeavyTransport';
+    this.defaultSubOptions = [
+        'DA_DedicatedTransport_LandRaider',
+        'DA_DedicatedTransport_LandRaiderCrusader',
+		'DA_DedicatedTransport_LandRaiderRedeemer',
+    ]
+    DA_DedicatedTransport.apply(this, arguments);
+}
+// Унаследовать
+DA_DedicatedHeavyTransport.prototype = Object.create(DA_DedicatedTransport.prototype);
+// Желательно и constructor сохранить
+DA_DedicatedHeavyTransport.prototype.constructor = DA_DedicatedHeavyTransport;
 
 
 
@@ -264,7 +198,7 @@ DedicatedTransport_suboption.prototype.on = function(){
 
 var DA_DedicatedTransport_DropPod = function(o) {
 	this.optionName = 'DA_DedicatedTransport_DropPod';
-	this.actionText = 'Drop Pod за ' + DA_DropPod.prototype.price;
+	this.actionText = '<b>Drop Pod</b> за <i>' + DA_DropPod.prototype.price+'</i>';
 	this.dedicatedUnitName = 'DA_DropPod';
     DedicatedTransport_suboption.apply(this, arguments);
 
@@ -306,3 +240,31 @@ var DA_DedicatedTransport_Razorback = function(o) {
 DA_DedicatedTransport_Razorback.prototype = Object.create(DedicatedTransport_suboption.prototype);
 // Желательно и constructor сохранить
 DA_DedicatedTransport_Razorback.prototype.constructor = DA_DedicatedTransport_Razorback;
+
+
+var DA_DedicatedTransport_LandRaider = function(o) {
+	this.optionName = 'DA_DedicatedTransport_LandRaider';
+	this.actionText = 'LandRaider <i>за '+DA_LandRaider.prototype.price+' очков</i>';
+	this.dedicatedUnitName = 'DA_LandRaider';
+	DedicatedTransport_suboption.apply(this, arguments);
+}
+DA_DedicatedTransport_LandRaider.prototype = Object.create(DedicatedTransport_suboption.prototype);
+DA_DedicatedTransport_LandRaider.prototype.constructor = DA_DedicatedTransport_LandRaider;
+
+var DA_DedicatedTransport_LandRaiderCrusader = function(o) {
+	this.optionName = 'DA_DedicatedTransport_LandRaiderCrusader';
+	this.actionText = 'LandRaiderCrusader <i>за '+DA_LandRaiderCrusader.prototype.price+' очков</i>';
+	this.dedicatedUnitName = 'DA_LandRaiderCrusader';
+	DedicatedTransport_suboption.apply(this, arguments);
+}
+DA_DedicatedTransport_LandRaiderCrusader.prototype = Object.create(DedicatedTransport_suboption.prototype);
+DA_DedicatedTransport_LandRaiderCrusader.prototype.constructor = DA_DedicatedTransport_LandRaiderCrusader;
+
+var DA_DedicatedTransport_LandRaiderRedeemer = function(o) {
+	this.optionName = 'DA_DedicatedTransport_LandRaiderRedeemer';
+	this.actionText = 'LandRaiderRedeemer <i>за '+DA_LandRaiderRedeemer.prototype.price+' очков</i>';
+	this.dedicatedUnitName = 'DA_LandRaiderRedeemer';
+	DedicatedTransport_suboption.apply(this, arguments);
+}
+DA_DedicatedTransport_LandRaiderRedeemer.prototype = Object.create(DedicatedTransport_suboption.prototype);
+DA_DedicatedTransport_LandRaiderRedeemer.prototype.constructor = DA_DedicatedTransport_LandRaiderRedeemer;

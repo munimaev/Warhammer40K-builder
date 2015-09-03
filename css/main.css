@@ -98,25 +98,53 @@ body {
 	left: 278px;
 	right: 16px;
 	height: 100%;
+	padding-top: 18px;
+	box-sizing: padding-box;
 
 }
 #WH_army.WH_army--small {
 	right: 368px;
 
 }
+.WH_army_in {
+	height: 100%;
+	overflow: auto;
+	padding-right: 8px;
+	box-sizing: padding-box;
+}
 .WH_army_group {
 	
 }
 .WH_army_group_name {
-	margin-top: 16px;
-	margin-bottom: 10px;
-	padding: 3px;
+	/*margin-top: 16px;*/
+	margin-bottom: 8px;
+	padding: 3px 3px 3px 22px;
 	border-radius: 3px;
 	word-wrap: break-word;
 	word-break: break-word;
 	font-size: 11px;
 	color: #fff;
 	background-color: rgba(0,0,0,0.3);
+	background-position: 3px center;
+	background-repeat: no-repeat;
+}
+.WH_army_group_name__HQ {
+	background-image: url("../pics/units/1_sect_1.png");
+}
+.WH_army_group_name__Troops {
+	background-image: url("../pics/units/1_sect_3.png");
+}
+.WH_army_group_name__Elite {
+	background-image: url("../pics/units/1_sect_2.png");
+}
+.WH_army_group_name__FastAttack {
+	background-image: url("../pics/units/1_sect_4.png");
+}
+.WH_army_group_name__HeavySupport {
+	background-image: url("../pics/units/1_sect_5.png");
+}
+.WH_army_group_pool {
+	padding-bottom: 16px;
 }
 
 
@@ -181,6 +209,11 @@ body {
 	padding: 11px;
 	text-align: left;
 }
+
+.WH_army_unit_name__disable {
+	color: #CCC;
+}
+
 .WH_army_unit_header_expand {
 	background-image: url('../pics/controls/expand.png')
 }
@@ -211,11 +244,30 @@ body {
 	display: none;
 }
 
-.WH_army_unit_wargear_span--readyToChange {
-	color: darkred;
-	font-weight: bold;
+.WH_army_unit_header_special h5 {
+	margin: 1em 0 0.33em;
+}
+.WH_army_unit_header_special div:first-child h5 {
+	margin: 0em 0 0.33em;
 }
 
+.WH_army_unit_warlordTrait_span,
+.WH_army_unit_specialRules_span {
+	font-size: smaller;
+}
+.modelName--readyToChange,
+.WH_army_unit_wargear_span--readyToChange {
+	color: darkred;
+	color: #1496BB;
+	font-weight: bold;
+	cursor: pointer;
+	border-bottom: 1px dashed  #1496BB;
+}
+.WH_army_unit_wargear_span img {
+	width: 12px;
+	height: 12px;
+	vertical-align: text-bottom;
+}
 #WH_options {
 	width: 368px;
 	float: right;
@@ -281,6 +333,7 @@ body {
 	background: #fff;	
 	min-height: 16px;
 	border-bottom: 1px solid #cccbca;
+	line-height: 1.33;
 }
 .WH_suboption_header {
 	border-radius: 2px;
@@ -309,10 +362,41 @@ body {
 	min-height: 16px;
 	background-repeat: no-repeat;
 	background-position: 8px 5px;
+	/*background-size: 16px 16px;*/
+	line-height: 1.25;
 }
-
+.WH_option_action b{
+	color: #333;
+}
 .WH_option_action--used:hover ,
 .WH_option_action:hover {
 	background-color: darkgrey;
 	color: #FFF;
 }
+.WH_option_action:hover b{
+	color: #FFF;
+}
+.WH_option_action_indicator {
+	height: 16px;
+	width: 16px;
+	background-repeat: no-repeat;
+	background-position: bottom right;
+	background-size: 12px 12px;
+	position:  absolute;
+	top: 7px;
+	left: 11px;
+	background-color: 
+}
+.WH_option_action_indicator--exclamation {
+	background-image:url('../pics/micro/exclamation.png') 
+}
+.WH_option_action_indicator--stop {
+	background-image:url('../pics/micro/stop.png') 
+}
+.WH_option_action_indicator--minus {
+	background-image:url('../pics/micro/minus.png') 
+}
+.WH_option_action_indicator--plus {
+	background-image:url('../pics/micro/plus.png')
+}
+/*iconset:drf*/
