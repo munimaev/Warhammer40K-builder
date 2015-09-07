@@ -29,6 +29,9 @@ var Ezekiels = function(o) {
         'Telekinesis', 
         'Telepathy',
     ];
+    this.defaultWarlordTrait = [
+        'CourageOfTheFirstLegion'
+    ];
 	WHUnit_Infantry.apply(this, arguments);
 }
 // Унаследовать

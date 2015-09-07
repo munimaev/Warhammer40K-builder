@@ -24,7 +24,9 @@ var WHUnit = function(o) {
 	this.unitWargear = [];
 	this.speccialRules = {general:[]};
 	this.warlordTraits = [];
+	this.disciplines = [];
 	this.price = this.price || 0;
+	this.totalPrice =  0;
 	this.isShowModels = false;
 	var _this = this;
 
@@ -91,12 +93,14 @@ var WHUnit = function(o) {
     this.$options.append(this.$oBody0);
     	this.$oBody0.append(this.$oBody);
 
+	this.$oBody.niceScroll()
 
     this.defaultUnitWargear = this.defaultUnitWargear || [];
 	this.addDefaultStructure();
 	this.addDefaultOptions();
 	this.addDefaultSpecialRules();
 	this.addDefaultWarlordTraits();
+	this.addDefaultDisciplines();
 	this.updateHeaderPrice();
 	for (var i in this.options) {
 		this.options[i].autoSelect();
@@ -172,6 +176,19 @@ WHUnit.prototype.addDefaultWarlordTraits  = function() {
 		}
 	}
 }
+
+WHUnit.prototype.addDefaultDisciplines  = function() {
+	for (var i in this.defaultDisciplines) {
+		if (typeof this.defaultDisciplines[i] === 'string') {
+			if (window[this.defaultDisciplines[i]]) {
+				this.disciplines.push(new window[this.defaultDisciplines[i]]({unit:this,createBy:this}));
+			}
+			else {
+				console.log("{disciplines: '"+this.defaultDisciplines[i]+"',visibleName: '"+this.defaultDisciplines[i]+"',},")
+			}
+		}
+	}
+}
 WHUnit.prototype.printUnit  = function() {
 	console.clear();
 	console.log("==================");
@@ -238,7 +255,9 @@ WHUnit.prototype.updateHeaderPrice = function(p) {
 	else {
 		this.$oPrice.html(' ('+this.price+')');
 	}
+	this.totalPrice = this.price+p;
 	this.$lPrice.html(' ('+(this.price+p)+')');
+	this.army.updateCost();
 }
 
 WHUnit.prototype.updateModels = function() {
@@ -276,6 +295,15 @@ WHUnit.prototype.updateModels = function() {
 			$lWarlordTraits.append(this.warlordTraits[r].getSpan());
 		}
 		this.$lSpecial.append($lWarlordTraits);
+	}
+
+	if (this.disciplines.length) {
+		var $lDisciplines = $('<div />');
+		$lDisciplines.append($('<h5>',{text:'Psyker disciplines'}));
+		for (var r in this.disciplines) {
+			$lDisciplines.append(this.disciplines[r].getSpan());
+		}
+		this.$lSpecial.append($lDisciplines);
 	}
 
 	// this.$lSpecial.html('Special Riles <br><small>' +this.defaultSpecialRules.join(', ')+'</small>');

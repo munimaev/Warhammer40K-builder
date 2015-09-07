@@ -34,7 +34,7 @@ DA_VeteranSquad.prototype = Object.create(WHUnit_Infantry.prototype);
 // Желательно и constructor сохранить
 DA_VeteranSquad.prototype.constructor = DA_VeteranSquad;
 // Методы потомка 
-DA_VeteranSquad.prototype.visibleName = 'Veteran Squad';
+DA_VeteranSquad.prototype.visibleName = 'Company Veteran Squad';
 
 
 

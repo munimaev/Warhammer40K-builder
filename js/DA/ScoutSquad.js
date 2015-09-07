@@ -10,7 +10,6 @@ var DA_ScoutSquad = function(o) {
 		'DA_ScoutSquad_upgradeToVeteran',
 		'DA_TacticalSquad_MeleeRangedWeapons',
 		'DA_ScoutSquad_AddMeltaBomb',
-		'DA_DedicatedFastTransport',
 	];
 	this.structureDefault = {
 		'DA_Sсout_Sergant' : 1,
@@ -252,7 +251,7 @@ DA_RangedWeaponsFabric([
     optionNameInModel : 'Heavy bolter with Hellfire shells',
     cost : 13,
     changeTo : 'HeavyBolterWithHellfireShells',
-    actionTextUp : '<b>Heavy bolter with Hellfire shells</b> <i>за 5 очков</i>',
+    actionTextUp : '<b>Heavy bolter with Hellfire shells</b> <i>за 13 очков</i>',
     actionTextDown : 'Убрать Heavy bolter with Hellfire shells'
 }, 
 ]);

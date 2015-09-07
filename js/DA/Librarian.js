@@ -3,8 +3,7 @@ var DA_Librarian = function(o) {
 	this.price = 65;
 	this.optionsDefault = [
 		'DA_Upgrade_ML1_to_ML2',
-        'DA_Upgrade_ML1_to_ML3',
-        'DA_Librarian_RangedWeapons',
+        'DA_RangedWeapons_Librarian',
         'DA_SpecilaIssueWargear',
         'DA_RelicsOfCliban',
         'DA_Librarian_Get',
@@ -56,37 +55,36 @@ fabric_option_unitMayTake([
     removeItems : ['Psyker_ML1'],
     addItems : ['Psyker_ML2'],
 },
-{
-    optionName : 'DA_Upgrade_ML1_to_ML3',
-    cost : 50,
-    removeItems : ['Psyker_ML1'],
-    addItems : ['Psyker_ML3'],
-}
 ]);
 
 
 
 
-var DA_Librarian_RangedWeapons = function(o) {
-    this.defaultSubOptions = [
-        'DA_RangedWeapons',
-    ]
-    this.optionName = 'DA_Librarian_RangedWeapons';
-    this.cost = 0;
-    WHOptionSuper.apply(this, arguments);
+
+var DA_RangedWeapons_Librarian = function(o) {
+    this.optionName = 'DA_RangedWeapons_Librarian';
+    this.headerText = 'Может заменить свой boltgun, bolt pistool и/или оружие ближнего боя на одно из списка Melee Weapons';
+    this.isWargearToChange = function(w,m) {
+        if (~m.hasWargear({'name':'TerminatorArmour'})) {
+            return false;
+        }
+        if ((w.wargearName == 'Boltgun' 
+            || w.wargearName == 'BoltPistol' 
+            || w.wargearType == 'PowerWeapon'
+            || w.wargearType == 'MeleeWeapon' 
+            ) && w.createBy === m
+        ) {
+            return true;
+        }
+        return false;
+    }
+    DA_RangedWeapons.apply(this, arguments);
 }
 // Унаследовать
-DA_Librarian_RangedWeapons.prototype = Object.create(WHOptionSuper.prototype);
+DA_RangedWeapons_Librarian.prototype = Object.create(DA_RangedWeapons.prototype);
 // Желательно и constructor сохранить
-DA_Librarian_RangedWeapons.prototype.constructor = DA_Librarian_RangedWeapons;
+DA_RangedWeapons_Librarian.prototype.constructor = DA_RangedWeapons_Librarian;
 
-DA_Librarian_RangedWeapons.prototype.isBlocked = function(){
-    if (~this.unit.models[0].hasWargear({name:'TerminatorArmour'})) {
-        return true;
-    }
-    return false;
-    return WHOptionSuper.prototype.canEnable.apply(this,arguments);
-};
 
 
 
@@ -99,6 +97,10 @@ fabric_option_multiChange([{
         cost: 20,
         actionTextUp: 'Librarian может взять <b>Space marine bike</b> <i>за 20 очков</i>',
         addItems: ['SpaceMarineBike'],
+    }],
+    isModelCanChange : [{
+        type : 'ifThereIsNoItem',
+        items : ['TerminatorArmour']
     }]
 },{
     optionName: 'DA_Librarian_Terminator',
@@ -118,18 +120,35 @@ fabric_option_multiChange([{
     isModelCanChange : [{
         type : 'ifThereIsNoItem',
         items : ['SpaceMarineBike']
+    }],
+    isBlocked : [{
+        type:'hasWargearOfAnoterOption',
+        optionName:[
+            'DA_RangedWeapons_Librarian',
+            'DA_Librarian_Terminator_Weapon'
+        ],
     }]
 },{
     optionName: 'DA_Librarian_Terminator_Weapon',
     cost: 0,
     headerText: 'Librarian в Terminator armour может взять одно из следующего',
-    defaultSubOptions: [
-        'DA_SpecilaIssueWargear_Auspex',
-        'DA_SpecilaIssueWargear_CombatShield',
-        'DA_SpecilaIssueWargear_MeltaBomb',
-        'DA_SpecilaIssueWargear_DigitalWeapon',
-        'DA_SpecilaIssueWargear_JumpPack',
-        'DA_SpecilaIssueWargear_ConversionField',
+    defaultSubOptions: [{
+        optionName: 'DA_Librarian_Terminator_Weapon_StormBolter',
+        cost: 5,
+        addItems: ['StormBolter'],
+    },{
+        optionName: 'DA_Librarian_Terminator_Weapon_CombiPlasma',
+        cost: 10,
+        addItems: ['CombiPlasma'],
+    },{
+        optionName: 'DA_Librarian_Terminator_Weapon_CombiPlasma',
+        cost: 10,
+        addItems: ['CombiPlasma'],
+    },{
+        optionName: 'DA_Librarian_Terminator_Weapon_CombiMelta',
+        cost: 10,
+        addItems: ['CombiMelta'],
+    },
     ],
     isModelCanChange : [{
         type : 'ifThereIsHasItem',

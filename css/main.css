@@ -97,19 +97,21 @@ body {
 	position: absolute;
 	left: 278px;
 	right: 16px;
-	height: 100%;
-	padding-top: 18px;
+	/*height: 100%;*/
+	top: 16px;
+	bottom: 16px;
+	z-index: 20;
 	box-sizing: padding-box;
 
 }
 #WH_army.WH_army--small {
-	right: 368px;
+	right: 358px;
 
 }
 .WH_army_in {
-	height: 100%;
-	overflow: auto;
-	padding-right: 8px;
+	/*height: 100%;*/
+	/*overflow:  auto;*/
+	padding-right: 12px;
 	box-sizing: padding-box;
 }
 .WH_army_group {
@@ -269,12 +271,15 @@ body {
 	vertical-align: text-bottom;
 }
 #WH_options {
-	width: 368px;
-	float: right;
+	width: 336px;
 	font-size: 13px;
-	height: 100%;
-	padding: 16px;
-	box-sizing:border-box;
+	position: absolute;
+	right: 16px;
+	top:16px;
+	bottom: 16px;
+	z-index: 10;
+	/*background-color: rgb(246, 246, 246);*/
+
 }
 
 .WH_options {
@@ -299,21 +304,29 @@ body {
 	text-shadow: 0 1px 0 #fff;
 	word-wrap: break-word;
 }
-.WH_options_body {
-	background: #f6f6f6;
-	padding: 10px;
-	overflow: auto;
-	height: 100%;
-	box-sizing: border-box;
-}
 
 
 .WH_options_body0 {
-	height: 100%;
-	margin-top: -45px;
-	padding-top: 45px;
+	position: absolute;
+	top:56px;
+	bottom:0px;
+	width: 100%;
 	/*padding-bottom: 15px;*/
-	box-sizing: border-box;
+	/*box-sizing: border-box;*/
+}
+
+.WH_options_body {
+	background: #f6f6f6;
+	/*background-color: rgb(146, 46, 246);*/
+	top: 10px;
+	bottom: 0px;
+	left: 10px;
+	right: 2px;
+	padding-right: 8px; 
+	position: absolute;
+	overflow: hidden;
+	/*height: 100%;*/
+	/*box-sizing: border-box;*/
 }
 
 .WH_option {
@@ -325,6 +338,7 @@ body {
 	box-shadow: 0 1px 2px rgba(0,0,0,0.06);
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
+	/*display: none;*/
 }
 .WH_option_header {
 	border-radius: 2px;
@@ -400,3 +414,43 @@ body {
 	background-image:url('../pics/micro/plus.png')
 }
 /*iconset:drf*/
+
+
+
+.WH_popup_option_s {
+	background-color: #fff;
+	margin: 1px 0 0 1px;
+	min-height: 150px;
+	width : 150px;
+	display: inline-block;
+	margin: 5px;
+	vertical-align: top;
+	border-radius: 3px;
+}
+.WH_popup_option_s_unit {
+
+}
+.WH_popup_option_s_unit_img {
+	background-color: #CCC;
+	width: 140px;
+	height: 140px;
+	margin: 5px 5px 0px;
+	background-size: cover;
+	background-position: center;
+	cursor: pointer;
+}
+.WH_popup_option_s_unit_name {
+	min-height: 16px;
+	padding: 11px 5px 11px;
+	cursor: pointer;
+
+}
+.WH_popup_option_s_unit_info {
+	font-size: x-small;
+	padding: 0px 5px 11px;
+	color: #2A5DB0;
+	color: rgba(20,150,187);
+	cursor: pointer;
+}
+
+

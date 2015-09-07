@@ -37,9 +37,8 @@ DA_InterrogatorChaplain.prototype = Object.create(WHUnit_Infantry.prototype);
 // Желательно и constructor сохранить
 DA_InterrogatorChaplain.prototype.constructor = DA_InterrogatorChaplain;
 // Методы потомка 
-DA_InterrogatorChaplain.prototype.visibleName = 'InterrogatorChaplain';
-
-
+DA_InterrogatorChaplain.prototype.visibleName = 'Interrogator Chaplain';
+DA_InterrogatorChaplain.prototype.pic = 'units_DA/DarkAngelsInterrogatorChaplin.jpg';
 
 
 var DA_MeleeWeapons_InterrogatorChaplain = function(o) {

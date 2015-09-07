@@ -87,16 +87,24 @@ WHSlot.prototype.closePopup = function() {
 }
 WHSlot.prototype.getUnitSelectOptions = function(slot,obj) {
     var result = $('<div />',{
-        'class':"WH_army_slot"
+        'class':"WH_popup_option_s"
     });
     var unit = $('<div />',{
-        'class':"WH_army_unit"
+        'class':"WH_popup_option_s_unit"
     });
 
     var name = $('<div />',{
-        'class':"WH_army_unit_name",
+        'class':"WH_popup_option_s_unit_name",
         'text': window[obj].prototype.visibleName
     });
+    var img = $('<div />',{
+        'class':"WH_popup_option_s_unit_img",
+        'style' : 'background-image:url("pics/'+window[obj].prototype.pic+'")'
+    });
+    // var info = $('<div />',{
+    //     'class':"WH_popup_option_s_unit_info",
+    //     'text' : 'Подробнее'
+    // });
     var enable = true;
     if (window[obj].prototype.unique) {
         for (var u in window[obj].prototype.unique) {
@@ -117,13 +125,17 @@ WHSlot.prototype.getUnitSelectOptions = function(slot,obj) {
                 });
                 __this.army.checkAllGroup();
                 __this.closePopup();
+                __this.army.updateCost();
             }
         }();
         name.click(clickFunc);
+        img.click(clickFunc);
     } else {
         name.addClass('WH_army_unit_name__disable')
     }
+    unit.append(img);
     unit.append(name);
+    // unit.append(info);
     result.append(unit);
     return result;
 }

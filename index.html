@@ -14,7 +14,7 @@
 
 		</div>
 		
-		<div id="WH_army">
+		<div id="WH_army" class="">
 
 		</div>
 		<div id="WH_options">
@@ -55,6 +55,7 @@
 	<script type="text/javascript" src="js/DA/models.js" ></script>
 	<script type="text/javascript" src="js/WHSpecialRules.class.js" ></script>
 	<script type="text/javascript" src="js/WHWarlordTrait.class.js" ></script>
+	<script type="text/javascript" src="js/WHPsyhoPower.class.js" ></script>
 	<script type="text/javascript" src="js/DA/_functions.js" ></script>
 	<script type="text/javascript" src="js/WHO.DA_RangedWeapons.class.js" ></script>
 	<script type="text/javascript" src="js/DA/Belial.js" ></script>
@@ -101,6 +102,9 @@
 		var rosters = [
 			new WHRoster()
 		];
+
+		$("#WH_army").niceScroll();
+		
 		$('.WH_roster_open_closed').click();
 		$('.WH_roster_add').click();
 		$('.WH_army_unit_name')[0].click()

@@ -27,7 +27,6 @@ var Model_Fabric = function(a) {
     }
 }
 
-console.log('msg')
 Model_Fabric([
 
 {
@@ -50,7 +49,7 @@ Model_Fabric([
     visibleModelName : 'Belial',
     defaultAbilities : {
         "WS": 5, "BS": 6, "S" : 4, "T" : 4, "W" : 3, "I" : 5, "A" : 4, "Ld": 10, "Sv": 2
-    }
+    },
 },{
     modelMainType :'Infantry',
     modelName : 'Ezekiel',

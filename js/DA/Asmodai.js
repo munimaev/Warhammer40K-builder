@@ -37,6 +37,7 @@ Asmodais.prototype.constructor = Asmodais;
 Asmodais.prototype.visibleName = 'Asmodai';
 Asmodais.prototype.unique = ['Asmodais'];
 
+Asmodais.prototype.pic = 'units_DA/Asmodai.jpg';
 
 
 

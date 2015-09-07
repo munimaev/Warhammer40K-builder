@@ -31,6 +31,7 @@ Belials.prototype.constructor = Belials;
 // Методы потомка 
 Belials.prototype.visibleName = 'Belial';
 Belials.prototype.unique = ['Belials'];
+Belials.prototype.pic = 'units_DA/Belials.jpg';
 
 
 

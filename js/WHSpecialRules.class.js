@@ -191,7 +191,7 @@ WHSpecialRuleFabric([
     specialRuleName: 'MissileLock',
     visibleName: 'MissileLock',
 }, {
-    specialRuleName: 'MovethroughCover',
+    specialRuleName: 'MoveThroughCover',
     visibleName: 'Move through cover',
 }, {
     specialRuleName: 'PowerOfTheMashineSpirit',

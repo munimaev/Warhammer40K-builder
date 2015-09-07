@@ -450,8 +450,8 @@ WHWargearFabric([
     wargearName: 'SponsonHeavyBolter',
     visibleName: 'Sponson Heavy bolter',
 }, {
-    wargearName: 'SqoutCloak',
-    visibleName: 'Sqout cloak',
+    wargearName: 'ScoutCloak',
+    visibleName: 'Scout cloak',
 }, {
     wargearName: 'StasisBomb',
     visibleName: 'Stasis bomb',

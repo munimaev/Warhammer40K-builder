@@ -32,6 +32,6 @@ Sableclaws.prototype.constructor = Sableclaws;
 // Методы потомка 
 Sableclaws.prototype.visibleName = 'Sableclaw';
 Sableclaws.prototype.unique = ['Sammaels','Sableclaws'];
-
+Sableclaws.prototype.pic = 'units_DA/LandspeederVengeance.jpg';
 
 

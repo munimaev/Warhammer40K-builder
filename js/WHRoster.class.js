@@ -1,6 +1,7 @@
 // --------- Класс-Родитель ------------
 var WHRoster = function(o) {
 
+    this.totalPrice = 0;
     this.$rosters = $('#rosters');
     this.armies = [];
     this.armyList = ['DarkAngels','DeamonsOfChaos'];
@@ -135,6 +136,17 @@ WHRoster.prototype.unselectAllArmy = function() {
     for (var i in this.armies) {
         this.armies[i].unselect();
     }
+}
+
+
+WHRoster.prototype.updateCost = function() {
+    console.log(this);
+    this.totalPrice = 0;
+    for (var i in this.armies) {
+        this.totalPrice += this.armies[i].totalPrice;
+    }
+    var priceTxt = this.totalPrice ? '('+this.totalPrice+')' : '';
+    this.$header.html('roster '+priceTxt)
 }
 
 

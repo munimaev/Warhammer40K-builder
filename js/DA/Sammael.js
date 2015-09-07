@@ -40,6 +40,7 @@ Sammaels.prototype.constructor = Sammaels;
 // Методы потомка 
 Sammaels.prototype.visibleName = 'Sammael';
 Sammaels.prototype.unique = ['Sammaels','Sableclaws'];
+Sammaels.prototype.pic = 'units_DA/Sammaels.jpg';
 
 
 

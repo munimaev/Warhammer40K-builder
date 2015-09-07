@@ -18,7 +18,7 @@ var WHArmy = function(o) {
             };
         }()
     });
-
+    this.totalPrice = 0;
     this.$header = $('<div />',{
         'class': '',
         'text' : this.visibleName
@@ -129,6 +129,7 @@ var WHArmy = function(o) {
 
 
 
+
 // Методы хранятся в прототипе
 WHArmy.prototype.select = function() {
     this.roster.unselectAllArmy();
@@ -179,6 +180,22 @@ WHArmy.prototype.alreadyTakenUnit = function(o) {
         }
     }
     return false;
+}
+
+
+WHArmy.prototype.updateCost = function () {
+    console.log(this);
+    this.totalPrice = 0;
+    for (var g in this.structure) {
+        for (var s in this.structure[g].slots) {
+            if (!this.structure[g].slots[s].isEmpty()) {
+                this.totalPrice += this.structure[g].slots[s].unit.totalPrice;
+            }
+        }
+    }
+    var totalPriceTxt = this.totalPrice ? ' ('+this.totalPrice+')' : '';
+    this.$header.html(this.visibleName + totalPriceTxt)
+    this.roster.updateCost();
 }
 
 
