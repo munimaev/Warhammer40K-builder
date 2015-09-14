@@ -1,7 +1,7 @@
 body {
 	display: block;
 }
-.WH {
+.WH_ {
 	font-family: "Open Sans", Helvetica, Calibri, Arial, sans-serif;
 	font-size: 14px;
 	position: fixed;
@@ -50,6 +50,7 @@ body {
 	background-position: 9px 9px;
 	background-repeat: no-repeat;
 	cursor: pointer;
+	position: relative;
 }
 .WH_roster_open_closed {
 	width:  16px;
@@ -57,9 +58,9 @@ body {
 	right:   8px;
 	top:     8px;
 	background-image: url("../pics/list.png");
-	float: right;
-	display: inline-block;
+	position: absolute;
 }
+.WH_roster_print ,
 .WH_roster_add {
 	padding: 8px;
 	height: 17px;
@@ -72,12 +73,13 @@ body {
 
 .WH_roster_army {
 	display: block;
-	padding: 8px 8px 8px 41px;
-	height: 17px;
-	background-position: 17px 9px;
+	padding: 8px 8px 8px 34px;
+	min-height: 17px;
+	background-position: 9px 9px;
 	background-repeat: no-repeat;
 	background-size: 16px 16px;
 	cursor: pointer;
+	position: relative;
 }
 .WH_roster_army--CD {
 	background-image: url("../pics/armies/chaos_deamon.jpg");
@@ -169,13 +171,48 @@ body {
     display: inline-block;
     vertical-align: middle;
     position: absolute;
+    top:0px;
+    right:32px;
+    bottom:0px;
+    left:32px;
+    /*background-color:rgba(255,255,255,1);*/
+    overflow: hidden;
+    } 
+.popup__overlay:after {
+    display: inline-block;
+    width:  0;
+    height: 100%;
+    vertical-align: middle;
+    content: ''
+    } 
+
+/*--------------------*/
+.info__overlay {
+	font-family: "Open Sans", Helvetica, Calibri, Arial, sans-serif;
+	font-size: 14px;
+	display: none;
+    position: fixed;
+    left:  0;
+    top:  0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    text-align: center;
+    background-color:rgba(0,0,0,0.5);
+    }
+.info {
+    display: inline-block;
+    vertical-align: middle;
+    position: absolute;
     top:15px;
     right:15px;
     bottom:15px;
     left:15px;
-    background-color:rgba(255,255,255,0.5);
+    background-color:rgba(255,255,255,1);
+    overflow: hidden;
+    border-radius: 3px;
     } 
-.popup__overlay:after {
+.info__overlay:after {
     display: inline-block;
     width:  0;
     height: 100%;
@@ -186,6 +223,19 @@ body {
 /*------armiesList----*/
 #armiesList {
 	display: none;
+}
+
+.WH_army_in_rules {
+	/*min-height: 26px;*/
+	background-color: #fff;
+	padding:1px 11px 11px 11px;
+	/*font-size: 13px;*/
+	margin-bottom: 16px; 
+	border-radius: 3px;
+}
+
+.WH_army_in_rules_h5 {
+	margin: 1em 0 0.33em;
 }
 
 .WH_army_slot {
@@ -208,25 +258,33 @@ body {
 .WH_army_unit_name,
 .WH_popup_unit_name {
 	height: 16px;
-	padding: 11px;
+	padding:  11px 11px 11px 11px;
 	text-align: left;
+	position: relative;
+	/*background-size: 32px 32px;
+	background-repeat: no-repeat;
+	background-position: 3px 3px;*/
 }
 
 .WH_army_unit_name__disable {
 	color: #CCC;
 }
 
-.WH_army_unit_header_expand {
-	background-image: url('../pics/controls/expand.png')
+.WH_army_unit_header_delete {
+	background-image: url('../pics/controls/delete_grey.png')
+}
+.WH_army_unit_header_delete:hover {
+	background-image: url('../pics/controls/delete.png')
 }
 .WH_army_unit_header_collapse {
 	background-image: url('../pics/controls/collapse.png')
 }
 
-.WH_army_unit_header_expand ,
+.WH_army_unit_header_delete ,
 .WH_army_unit_header_collapse {
-	float: right;
-	position: relative;
+	right: 11px;
+	top:11px;
+	position: absolute;
 	width: 16px;
 	height: 16px;
 }
@@ -236,26 +294,31 @@ body {
 
 	font-size: 13px;
 	display: none;
+	min-height: 50px;
+	background-color: rgb(252,252,252);
 }
 
 .WH_army_unit_header_special {
-	padding:11px 11px 11px 11px;
+	padding:0px 11px 11px 11px;
 	border-top: 1px dashed #bdbcbb;
 
 	font-size: 13px;
 	display: none;
+	background-color: rgb(252,252,252);
+}
+
+.WH_army_unit_header_special div {
+	margin-top: 11px; 
 }
 
 .WH_army_unit_header_special h5 {
-	margin: 1em 0 0.33em;
-}
-.WH_army_unit_header_special div:first-child h5 {
-	margin: 0em 0 0.33em;
+	margin: 1em 0 1em;
 }
 
+.WH_army_unit_wargear_span,
 .WH_army_unit_warlordTrait_span,
 .WH_army_unit_specialRules_span {
-	font-size: smaller;
+	font-size: 12px;
 }
 .modelName--readyToChange,
 .WH_army_unit_wargear_span--readyToChange {
@@ -264,6 +327,7 @@ body {
 	font-weight: bold;
 	cursor: pointer;
 	border-bottom: 1px dashed  #1496BB;
+	font-size: 12px;
 }
 .WH_army_unit_wargear_span img {
 	width: 12px;
@@ -454,3 +518,209 @@ body {
 }
 
 
+.WH_select_army {
+	display: inline-block;
+	width: 100%;
+}
+.WH_select_army:first-child {
+	margin-top: 15px;
+}
+
+
+.WH_select_army_div {
+	border-radius: 3px;
+	background-color: #FFF;
+	padding: 11px 11px 15px 11px;
+	margin-bottom: 10px; 
+	text-align: left;
+	vertical-align: top;
+}
+.WH_select_army_name {
+	text-align: left;
+	padding: 5px;
+	color: #0082c6;
+	cursor: pointer;
+	}
+
+.WH_select_army_structure_unit {
+	font-size: 12px;
+	line-height: 15px;
+	text-align: left;
+	padding-left: 36px; 
+	background-size: auto 13px;
+	background-repeat: no-repeat;
+	background-position: 16px 1px;
+}
+.WH_select_army_structure_h5 {
+	margin: 5px;
+	padding: 0px;
+}
+
+.WH_select_army_structure_unit__HQ {
+	background-image: url("../pics/units/1_sect_1.png");
+}
+.WH_select_army_structure_unit__Troops {
+	background-image: url("../pics/units/1_sect_3.png");
+}
+.WH_select_army_structure_unit__Elite {
+	background-image: url("../pics/units/1_sect_2.png");
+}
+.WH_select_army_structure_unit__FastAttack {
+	background-image: url("../pics/units/1_sect_4.png");
+}
+.WH_select_army_structure_unit__HeavySupport {
+	background-image: url("../pics/units/1_sect_5.png");
+}
+
+.WH_select_army_h5 {
+	margin: 5px;
+	padding: 0px;
+}
+.WH_select_army_restriction_span {
+	font-size: 12px;
+	line-height: 14px;
+	padding-left: 20px; 
+}
+
+
+
+.WH_select_army_rule_span {
+	font-size: 12px;
+	line-height: 15px;
+	text-align: left;
+	padding-left: 16px;
+}
+.WH_army_select_specialRules_span {
+	font-size: 12px;
+}
+
+
+.WH_select_army_block {
+	vertical-align: top;
+	display: inline-block;
+	width: 31%;
+	padding-right: 2%;
+	min-width: 350px;
+
+}
+
+.WH_roster_army_del {
+	width: 16px;
+	height: 16px;
+	background-image: url('../pics/controls/delete_grey.png');
+	position: absolute;
+	right:8px;
+}
+
+
+.WH_roster_army_del:hover {
+	background-image: url('../pics/controls/delete.png');
+}
+.WH_roster_army_name {
+	padding-right: 24px;
+	/*color: blue;*/
+}
+
+
+
+.WH_select_faction {
+	width:200px;
+	height: 150px;
+	background-size: cover;
+	display: inline-block;
+	margin: 5px;
+	cursor: pointer;
+}
+.WH_select_faction__DarkAngels {
+	background-image: url('../pics/covers/DarkAngels.png');
+}
+.WH_select_faction__DeamonsOfChaos {
+	background-image: url('../pics/covers/space_marines.png');	
+}
+
+.popup_close {
+	width: 16px;
+	height: 16px;
+	background-image: url('../pics/controls/delete.png');
+	position: absolute;
+	right:8px;
+	top:8px;
+}
+
+.WH_army_unit_header_unit_modelName {
+	margin: 0.5em 0 1em;
+}
+.WH_army_unit_header_unit_wargearList {
+	margin-bottom: 1em; 
+}
+
+.WH_army_unit_header_unit_modelAbilities {
+	float: right;
+	min-height: 38px;
+	min-width:200px;
+	/*background-color: grey;*/
+	margin: 0 0px 5px 5px;
+	font-size: 12px;
+}
+.WH_army_unit_table {
+	width: 100%;
+background: none;
+border: 1px solid #d8d8d8;
+border-collapse: separate;
+border-spacing: 0;
+border-radius: 3px;
+
+
+}
+.WH_army_unit_tbody {
+	display: table-row-group;
+	vertical-align: middle;
+	border-color: inherit;
+	text-align: center;
+}
+
+.WH_army_unit_tr td,
+.WH_army_unit_tr th{
+vertical-align: top;
+padding: .3em .7em;
+padding-bottom: -webkit-calc(.3em + 1px);
+padding-bottom: calc(.3em + 1px);
+text-align: left;
+border-bottom: 1px solid #e5e5e5;
+	text-align: center;
+}
+
+.WH_army_unit_tr td+td, 
+.WH_army_unit_tr th+th {
+border-left: 1px solid #e5e5e5;
+}
+
+.WH_army_unit_tr th {
+	font-size: 11px;
+}
+
+tr:last-child>td {
+	border-bottom-style: none;
+}
+
+.info {
+	padding:10px; 
+}
+.info_table {
+}
+.info .WH_specialRules {
+	/*display: block;*/
+	text-align: left;
+	line-height: 150%;
+
+}
+.WH_specialRules {
+	color: #0082c6;
+	border-bottom: 1px dotted #0082c6;
+	/*padding-bottom: 0px;*/
+	/*border-radius: 3px;*/
+	margin-right: 10px;
+}
+.info .info_td_type {
+	text-align: left;
+}

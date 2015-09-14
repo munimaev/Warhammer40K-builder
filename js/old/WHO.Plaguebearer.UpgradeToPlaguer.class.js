@@ -1,10 +1,10 @@
-// --------- Класс-потомок WHOption -----------
+// --------- Класс-потомок WH_Option -----------
 var PlaguebearerUpgradeToPlaguer = function(o) {
     this.optionName = 'PlaguebearerUpgradeToPlaguer';
     this.cost = 5;
     this.actionText = 'Одного чумоносца можно усовершенствовать до зачумленного';
     this.actionIcon = 'upgrade';
-    WHOption.apply(this, arguments);
+    WH_Option.apply(this, arguments);
 
 
     var _this = this;
@@ -23,7 +23,7 @@ var PlaguebearerUpgradeToPlaguer = function(o) {
 }
 
 // Унаследовать
-PlaguebearerUpgradeToPlaguer.prototype = Object.create(WHOption.prototype);
+PlaguebearerUpgradeToPlaguer.prototype = Object.create(WH_Option.prototype);
 
 // Желательно и constructor сохранить
 PlaguebearerUpgradeToPlaguer.prototype.constructor = PlaguebearerUpgradeToPlaguer;

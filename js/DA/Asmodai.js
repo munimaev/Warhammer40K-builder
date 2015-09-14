@@ -27,10 +27,10 @@ var Asmodais = function(o) {
     this.defaultWarlordTrait = [
         'TheHunt'
     ];
-	WHUnit_Infantry.apply(this, arguments);
+	WH_Unit_Infantry.apply(this, arguments);
 }
 // Унаследовать
-Asmodais.prototype = Object.create(WHUnit_Infantry.prototype);
+Asmodais.prototype = Object.create(WH_Unit_Infantry.prototype);
 // Желательно и constructor сохранить
 Asmodais.prototype.constructor = Asmodais;
 // Методы потомка 

@@ -15,13 +15,14 @@ var DA_Rhino = function(o) {
 	this.defaultSpecialRules = [
 		// 'Repair', 
 	];
-	WHUnit_Vehicle.apply(this, arguments);
+	WH_Unit_Vehicle.apply(this, arguments);
 }
 // Унаследовать
-DA_Rhino.prototype = Object.create(WHUnit_Vehicle.prototype);
+DA_Rhino.prototype = Object.create(WH_Unit_Vehicle.prototype);
 // Желательно и constructor сохранить
 DA_Rhino.prototype.constructor = DA_Rhino;
 // Методы потомка 
 DA_Rhino.prototype.visibleName = 'Rhino';
 DA_Rhino.prototype.price = 35;
+DA_Rhino.prototype.pic = 'units_DA/SpaceMarineRhino.jpg';
 

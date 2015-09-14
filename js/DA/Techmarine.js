@@ -41,18 +41,19 @@ var DA_Techmarine = function(o) {
             rules: ['Mindlock']
         }
     ];
-	WHUnit_Infantry.apply(this, arguments);
+	WH_Unit_Infantry.apply(this, arguments);
 }
 // Унаследовать
-DA_Techmarine.prototype = Object.create(WHUnit_Infantry.prototype);
+DA_Techmarine.prototype = Object.create(WH_Unit_Infantry.prototype);
 // Желательно и constructor сохранить
 DA_Techmarine.prototype.constructor = DA_Techmarine;
 // Методы потомка 
 DA_Techmarine.prototype.visibleName = 'Techmarine';
+DA_Techmarine.prototype.pic = 'units_DA/Techmarine.jpg';
 
 
 
-WHOptionAddModelFabric([{
+WH_OptionAddModelFabric([{
     'optionName' : 'DA_Techmarine_addServitore',
     'cost' : 10,
     'maxCountAdding' : 5,

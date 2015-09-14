@@ -20,15 +20,16 @@ var DA_Predator = function(o) {
 		// 'CombatSquad', 
 		// 'GrimResolve', 
 	];
-	WHUnit_Vehicle.apply(this, arguments);
+	WH_Unit_Vehicle.apply(this, arguments);
 }
 // Унаследовать
-DA_Predator.prototype = Object.create(WHUnit_Vehicle.prototype);
+DA_Predator.prototype = Object.create(WH_Unit_Vehicle.prototype);
 // Желательно и constructor сохранить
 DA_Predator.prototype.constructor = DA_Predator;
 // Методы потомка 
 DA_Predator.prototype.visibleName = 'Predator';
 DA_Predator.prototype.price = 75;
+DA_Predator.prototype.pic = 'units_DA/SpaceMarinesPredator.jpg';
 
 
 //========================
@@ -36,7 +37,7 @@ DA_Predator.prototype.price = 75;
 //=========================
 
 
-WHOptionAddModelFabric([{
+WH_OptionAddModelFabric([{
     'optionName' : 'DA_Predator_addPredator',
     'cost' : 75,
     'maxCountAdding' : 2,

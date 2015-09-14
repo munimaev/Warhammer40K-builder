@@ -31,17 +31,18 @@ var DA_DevastatorSquad = function(o) {
 		'CombatSquad', 
 		'GrimResolve', 
 	];
-	WHUnit_Infantry.apply(this, arguments);
+	WH_Unit_Infantry.apply(this, arguments);
 }
 // Унаследовать
-DA_DevastatorSquad.prototype = Object.create(WHUnit_Infantry.prototype);
+DA_DevastatorSquad.prototype = Object.create(WH_Unit_Infantry.prototype);
 // Желательно и constructor сохранить
 DA_DevastatorSquad.prototype.constructor = DA_DevastatorSquad;
 // Методы потомка 
 DA_DevastatorSquad.prototype.visibleName = 'Devastator Squad';
+DA_DevastatorSquad.prototype.pic = 'units_DA/DevastatorSquadDA.jpg';
 
 
-WHOptionAddModelFabric([{
+WH_OptionAddModelFabric([{
 
     'optionName' : 'DA_DevastatorSquad_addSpaceMarine',
     'cost' : 14,
@@ -77,6 +78,7 @@ WHOptionAddModelFabric([{
 
 
 
+
 //==============================================================================
 
 
@@ -88,7 +90,6 @@ fabric_option_unitMayTake([
 }
 ]);
 //==============================================================================
-
 
 
 
@@ -107,6 +108,8 @@ var DA_DevastatorSquad_HeavyWeapons = function(o) {
     this.headerText = 'Heavy Weapons. Заменить свой boltgun на одно из следующего';
     MultiChangeFromWargear_class.apply(this, arguments);
 }
+
+
 // Унаследовать
 DA_DevastatorSquad_HeavyWeapons.prototype = Object.create(MultiChangeFromWargear_class.prototype);
 // Желательно и constructor сохранить

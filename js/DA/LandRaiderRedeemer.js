@@ -21,15 +21,16 @@ var DA_LandRaiderRedeemer = function(o) {
 		// 'CombatSquad', 
 		// 'GrimResolve', 
 	];
-	WHUnit_Vehicle.apply(this, arguments);
+	WH_Unit_Vehicle.apply(this, arguments);
 }
 // Унаследовать
-DA_LandRaiderRedeemer.prototype = Object.create(WHUnit_Vehicle.prototype);
+DA_LandRaiderRedeemer.prototype = Object.create(WH_Unit_Vehicle.prototype);
 // Желательно и constructor сохранить
 DA_LandRaiderRedeemer.prototype.constructor = DA_LandRaiderRedeemer;
 // Методы потомка 
 DA_LandRaiderRedeemer.prototype.visibleName = 'Land raider redeemer';
 DA_LandRaiderRedeemer.prototype.price = 240;
+DA_LandRaiderRedeemer.prototype.pic = 'units_DA/LandRaiderRedeemer.jpg';
 
 
 //========================

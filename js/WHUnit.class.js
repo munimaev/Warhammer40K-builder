@@ -1,5 +1,6 @@
 // --------- Класс-Родитель ------------
-var WHUnit = function(o) {
+var WH_Unit = function(o) {
+
     if (!o) {
         throw {'text':'Not set object'};
     }
@@ -10,8 +11,8 @@ var WHUnit = function(o) {
         throw {'text':'Not set army'};
     }
     this.$link = o.$link;
-    this.$olink = $('#WH_options');
-    this.$alink = $('#WH_army');
+    this.$olink = $('#WH__options');
+    this.$alink = $('#WH__army');
     this.$scrollValue = 0;
     this.army = o.army;
     // this.unique = this.unique || false;
@@ -34,31 +35,37 @@ var WHUnit = function(o) {
 
 
 	this.$this = $('<div />', {
-		'class': 'WH_army_unit'
+		'class': 'WH__army_unit'
 	})
 	this.$name = $('<div />', {
 		'text': _this.getVisibleNAme(),
-		'class': 'WH_army_unit_name'
-	})
-    this.$lPrice = $('<span />', {
-		'class': 'WH_army_unit_header_price',
-		'text': this.price
-	})
-    this.$lExpand = $('<div />', {
-		'class': 'WH_army_unit_header_expand',
+		'class': 'WH__army_unit_name',
 		'click':function() {
 			var __this = _this;
 			return function() {
 				__this.toogleModels();
 			}
+		}(),
+		// 'style' : 'background-image:url(pics/'+this.pic+')',
+	})
+    this.$lPrice = $('<span />', {
+		'class': 'WH__army_unit_header_price',
+		'text': this.price
+	})
+    this.$lRemove = $('<div />', {
+		'class': 'WH__army_unit_header_delete',
+		'click':function() {
+			var __this = _this;
+			return function(e) {
+				__this.removeSelf(e);
+			}
 		}()
 	})
     this.$lModels = $('<div />', {
-		'class': 'WH_army_unit_header_unit',
-		'text': 'dasds'
+		'class': 'WH__army_unit_header_unit',
 	})
     this.$lSpecial = $('<div />', {
-		'class': 'WH_army_unit_header_special',
+		'class': 'WH__army_unit_header_special',
 		'text': 'Special Rules'
 	})
 
@@ -66,26 +73,26 @@ var WHUnit = function(o) {
 	this.$link.append(this.$this);
 		this.$this.append(this.$name);
 			this.$name.append(this.$lPrice);
-			this.$name.append(this.$lExpand);
+			this.$name.append(this.$lRemove);
 		this.$this.append(this.$lModels);
 		this.$this.append(this.$lSpecial);
 
     this.$options = $('<div />', {
-		'class': 'WH_options'
+		'class': 'WH__options'
 	})
     this.$oHeader = $('<div />', {
-		'class': 'WH_options_header',
+		'class': 'WH__options_header',
 		'text' : _this.getVisibleNAme()
 	})
     this.$oPrice = $('<span />', {
-		'class': 'WH_options_header_price',
+		'class': 'WH__options_header_price',
 		'text': this.price
 	})
     this.$oBody0 = $('<div />', {
-		'class': 'WH_options_body0'
+		'class': 'WH__options_body0'
 	})
     this.$oBody = $('<div />', {
-		'class': 'WH_options_body'
+		'class': 'WH__options_body'
 	})
 
     this.$options.append(this.$oHeader);
@@ -111,7 +118,7 @@ var WHUnit = function(o) {
 
 
 // Методы хранятся в прототипе
-WHUnit.prototype.addDefaultStructure  = function() {
+WH_Unit.prototype.addDefaultStructure  = function() {
 	if (!this.hasOwnProperty('structureDefault')) {
 		throw {};
 	}
@@ -125,34 +132,35 @@ WHUnit.prototype.addDefaultStructure  = function() {
 	}
 };
 
-WHUnit.prototype.addDefaultOptions  = function() {
+WH_Unit.prototype.addDefaultOptions  = function() {
 	for (var i in this.optionsDefault) {
 		this.options.push(new window[this.optionsDefault[i]]({unit:this,$link:this.$oBody}));
 	};
 };
-WHUnit.prototype.addDefaultSpecialRules  = function() {
+WH_Unit.prototype.addDefaultSpecialRules  = function() {
 	for (var i in this.defaultSpecialRules) {
 		if (typeof this.defaultSpecialRules[i] === 'string') {
-			if (window[this.defaultSpecialRules[i]]) {
-				this.speccialRules.general.push(new window[this.defaultSpecialRules[i]]({unit:this,createBy:this}));
+			if (WH_SpecialRules[this.defaultSpecialRules[i]]) {
+				this.speccialRules.general.push(new WH_SpecialRules[this.defaultSpecialRules[i]]({unit:this,createBy:this}));
 			}
 			else {
 				console.log("{specialRuleName: '"+this.defaultSpecialRules[i]+"',visibleName: '"+this.defaultSpecialRules[i]+"',},")
 			}
 		}
 		else if (typeof this.defaultSpecialRules[i] === 'object') {
-			console.log(this.defaultSpecialRules[i])
 			if (this.defaultSpecialRules[i].type === 'onModelName') {
 				if (!this.speccialRules.hasOwnProperty('onModelName')) {
 					this.speccialRules.onModelName = {};
 				}
 				for (var n in this.defaultSpecialRules[i].names) {
-					if (!this.speccialRules.onModelName.hasOwnProperty(this.defaultSpecialRules[i].names[n])) {
-						this.speccialRules.onModelName[this.defaultSpecialRules[i].names[n]] = [];
+					var ruleName =  this.defaultSpecialRules[i].names[n];
+					if (!this.speccialRules.onModelName.hasOwnProperty(ruleName)) {
+						this.speccialRules.onModelName[ruleName] = [];
 					}
 					for (var r in this.defaultSpecialRules[i].rules) {
-						if (window[this.defaultSpecialRules[i].names[n]]) {
-							this.speccialRules.onModelName[this.defaultSpecialRules[i].names[n]].push(new window[this.defaultSpecialRules[i].rules[r]]({unit:this,createBy:this}))
+						var ruleRule = this.defaultSpecialRules[i].rules[r];
+						if (WH_SpecialRules[ruleRule]) {
+							this.speccialRules.onModelName[ruleName].push(new WH_SpecialRules[ruleRule]({unit:this,createBy:this}))
 						}
 						else {
 							console.log("{specialRuleName: '"+this.defaultSpecialRules[i]+"',visibleName: '"+this.defaultSpecialRules[i]+"',},")
@@ -164,7 +172,7 @@ WHUnit.prototype.addDefaultSpecialRules  = function() {
 	}
 };
 
-WHUnit.prototype.addDefaultWarlordTraits  = function() {
+WH_Unit.prototype.addDefaultWarlordTraits  = function() {
 	for (var i in this.defaultWarlordTrait) {
 		if (typeof this.defaultWarlordTrait[i] === 'string') {
 			if (window[this.defaultWarlordTrait[i]]) {
@@ -177,7 +185,7 @@ WHUnit.prototype.addDefaultWarlordTraits  = function() {
 	}
 }
 
-WHUnit.prototype.addDefaultDisciplines  = function() {
+WH_Unit.prototype.addDefaultDisciplines  = function() {
 	for (var i in this.defaultDisciplines) {
 		if (typeof this.defaultDisciplines[i] === 'string') {
 			if (window[this.defaultDisciplines[i]]) {
@@ -189,7 +197,7 @@ WHUnit.prototype.addDefaultDisciplines  = function() {
 		}
 	}
 }
-WHUnit.prototype.printUnit  = function() {
+WH_Unit.prototype.printUnit  = function() {
 	console.clear();
 	console.log("==================");
 	for (var i in this.models) {
@@ -203,24 +211,24 @@ WHUnit.prototype.printUnit  = function() {
 };
 
 
-WHUnit.prototype.select  = function() {
+WH_Unit.prototype.select  = function() {
 	this.army.unselectAllUnit();
-	this.$alink.addClass('WH_army--small');
+	this.$alink.addClass('WH__army--small');
 	this.updateAllOptions();
 	this.updateModels();
 	this.$olink.append(this.$options);
     this.$oBody.scrollTop(this.$scrollValue);
 };
-WHUnit.prototype.unselect  = function() {
-	this.$alink.removeClass('WH_army--small');
+WH_Unit.prototype.unselect  = function() {
+	this.$alink.removeClass('WH__army--small');
 	this.$scrollValue = this.$oBody.scrollTop();
 	this.$options.detach();
 };
-WHUnit.prototype.getVisibleNAme  = function() {
+WH_Unit.prototype.getVisibleNAme  = function() {
 	return this.visibleName || this.unitName;
 };
 
-WHUnit.prototype.updateAllOptions = function() {
+WH_Unit.prototype.updateAllOptions = function() {
 
 
 	for (var o in this.options) {
@@ -233,7 +241,7 @@ WHUnit.prototype.updateAllOptions = function() {
 	}
 	this.$oPrice.html( additionalCost );
 }
-WHUnit.prototype.getAdditionalCost = function() {
+WH_Unit.prototype.getAdditionalCost = function() {
 	var additionalCost = 0;
 	for (var m in this.models) {
 		for (var c in this.models[m].changedWargear) {
@@ -247,7 +255,7 @@ WHUnit.prototype.getAdditionalCost = function() {
 }
 
 
-WHUnit.prototype.updateHeaderPrice = function(p) {
+WH_Unit.prototype.updateHeaderPrice = function(p) {
 	var p = p || 0;
 	if (p > 0) {
 		this.$oPrice.html(' ('+this.price+'+'+p+')');
@@ -260,34 +268,15 @@ WHUnit.prototype.updateHeaderPrice = function(p) {
 	this.army.updateCost();
 }
 
-WHUnit.prototype.updateModels = function() {
+WH_Unit.prototype.updateModels = function() {
 	var modelsArr = this.getUnicModelArr();
 	this.$lModels.empty();
 	for (var m in modelsArr) {
 		this.$lModels.append(modelsArr[m].model.printModel({count:modelsArr[m].count}));
 	}
 	this.$lSpecial.empty()
+	this.$lSpecial.append(this.getSpecialRulesHtml());
 
-	if (this.speccialRules.general.length) {
-		var $general = $('<div />');
-		$general.append($('<h5>',{text:'Special Rules'}));
-		for (var r in this.speccialRules.general) {
-			$general.append(this.speccialRules.general[r].getSpan());
-		}
-		this.$lSpecial.append($general);
-	}
-
-	if (this.speccialRules.hasOwnProperty('onModelName')) {
-		// console.log(this.speccialRules.onModelName)
-		for (var n in this.speccialRules.onModelName) {
-			var $onModelName = $('<div />');
-			$onModelName.append($('<h5>',{text: 'Special Rules - '+window[n].prototype.visibleModelName}));
-			for (var r in this.speccialRules.onModelName[n]) {
-				$onModelName.append(this.speccialRules.onModelName[n][r].getSpan());	
-			}
-			this.$lSpecial.append($onModelName);
-		}
-	}
 	if (this.warlordTraits.length) {
 		var $lWarlordTraits = $('<div />');
 		$lWarlordTraits.append($('<h5>',{text:'Warlord Trait'}));
@@ -310,7 +299,52 @@ WHUnit.prototype.updateModels = function() {
 	// this.$lModels.html(modelsText);
 }
 
-WHUnit.prototype.getUnicModelArr = function(models) {
+WH_Unit.prototype.getSpecialRulesHtml = function() {
+	var $div = $('<div />',{});
+
+	var general = this.getSpecialRulesArr({general:true});
+	if (general.length) {
+		var $general = $('<div />');
+		$general.append($('<h5>',{text:'Special Rules'}));
+		for (var r in general) {
+			$general.append(general[r].getSpan());
+		}
+		$div.append($general);
+	}
+
+	if (this.speccialRules.hasOwnProperty('onModelName')) {
+		for (var n in this.speccialRules.onModelName) {
+			var $onModelName = $('<div />');
+			$onModelName.append($('<h5>',{text: 'Special Rules - '+window[n].prototype.visibleModelName}));
+			for (var r in this.speccialRules.onModelName[n]) {
+				$onModelName.append(this.speccialRules.onModelName[n][r].getSpan());	
+			}
+			$div.append($onModelName);
+		}
+	}
+	return $div;
+}
+
+WH_Unit.prototype.getSpecialRulesArr = function(o) {
+	var result = [];
+	if (o.general) {
+		if (this.speccialRules.general.length) {
+			for (var r in this.speccialRules.general) {
+				result.push(this.speccialRules.general[r]);
+			}
+		}
+	}
+	else if (o.onModelName) {
+		if (this.speccialRules.onModelName && this.speccialRules.onModelName[o.modelName]) {
+			for (var r in this.speccialRules.onModelName[o.modelName]) {
+				result.push(this.speccialRules.onModelName[o.modelName][r]);
+			}
+		}
+	}
+	return result;
+}
+
+WH_Unit.prototype.getUnicModelArr = function(models) {
 	var modelsArr = [];
 	var models = models || this.models;
 	for (var M in models) {
@@ -332,7 +366,7 @@ WHUnit.prototype.getUnicModelArr = function(models) {
 	return modelsArr;
 }
 
-WHUnit.prototype.modelDataEquals = function(m1, m2) {
+WH_Unit.prototype.modelDataEquals = function(m1, m2) {
 	if (m1.model.modelName != m2.model.modelName) {
 		return false;
 	}
@@ -359,7 +393,7 @@ WHUnit.prototype.modelDataEquals = function(m1, m2) {
 	}
 	return true;
 }
-WHUnit.prototype.modelDataForm = function(M) {
+WH_Unit.prototype.modelDataForm = function(M) {
 	var result = {
 		model: M,
 		count : 1
@@ -369,7 +403,7 @@ WHUnit.prototype.modelDataForm = function(M) {
 
 
 
-WHUnit.prototype.toogleModels = function() { 
+WH_Unit.prototype.toogleModels = function() { 
 
 	if (!this.isShowModels) {
 		this.isShowModels = true;
@@ -383,27 +417,41 @@ WHUnit.prototype.toogleModels = function() {
 	}
 }
 
+WH_Unit.prototype.removeSelf = function(e) { 
+	for (var g in this.army.structure){
+		for (var s in this.army.structure[g].slots) {
+			if (this.army.structure[g].slots[s].unit === this) {
+				this.army.structure[g].slots[s].unselectUnit();
+				this.army.structure[g].slots[s].returnToDefault()
+				this.army.checkAllGroup();
+				this.army.updateCost();
+				break;
+			}
+		}
+	}
+}
+
 
 // --------- Класс-потомок -----------
-var WHUnit_Infantry = function(o) {
+var WH_Unit_Infantry = function(o) {
 	this.unitType = 'infantry';
-	WHUnit.apply(this, arguments);
+	WH_Unit.apply(this, arguments);
 }
 // Унаследовать
-WHUnit_Infantry.prototype = Object.create(WHUnit.prototype);
+WH_Unit_Infantry.prototype = Object.create(WH_Unit.prototype);
 // Желательно и constructor сохранить
-WHUnit_Infantry.prototype.constructor = WHUnit_Infantry;
+WH_Unit_Infantry.prototype.constructor = WH_Unit_Infantry;
 
 
 
-var WHUnit_Vehicle = function(o) {
+var WH_Unit_Vehicle = function(o) {
 	this.unitType = 'vehicle';
-	WHUnit.apply(this, arguments);
+	WH_Unit.apply(this, arguments);
 }
 // Унаследовать
-WHUnit_Vehicle.prototype = Object.create(WHUnit.prototype);
+WH_Unit_Vehicle.prototype = Object.create(WH_Unit.prototype);
 // Желательно и constructor сохранить
-WHUnit_Vehicle.prototype.constructor = WHUnit_Vehicle;
+WH_Unit_Vehicle.prototype.constructor = WH_Unit_Vehicle;
 
 
 
@@ -429,11 +477,11 @@ var Plaguebearers = function(o) {
     	'PlagueSword'
     ];
 
-	WHUnit_Infantry.apply(this, arguments);
+	WH_Unit_Infantry.apply(this, arguments);
 }
 
 // Унаследовать
-Plaguebearers.prototype = Object.create(WHUnit_Infantry.prototype);
+Plaguebearers.prototype = Object.create(WH_Unit_Infantry.prototype);
 
 // Желательно и constructor сохранить
 Plaguebearers.prototype.constructor = Plaguebearers;
@@ -444,7 +492,7 @@ Plaguebearers.prototype.visibleName = 'Plaguebearers';
 
 Plaguebearers.prototype.init = function() {
   // Вызов метода родителя внутри своего
-  WHUnit_Infantry.prototype.run.apply(this);	
+  WH_Unit_Infantry.prototype.run.apply(this);	
 };
 
 
@@ -461,7 +509,7 @@ Plaguebearers.prototype.hasPlguer = function() {
 
 
 /*
-WHOptionAddModelFabric([{
+WH_OptionAddModelFabric([{
     'optionName' : 'PlaguebearerAdditionalPlaguebearer',
     'cost' : 9,
     'actionTextUp' : 'Добавить чумоносца.',

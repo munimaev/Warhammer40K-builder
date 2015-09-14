@@ -29,17 +29,18 @@ var DA_ScoutSquad = function(o) {
 		'MoveThroughCover',
 		'Scout',
 	];
-	WHUnit_Infantry.apply(this, arguments);
+	WH_Unit_Infantry.apply(this, arguments);
 }
 // Унаследовать
-DA_ScoutSquad.prototype = Object.create(WHUnit_Infantry.prototype);
+DA_ScoutSquad.prototype = Object.create(WH_Unit_Infantry.prototype);
 // Желательно и constructor сохранить
 DA_ScoutSquad.prototype.constructor = DA_ScoutSquad;
 // Методы потомка 
 DA_ScoutSquad.prototype.visibleName = 'Scout Squad';
+DA_ScoutSquad.prototype.pic = 'units_DA/ScoutSquade.jpg';
 
 
-WHOptionAddModelFabric([{
+WH_OptionAddModelFabric([{
     'optionName' : 'DA_ScoutSquad_addScout',
     'cost' : 11,
     'maxCountAdding' : 5,

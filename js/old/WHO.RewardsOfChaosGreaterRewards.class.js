@@ -1,9 +1,9 @@
-// --------- Класс-потомок WHOption -----------
+// --------- Класс-потомок WH_Option -----------
 var RewardsOfChaosGreaterRewards = function(o) {
     this.optionName = 'RewardsOfChaosGreaterRewards';
     this.cost = 20;
     this.actionText = 'Высшие вознаграждения - 20 очков';
-    WHOption.apply(this, arguments);
+    WH_Option.apply(this, arguments);
     
     var _this = this;
     this.$action.click(function(){
@@ -15,7 +15,7 @@ var RewardsOfChaosGreaterRewards = function(o) {
 }
 
 // Унаследовать
-RewardsOfChaosGreaterRewards.prototype = Object.create(WHOption.prototype);
+RewardsOfChaosGreaterRewards.prototype = Object.create(WH_Option.prototype);
 
 // Желательно и constructor сохранить
 RewardsOfChaosGreaterRewards.prototype.constructor = RewardsOfChaosGreaterRewards;
@@ -34,7 +34,7 @@ RewardsOfChaosGreaterRewards.prototype.enable = function () {
     			this.unit.models[i].getedOptions.push('Greater Rewards')
     		}
     	}
-    	WHOption.prototype.enable.apply(this);
+    	WH_Option.prototype.enable.apply(this);
     }
 }
 

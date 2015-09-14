@@ -31,21 +31,22 @@ var DA_DeathwingKnightSquad = function(o) {
         'PrecisionStrike',
         'FortressOfShields',
 	];
-	WHUnit_Infantry.apply(this, arguments);
+	WH_Unit_Infantry.apply(this, arguments);
 }
 // Унаследовать
-DA_DeathwingKnightSquad.prototype = Object.create(WHUnit_Infantry.prototype);
+DA_DeathwingKnightSquad.prototype = Object.create(WH_Unit_Infantry.prototype);
 // Желательно и constructor сохранить
 DA_DeathwingKnightSquad.prototype.constructor = DA_DeathwingKnightSquad;
 // Методы потомка 
 DA_DeathwingKnightSquad.prototype.visibleName = 'Deathwing Knight Squad';
+DA_DeathwingKnightSquad.prototype.pic = 'units_DA/DeathwingKnight.jpg';
 
 
 
 
 //==============================================================================
 
-WHOptionAddModelFabric([{
+WH_OptionAddModelFabric([{
     'optionName' : 'DA_DeathwingKnightSquad_addKinght',
     'cost' : 45,
     'maxCountAdding' : 5,

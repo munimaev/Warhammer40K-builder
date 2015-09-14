@@ -18,15 +18,16 @@ var DA_Razorback = function(o) {
 		// 'CombatSquad', 
 		// 'GrimResolve', 
 	];
-	WHUnit_Vehicle.apply(this, arguments);
+	WH_Unit_Vehicle.apply(this, arguments);
 }
 // Унаследовать
-DA_Razorback.prototype = Object.create(WHUnit_Vehicle.prototype);
+DA_Razorback.prototype = Object.create(WH_Unit_Vehicle.prototype);
 // Желательно и constructor сохранить
 DA_Razorback.prototype.constructor = DA_Razorback;
 // Методы потомка 
 DA_Razorback.prototype.visibleName = 'Razorback';
 DA_Razorback.prototype.price = 55;
+DA_Razorback.prototype.pic = 'units_DA/Razorback.jpg';
 
 
 //========================

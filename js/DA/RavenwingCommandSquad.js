@@ -29,16 +29,17 @@ var DA_RavenwingCommandSquad = function(o) {
         'Scout', 
         'SkilledRider', 
 	];
-	WHUnit_Infantry.apply(this, arguments);
+	WH_Unit_Infantry.apply(this, arguments);
 }
 // Унаследовать
-DA_RavenwingCommandSquad.prototype = Object.create(WHUnit_Infantry.prototype);
+DA_RavenwingCommandSquad.prototype = Object.create(WH_Unit_Infantry.prototype);
 // Желательно и constructor сохранить
 DA_RavenwingCommandSquad.prototype.constructor = DA_RavenwingCommandSquad;
 // Методы потомка 
 DA_RavenwingCommandSquad.prototype.visibleName = 'Ravenwing Command Squad';
+DA_RavenwingCommandSquad.prototype.pic = 'units_DA/RavenwingCommand.jpg';
 
-WHOptionAddModelFabric([{
+WH_OptionAddModelFabric([{
     'optionName' : 'DA_RavenwingCommandSquad_addRavenwing_Biker',
     'cost' : 40,
     'maxCountAdding' : 3,

@@ -17,15 +17,16 @@ var DA_RavenwingDarkshroud = function(o) {
         'Shrouded', 
         'IconOfOldCaliban', 
 	];
-	WHUnit_Vehicle.apply(this, arguments);
+	WH_Unit_Vehicle.apply(this, arguments);
 }
 // Унаследовать
-DA_RavenwingDarkshroud.prototype = Object.create(WHUnit_Vehicle.prototype);
+DA_RavenwingDarkshroud.prototype = Object.create(WH_Unit_Vehicle.prototype);
 // Желательно и constructor сохранить
 DA_RavenwingDarkshroud.prototype.constructor = DA_RavenwingDarkshroud;
 // Методы потомка 
 DA_RavenwingDarkshroud.prototype.visibleName = 'Ravenwing Darkshroud';
 DA_RavenwingDarkshroud.prototype.price = 80;
+DA_RavenwingDarkshroud.prototype.pic = 'units_DA/Darkshroud.jpg';
 
 
 //========================

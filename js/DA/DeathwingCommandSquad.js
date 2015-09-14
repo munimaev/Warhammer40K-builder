@@ -26,14 +26,15 @@ var DA_DeathwingCommandSquad = function(o) {
 		'GrimResolve',
 		'SplitFire',
 	];
-	WHUnit_Infantry.apply(this, arguments);
+	WH_Unit_Infantry.apply(this, arguments);
 }
 // Унаследовать
-DA_DeathwingCommandSquad.prototype = Object.create(WHUnit_Infantry.prototype);
+DA_DeathwingCommandSquad.prototype = Object.create(WH_Unit_Infantry.prototype);
 // Желательно и constructor сохранить
 DA_DeathwingCommandSquad.prototype.constructor = DA_DeathwingCommandSquad;
 // Методы потомка 
 DA_DeathwingCommandSquad.prototype.visibleName = 'Deathwing Command Squad';
+DA_DeathwingCommandSquad.prototype.pic = 'units_DA/DeathwingCommand.jpg';
 
 
 
@@ -193,20 +194,6 @@ DA_DeathwingCommandSquad_Standart.prototype.isModelCanChange = function(m, super
 }
 
 
-DA_RangedWeaponsFabric([
-{
-    'optionName'      : 'DA_Standart_CompanyBanner',
-    'optionNameInModel': 'CompanyBanner',
-    'cost' : 20,
-    addItems : ['CompanyBanner'],
-},{
-    'optionName'      : 'DA_Standart_SacredStandart',
-    'optionNameInModel': 'SacredStandart',
-    'cost' : 35,
-    addItems : ['SacredStandart'],
-}
-])
-
 
 
 //==============================================================================
@@ -256,10 +243,10 @@ var DA_DeathwingCommandSquad_TerminatorHeavyWargearAll = function(o) {
     this.optionName = 'DA_DeathwingCommandSquad_TerminatorHeavyWargearAll';
     this.cost = 0;
     this.headerText = 'Одна модель может взять одно из спика Terminator Heavy Weapon';
-    WHOptionSuper.apply(this, arguments);
+    WH_OptionSuper.apply(this, arguments);
 }
 // Унаследовать
-DA_DeathwingCommandSquad_TerminatorHeavyWargearAll.prototype = Object.create(WHOptionSuper.prototype);
+DA_DeathwingCommandSquad_TerminatorHeavyWargearAll.prototype = Object.create(WH_OptionSuper.prototype);
 // Желательно и constructor сохранить
 DA_DeathwingCommandSquad_TerminatorHeavyWargearAll.prototype.constructor = DA_DeathwingCommandSquad_TerminatorHeavyWargearAll;
 
@@ -278,7 +265,7 @@ DA_DeathwingCommandSquad_TerminatorHeavyWargearAll.prototype.canEnable = functio
             }
         }
     }
-    return WHOptionSuper.prototype.canEnable.apply(this, arguments);;
+    return WH_OptionSuper.prototype.canEnable.apply(this, arguments);;
 };
 
 

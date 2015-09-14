@@ -19,15 +19,16 @@ var DA_Vindicator = function(o) {
 		// 'CombatSquad', 
 		// 'GrimResolve', 
 	];
-	WHUnit_Vehicle.apply(this, arguments);
+	WH_Unit_Vehicle.apply(this, arguments);
 }
 // Унаследовать
-DA_Vindicator.prototype = Object.create(WHUnit_Vehicle.prototype);
+DA_Vindicator.prototype = Object.create(WH_Unit_Vehicle.prototype);
 // Желательно и constructor сохранить
 DA_Vindicator.prototype.constructor = DA_Vindicator;
 // Методы потомка 
 DA_Vindicator.prototype.visibleName = 'Vindicator';
 DA_Vindicator.prototype.price = 120;
+DA_Vindicator.prototype.pic = 'units_DA/SpaceMarinesVindicator.jpg';
 
 
 //========================
@@ -35,7 +36,7 @@ DA_Vindicator.prototype.price = 120;
 //=========================
 
 
-WHOptionAddModelFabric([{
+WH_OptionAddModelFabric([{
     'optionName' : 'DA_Vindicator_addVindicator',
     'cost' : 120,
     'maxCountAdding' : 2,

@@ -1,4 +1,4 @@
-// --------- Класс-потомок WHOption -----------
+// --------- Класс-потомок WH_Option -----------
 var PlaguebearerAdditionalPlaguebearerRemove = function(o) {
     this.optionName = 'PlaguebearerAdditionalPlaguebearerRemove';
     this.cost = 9;
@@ -7,7 +7,7 @@ var PlaguebearerAdditionalPlaguebearerRemove = function(o) {
 
     this.actionIcon = 'remove_unit';
     this.defaultHide = true;
-    WHOption.apply(this, arguments);
+    WH_Option.apply(this, arguments);
 
     var _this = this;
     this.$action.click(function(){
@@ -19,7 +19,7 @@ var PlaguebearerAdditionalPlaguebearerRemove = function(o) {
 }
 
 // Унаследовать
-PlaguebearerAdditionalPlaguebearerRemove.prototype = Object.create(WHOption.prototype);
+PlaguebearerAdditionalPlaguebearerRemove.prototype = Object.create(WH_Option.prototype);
 
 // Желательно и constructor сохранить
 PlaguebearerAdditionalPlaguebearerRemove.prototype.constructor = PlaguebearerAdditionalPlaguebearerRemove;

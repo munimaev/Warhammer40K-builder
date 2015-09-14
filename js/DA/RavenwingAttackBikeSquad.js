@@ -25,18 +25,19 @@ var DA_RavenwingAttackBikeSquad = function(o) {
         'Ravenwing', 
         'Scout', 
 	];
-	WHUnit_Infantry.apply(this, arguments);
+	WH_Unit_Infantry.apply(this, arguments);
 }
 // Унаследовать
-DA_RavenwingAttackBikeSquad.prototype = Object.create(WHUnit_Infantry.prototype);
+DA_RavenwingAttackBikeSquad.prototype = Object.create(WH_Unit_Infantry.prototype);
 // Желательно и constructor сохранить
 DA_RavenwingAttackBikeSquad.prototype.constructor = DA_RavenwingAttackBikeSquad;
 // Методы потомка 
 DA_RavenwingAttackBikeSquad.prototype.visibleName = 'Ravenwing Attack Bike Squad';
+DA_RavenwingAttackBikeSquad.prototype.pic = 'units_DA/DarkAngelsAttackBike.jpg';
 
 
 
-WHOptionAddModelFabric([{
+WH_OptionAddModelFabric([{
     'optionName' : 'DA_RavenwingAttackBikeSquad_addRavenwing_Attack_Bike',
     'cost' : 45,
     'maxCountAdding' : 2,

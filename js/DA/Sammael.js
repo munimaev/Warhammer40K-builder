@@ -31,10 +31,10 @@ var Sammaels = function(o) {
     this.defaultWarlordTrait = [
         'RapidManoevre'
     ];
-	WHUnit_Infantry.apply(this, arguments);
+	WH_Unit_Infantry.apply(this, arguments);
 }
 // Унаследовать
-Sammaels.prototype = Object.create(WHUnit_Infantry.prototype);
+Sammaels.prototype = Object.create(WH_Unit_Infantry.prototype);
 // Желательно и constructor сохранить
 Sammaels.prototype.constructor = Sammaels;
 // Методы потомка 

@@ -37,7 +37,7 @@ var fabric_option_unitMayTake = function(a) {
                         addItemList += ', ';
                     }
                 }
-                addItemList += '<b>'+window[addItems[w]].prototype.visibleName+'</b>';
+                addItemList += '<b>'+WH_SpecialRules[addItems[w]].prototype.visibleName+'</b>';
             }
 
             if (!actionText) {
@@ -305,6 +305,8 @@ var fabric_option_upgradeModel = function(a) {
     }
 }
 
+
+
 fabric_option_upgradeModel([
 {
     optionName  : 'DA_upgradeRavenwingSergeantToVeteran',
@@ -325,11 +327,10 @@ fabric_option_upgradeModel([
 
 
 
-
 //==============================================
 
 
-// --------- Класс-потомок WHOption -----------
+// --------- Класс-потомок WH_Option -----------
 var DA_RangedWeapons_Class = function(o) {
     this.funCanEnable = function() {
         if (this.superOption.onePerArmie) {
@@ -801,29 +802,14 @@ fabric_option_multiChange([{
     optionName: 'DA_SpecilaIssueWargear',
     cost: 0,
     headerText: 'Модель может взять одно из списка Special Issue Wargear',
-    defaultSubOptions: [{
-        optionName: 'DA_SpecilaIssueWargear_Auspex',
-        cost: 5,
-        addItems: ['Auspex'],
-    },{
-        optionName: 'DA_SpecilaIssueWargear_CombatShield',
-        cost: 5,
-        addItems: ['CombatShield'],
-    },{
-        optionName: 'DA_SpecilaIssueWargear_MeltaBomb',
-        cost: 5,
-        addItems: ['MeltaBomb'],
-    },{
-        optionName: 'DA_SpecilaIssueWargear_DigitalWeapon',
-        cost: 10,
-        addItems: ['DigitalWeapon'],
-    },
-    'DA_SpecilaIssueWargear_JumpPack',
-    {
-        optionName: 'DA_SpecilaIssueWargear_ConversionField',
-        cost: 20,
-        addItems: ['ConversionField'],
-    }],
+    defaultSubOptions: [
+        'DA_SpecilaIssueWargear_Auspex',
+        'DA_SpecilaIssueWargear_CombatShield',
+        'DA_SpecilaIssueWargear_MeltaBomb',
+        'DA_SpecilaIssueWargear_DigitalWeapon',
+        'DA_SpecilaIssueWargear_JumpPack',
+        'DA_SpecilaIssueWargear_ConversionField'
+    ],
     isModelCanChange : [
     function(m, superOption){
         if (superOption.superOption.optionName == 'DA_SpecilaIssueWargear_JumpPack'
@@ -841,3 +827,4 @@ fabric_option_multiChange([{
     }]
 }
 ]);
+

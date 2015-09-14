@@ -23,15 +23,16 @@ var Sableclaws = function(o) {
     this.defaultWarlordTrait = [
         'RapidManoevre'
     ];
-	WHUnit_Infantry.apply(this, arguments);
+	WH_Unit_Infantry.apply(this, arguments);
 }
 // Унаследовать
-Sableclaws.prototype = Object.create(WHUnit_Infantry.prototype);
+Sableclaws.prototype = Object.create(WH_Unit_Infantry.prototype);
 // Желательно и constructor сохранить
 Sableclaws.prototype.constructor = Sableclaws;
 // Методы потомка 
 Sableclaws.prototype.visibleName = 'Sableclaw';
 Sableclaws.prototype.unique = ['Sammaels','Sableclaws'];
 Sableclaws.prototype.pic = 'units_DA/LandspeederVengeance.jpg';
+Sableclaws.prototype.pic = 'units_DA/DarkAngelsLandSpeeder.jpg';
 
 

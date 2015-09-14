@@ -1,10 +1,10 @@
-// --------- Класс-потомок WHOption -----------
+// --------- Класс-потомок WH_Option -----------
 var PlaguebearerAdditionalPlaguebearerAdd = function(o) {
     this.optionName = 'PlaguebearerAdditionalPlaguebearerAdd';
     this.cost = 9;
     this.actionText = 'Добавить чумоносца.';
     this.actionIcon = 'add_unit';
-    WHOption.apply(this, arguments);
+    WH_Option.apply(this, arguments);
     
     var _this = this;
     this.$action.click(function(){
@@ -16,7 +16,7 @@ var PlaguebearerAdditionalPlaguebearerAdd = function(o) {
 }
 
 // Унаследовать
-PlaguebearerAdditionalPlaguebearerAdd.prototype = Object.create(WHOption.prototype);
+PlaguebearerAdditionalPlaguebearerAdd.prototype = Object.create(WH_Option.prototype);
 
 // Желательно и constructor сохранить
 PlaguebearerAdditionalPlaguebearerAdd.prototype.constructor = PlaguebearerAdditionalPlaguebearerAdd;

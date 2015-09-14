@@ -21,15 +21,16 @@ var DA_LandRaiderCrusader = function(o) {
 		// 'CombatSquad', 
 		// 'GrimResolve', 
 	];
-	WHUnit_Vehicle.apply(this, arguments);
+	WH_Unit_Vehicle.apply(this, arguments);
 }
 // Унаследовать
-DA_LandRaiderCrusader.prototype = Object.create(WHUnit_Vehicle.prototype);
+DA_LandRaiderCrusader.prototype = Object.create(WH_Unit_Vehicle.prototype);
 // Желательно и constructor сохранить
 DA_LandRaiderCrusader.prototype.constructor = DA_LandRaiderCrusader;
 // Методы потомка 
 DA_LandRaiderCrusader.prototype.visibleName = 'Land raider crusader';
 DA_LandRaiderCrusader.prototype.price = 250;
+DA_LandRaiderCrusader.prototype.pic = 'units_DA/LandRaiderCrusader.jpg';
 
 
 //========================

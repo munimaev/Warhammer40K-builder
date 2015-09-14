@@ -32,14 +32,15 @@ var DA_DeathwingTerminatorSquad = function(o) {
 		'GrimResolve',
 		'SplitFire',
 	];
-	WHUnit_Infantry.apply(this, arguments);
+	WH_Unit_Infantry.apply(this, arguments);
 }
 // Унаследовать
-DA_DeathwingTerminatorSquad.prototype = Object.create(WHUnit_Infantry.prototype);
+DA_DeathwingTerminatorSquad.prototype = Object.create(WH_Unit_Infantry.prototype);
 // Желательно и constructor сохранить
 DA_DeathwingTerminatorSquad.prototype.constructor = DA_DeathwingTerminatorSquad;
 // Методы потомка 
 DA_DeathwingTerminatorSquad.prototype.visibleName = 'Deathwing Terminator Squad';
+DA_DeathwingTerminatorSquad.prototype.pic = 'units_DA/DeathwingTerminators.jpg';
 
 
 
@@ -48,7 +49,7 @@ DA_DeathwingTerminatorSquad.prototype.visibleName = 'Deathwing Terminator Squad'
 
 
 
-WHOptionAddModelFabric([{
+WH_OptionAddModelFabric([{
     'optionName' : 'DA_DeathwingTerminatorSquad_addTerninator',
     'cost' : 40,
     'maxCountAdding' : 5,
@@ -230,10 +231,10 @@ var DA_DeathwingTerminatorSquad_TerminatorHeavyWargearAll = function(o) {
     this.optionName = 'DA_DeathwingTerminatorSquad_TerminatorHeavyWargearAll';
     this.cost = 0;
     this.headerText = 'За каждые 5 моделей в отряде одна модель может взять одно из спика Terminator Heavy Weapon';
-    WHOptionSuper.apply(this, arguments);
+    WH_OptionSuper.apply(this, arguments);
 }
 // Унаследовать
-DA_DeathwingTerminatorSquad_TerminatorHeavyWargearAll.prototype = Object.create(WHOptionSuper.prototype);
+DA_DeathwingTerminatorSquad_TerminatorHeavyWargearAll.prototype = Object.create(WH_OptionSuper.prototype);
 // Желательно и constructor сохранить
 DA_DeathwingTerminatorSquad_TerminatorHeavyWargearAll.prototype.constructor = DA_DeathwingTerminatorSquad_TerminatorHeavyWargearAll;
 

@@ -35,14 +35,15 @@ var DA_Librarian = function(o) {
         'Telekinesis', 
         'Telepathy',
     ];
-	WHUnit_Infantry.apply(this, arguments);
+	WH_Unit_Infantry.apply(this, arguments);
 }
 // Унаследовать
-DA_Librarian.prototype = Object.create(WHUnit_Infantry.prototype);
+DA_Librarian.prototype = Object.create(WH_Unit_Infantry.prototype);
 // Желательно и constructor сохранить
 DA_Librarian.prototype.constructor = DA_Librarian;
 // Методы потомка 
 DA_Librarian.prototype.visibleName = 'Librarian';
+DA_Librarian.prototype.pic = 'units_DA/Librarian.jpg';
 
 
 
@@ -137,9 +138,9 @@ fabric_option_multiChange([{
         cost: 5,
         addItems: ['StormBolter'],
     },{
-        optionName: 'DA_Librarian_Terminator_Weapon_CombiPlasma',
+        optionName: 'DA_Librarian_Terminator_Weapon_CombiFlamer',
         cost: 10,
-        addItems: ['CombiPlasma'],
+        addItems: ['CombiFlamer'],
     },{
         optionName: 'DA_Librarian_Terminator_Weapon_CombiPlasma',
         cost: 10,

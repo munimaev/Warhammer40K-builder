@@ -24,15 +24,16 @@ var Azraels = function(o) {
         'RitesOfBattle',
         'SupremeStrategist'
 	];
-	WHUnit_Infantry.apply(this, arguments);
+	WH_Unit_Infantry.apply(this, arguments);
 }
 // Унаследовать
-Azraels.prototype = Object.create(WHUnit_Infantry.prototype);
+Azraels.prototype = Object.create(WH_Unit_Infantry.prototype);
 // Желательно и constructor сохранить
 Azraels.prototype.constructor = Azraels;
 // Методы потомка 
 Azraels.prototype.visibleName = 'Azrael';
 Azraels.prototype.unique = ['Azraels'];
+Azraels.prototype.pic = 'units_DA/Azrael.jpg';
 
 
 

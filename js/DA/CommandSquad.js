@@ -25,14 +25,15 @@ var DA_CommandSquad = function(o) {
 		'GrimResolve',
 		'HonorOrDeath',
 	];
-	WHUnit_Infantry.apply(this, arguments);
+	WH_Unit_Infantry.apply(this, arguments);
 }
 // Унаследовать
-DA_CommandSquad.prototype = Object.create(WHUnit_Infantry.prototype);
+DA_CommandSquad.prototype = Object.create(WH_Unit_Infantry.prototype);
 // Желательно и constructor сохранить
 DA_CommandSquad.prototype.constructor = DA_CommandSquad;
 // Методы потомка 
 DA_CommandSquad.prototype.visibleName = 'Command Squad';
+DA_CommandSquad.prototype.pic = 'units_DA/SpaceMarinesCommandSquad.jpg';
 
 
 
@@ -91,35 +92,6 @@ DA_CommandSquad_Standart.prototype.canEnableWeapon = function(option,superOption
     return true;
 };
 
-DA_RangedWeaponsFabric([{
-    'optionName'      : 'DA_Standart_CompanyStandart',
-    'optionNameInModel': 'CompanyStandart',
-    'cost' : 15,
-    'changeTo' : 'CompanyStandart',
-    'actionTextUp' : '<b>CompanyStandart</b> <i>за 15 очков</i>',
-    // 'actionIconUp' : 'def',
-    'actionTextDown' : 'Удалить CompanyStandart',
-    // 'actionIconDown' : 'rewards1',
-},{
-    'optionName'      : 'DA_Standart_ChapterBanner',
-    'optionNameInModel': 'ChapterBanner',
-    'cost' : 25,
-    'changeTo' : 'ChapterBanner',
-    'actionTextUp' : '<b>ChapterBanner</b> <i>за 25 очков</i>',
-    // 'actionIconUp' : 'def',
-    'actionTextDown' : 'Удалить ChapterBanner',
-    // 'actionIconDown' : 'rewards1',
-},{
-    'optionName'      : 'DA_Standart_SacredStandart',
-    'optionNameInModel': 'SacredStandart',
-    'cost' : 35,
-    'changeTo' : 'SacredStandart',
-    'actionTextUp' : '<b>SacredStandart</b> <i>за 35 очков</i>',
-    // 'actionIconUp' : 'def',
-    'actionTextDown' : 'Удалить SacredStandart',
-    // 'actionIconDown' : 'rewards1',
-}
-])
 
 
 //==============================================================================

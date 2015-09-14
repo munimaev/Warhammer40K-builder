@@ -20,15 +20,16 @@ var DA_LandRaider = function(o) {
 		// 'CombatSquad', 
 		// 'GrimResolve', 
 	];
-	WHUnit_Vehicle.apply(this, arguments);
+	WH_Unit_Vehicle.apply(this, arguments);
 }
 // Унаследовать
-DA_LandRaider.prototype = Object.create(WHUnit_Vehicle.prototype);
+DA_LandRaider.prototype = Object.create(WH_Unit_Vehicle.prototype);
 // Желательно и constructor сохранить
 DA_LandRaider.prototype.constructor = DA_LandRaider;
 // Методы потомка 
 DA_LandRaider.prototype.visibleName = 'Land raider';
 DA_LandRaider.prototype.price = 250;
+DA_LandRaider.prototype.pic = 'units_DA/SpaceMarineLandRaider.jpg';
 
 
 //========================

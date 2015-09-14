@@ -3,7 +3,7 @@ var DA_VenerableDreadnoughts = function(o) {
 	this.price = 125;
 	this.optionsDefault = [
 		'DA_VenerableDreadnoughts_addVenerableDreadnought',
-		'DA_VenerableDreadnoughts_DreadnoughrWeapon',
+		'DA_VenerableDreadnoughts_DreadnoughtWeapon',
 		'DA_VenerableDreadnoughts_ReplaceFist',
 		'DA_DreadnughtEquipment',
 		'DA_VenerableDreadnought_DedicatedTransport',
@@ -22,22 +22,23 @@ var DA_VenerableDreadnoughts = function(o) {
 		// 'Immobile', 
 		// 'InertialGuidanceSystem', 
 	];
-	WHUnit_Vehicle.apply(this, arguments);
+	WH_Unit_Vehicle.apply(this, arguments);
 }
 // Унаследовать
-DA_VenerableDreadnoughts.prototype = Object.create(WHUnit_Vehicle.prototype);
+DA_VenerableDreadnoughts.prototype = Object.create(WH_Unit_Vehicle.prototype);
 // Желательно и constructor сохранить
 DA_VenerableDreadnoughts.prototype.constructor = DA_VenerableDreadnoughts;
 // Методы потомка 
 DA_VenerableDreadnoughts.prototype.visibleName = 'Venerable Dreadnought';
 DA_VenerableDreadnoughts.prototype.price = 35;
+DA_VenerableDreadnoughts.prototype.pic = 'units_DA/VenerableDreadnought.jpg';
 
 
 
 //==============================================================================
 
 
-WHOptionAddModelFabric([{
+WH_OptionAddModelFabric([{
     'optionName' : 'DA_VenerableDreadnoughts_addVenerableDreadnought',
     'cost' : 125,
     'maxCountAdding' : 2,
@@ -46,7 +47,7 @@ WHOptionAddModelFabric([{
     	if (this.unit.dedicatedTransport) {
     		return false;
     	}
-	    return WHOptionAdditionalModel.prototype.canEnable(this, arguments)
+	    return WH_OptionAdditionalModel.prototype.canEnable(this, arguments)
     }
 }]);
 
@@ -57,16 +58,16 @@ WHOptionAddModelFabric([{
 
 
 
-var DA_VenerableDreadnoughts_DreadnoughrWeapon = function(o) {
+var DA_VenerableDreadnoughts_DreadnoughtWeapon = function(o) {
     this.defaultSubOptions = [
-        'DA_DreadnoughrWeapon_TwinLinkedAutoCannon',
-        'DA_DreadnoughrWeapon_TwinLinkedHeavyBolter',
-        'DA_DreadnoughrWeapon_TwinLinkedHeavyFlamer',
-        'DA_DreadnoughrWeapon_PlasmaCannon',
-        'DA_DreadnoughrWeapon_AssaultCannon',
-        'DA_DreadnoughrWeapon_TwinLinkedLascannon',
+        'DA_VenerableDreadnoughtWeapon_TwinLinkedAutoCannon',
+        'DA_VenerableDreadnoughtWeapon_TwinLinkedHeavyBolter',
+        'DA_VenerableDreadnoughtWeapon_TwinLinkedHeavyFlamer',
+        'DA_VenerableDreadnoughtWeapon_PlasmaCannon',
+        'DA_VenerableDreadnoughtWeapon_AssaultCannon',
+        'DA_VenerableDreadnoughtWeapon_TwinLinkedLascannon',
     ]
-    this.optionName = 'DA_VenerableDreadnoughts_DreadnoughrWeapon';
+    this.optionName = 'DA_VenerableDreadnoughts_DreadnoughtWeapon';
     this.cost = 0;
     this.headerText = 'Любая модель может заменить Multi-Melta на одно из мледющего';
     this.isWargearToChange = function(w,m) {
@@ -82,50 +83,50 @@ var DA_VenerableDreadnoughts_DreadnoughrWeapon = function(o) {
     ChangeFromWargear_class.apply(this, arguments);
 }
 // Унаследовать
-DA_VenerableDreadnoughts_DreadnoughrWeapon.prototype = Object.create(ChangeFromWargear_class.prototype);
+DA_VenerableDreadnoughts_DreadnoughtWeapon.prototype = Object.create(ChangeFromWargear_class.prototype);
 // Желательно и constructor сохранить
-DA_VenerableDreadnoughts_DreadnoughrWeapon.prototype.constructor = DA_VenerableDreadnoughts_DreadnoughrWeapon;
+DA_VenerableDreadnoughts_DreadnoughtWeapon.prototype.constructor = DA_VenerableDreadnoughts_DreadnoughtWeapon;
 
 
 DA_RangedWeaponsFabric([
 
 {
-    'optionName'      : 'DA_DreadnoughrWeapon_TwinLinkedAutoCannon',
+    'optionName'      : 'DA_VenerableDreadnoughtWeapon_TwinLinkedAutoCannon',
     'optionNameInModel' : 'TwinLinkedAutoCannon',
     'cost' : 5,
     'changeTo' : 'TwinLinkedAutoCannon',
     'actionTextUp' : '<b>TwinLinkedAutoCannon</b> <i>за 5 очков</i>',
     'actionTextDown' : 'Удалить TwinLinkedAutoCannon'
 }, {
-    'optionName'      : 'DA_DreadnoughrWeapon_TwinLinkedHeavyBolter',
+    'optionName'      : 'DA_VenerableDreadnoughtWeapon_TwinLinkedHeavyBolter',
     'optionNameInModel' : 'TwinLinkedHeavyBolter',
     'cost' : 5,
     'changeTo' : 'TwinLinkedHeavyBolter',
     'actionTextUp' : '<b>TwinLinkedHeavyBolter</b> <i>за 5 очков</i>',
     'actionTextDown' : 'Удалить TwinLinkedHeavyBolter'
 }, {
-    'optionName'      : 'DA_DreadnoughrWeapon_TwinLinkedHeavyFlamer',
+    'optionName'      : 'DA_VenerableDreadnoughtWeapon_TwinLinkedHeavyFlamer',
     'optionNameInModel' : 'TwinLinkedHeavyFlamer',
     'cost' : 5,
     'changeTo' : 'TwinLinkedHeavyFlamer',
     'actionTextUp' : '<b>TwinLinkedHeavyFlamer</b> <i>за 5 очков</i>',
     'actionTextDown' : 'Удалить TwinLinkedHeavyFlamer'
 }, {
-    'optionName'      : 'DA_DreadnoughrWeapon_PlasmaCannon',
+    'optionName'      : 'DA_VenerableDreadnoughtWeapon_PlasmaCannon',
     'optionNameInModel' : 'PlasmaCannon',
     'cost' : 5,
     'changeTo' : 'PlasmaCannon',
     'actionTextUp' : '<b>PlasmaCannon</b> <i>за 5 очков</i>',
     'actionTextDown' : 'Удалить PlasmaCannon'
 }, {
-    'optionName'      : 'DA_DreadnoughrWeapon_AssaultCannon',
+    'optionName'      : 'DA_VenerableDreadnoughtWeapon_AssaultCannon',
     'optionNameInModel' : 'AssaultCannon',
     'cost' : 10,
     'changeTo' : 'AssaultCannon',
     'actionTextUp' : '<b>AssaultCannon</b> <i>за 10 очков</i>',
     'actionTextDown' : 'Удалить AssaultCannon'
 }, {
-    'optionName'      : 'DA_DreadnoughrWeapon_TwinLinkedLascannon',
+    'optionName'      : 'DA_VenerableDreadnoughtWeapon_TwinLinkedLascannon',
     'optionNameInModel' : 'TwinLinkedLascannon',
     'cost' : 15,
     'changeTo' : 'TwinLinkedLascannon',
@@ -145,9 +146,9 @@ DA_RangedWeaponsFabric([
 
 var DA_VenerableDreadnoughts_ReplaceFist = function(o) {
     this.defaultSubOptions = [
-        'DA_DreadnoughrWeapon_MissleLuauncher',
-        'DA_DreadnoughrWeapon_TwinLinkedAutoCannon',
-        'DA_DreadnoughrWeapon_PowerFistWithBuildInHeavyFlamer',
+        'DA_VenerableDreadnoughtWeapon_ReplaceFist_MissleLuauncher',
+        'DA_VenerableDreadnoughtWeapon_ReplaceFist_TwinLinkedAutoCannon',
+        'DA_VenerableDreadnoughtWeapon_ReplaceFist_PowerFistWithBuildInHeavyFlamer',
     ]
     this.optionName = 'DA_VenerableDreadnoughts_ReplaceFist';
     this.cost = 0;
@@ -175,21 +176,21 @@ DA_VenerableDreadnoughts_ReplaceFist.prototype.constructor = DA_VenerableDreadno
 DA_RangedWeaponsFabric([
 
 {
-    'optionName'      : 'DA_DreadnoughrWeapon_MissleLuauncher',
+    'optionName'      : 'DA_VenerableDreadnoughtWeapon_ReplaceFist_MissleLuauncher',
     'optionNameInModel' : 'MissleLuauncher',
     'cost' : 10,
     'changeTo' : 'MissleLuauncher',
     'actionTextUp' : '<b>MissleLuauncher</b> <i>за 10 очков</i>',
     'actionTextDown' : 'Убрать MissleLuauncher'
 }, {
-    'optionName'      : 'DA_DreadnoughrWeapon_TwinLinkedAutoCannon',
+    'optionName'      : 'DA_VenerableDreadnoughtWeapon_ReplaceFist_TwinLinkedAutoCannon',
     'optionNameInModel' : 'TwinLinkedAutoCannon',
     'cost' : 15,
     'changeTo' : 'TwinLinkedAutoCannon',
     'actionTextUp' : '<b>TwinLinkedAutoCannon</b> <i>за 15 очков</i>',
     'actionTextDown' : 'Убрать TwinLinkedAutoCannon'
 }, {
-    'optionName'      : 'DA_DreadnoughrWeapon_PowerFistWithBuildInHeavyFlamer',
+    'optionName'      : 'DA_VenerableDreadnoughtWeapon_ReplaceFist_PowerFistWithBuildInHeavyFlamer',
     'optionNameInModel' : 'PowerFistWithBuildInHeavyFlamer',
     'cost' : 10,
     'changeTo' : 'PowerFistWithBuildInHeavyFlamer',

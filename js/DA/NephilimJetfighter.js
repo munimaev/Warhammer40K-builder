@@ -18,15 +18,16 @@ var DA_NephilimJetfighter = function(o) {
         'StrafingRun', 
         'UnrelentningHunter', 
 	];
-	WHUnit_Vehicle.apply(this, arguments);
+	WH_Unit_Vehicle.apply(this, arguments);
 }
 // Унаследовать
-DA_NephilimJetfighter.prototype = Object.create(WHUnit_Vehicle.prototype);
+DA_NephilimJetfighter.prototype = Object.create(WH_Unit_Vehicle.prototype);
 // Желательно и constructor сохранить
 DA_NephilimJetfighter.prototype.constructor = DA_NephilimJetfighter;
 // Методы потомка 
 DA_NephilimJetfighter.prototype.visibleName = 'Nephilim Jetfighter';
 DA_NephilimJetfighter.prototype.price = 170;
+DA_NephilimJetfighter.prototype.pic = 'units_DA/NephilimJet.jpg';
 
 
 //========================

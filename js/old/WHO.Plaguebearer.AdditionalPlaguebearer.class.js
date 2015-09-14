@@ -1,4 +1,4 @@
-// --------- Класс-потомок WHOptionSuper -----------
+// --------- Класс-потомок WH_OptionSuper -----------
 var PlaguebearerAdditionalPlaguebearer = function(o) {
     this.defaultSubOptions = [
         'PlaguebearerAdditionalPlaguebearerAdd',
@@ -9,11 +9,11 @@ var PlaguebearerAdditionalPlaguebearer = function(o) {
     this.usedCountMax = 10;
     this.headerText = 'Можно включить до десяти дополнительных чумоносцев по 9 очков за модель.';
 
-    WHOptionSuper.apply(this, arguments);
+    WH_OptionSuper.apply(this, arguments);
 }
 
 // Унаследовать
-PlaguebearerAdditionalPlaguebearer.prototype = Object.create(WHOptionSuper.prototype);
+PlaguebearerAdditionalPlaguebearer.prototype = Object.create(WH_OptionSuper.prototype);
 
 // Желательно и constructor сохранить
 PlaguebearerAdditionalPlaguebearer.prototype.constructor = PlaguebearerAdditionalPlaguebearer;
@@ -73,7 +73,7 @@ PlaguebearerAdditionalPlaguebearer.prototype.getCount = function() {
 
 
 PlaguebearerAdditionalPlaguebearer.prototype.update = function() {
-    WHOption.prototype.update.apply(this);
+    WH_Option.prototype.update.apply(this);
     this.$header.html(this.getVisibleHeader());
 }
 

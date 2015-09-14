@@ -27,17 +27,18 @@ var DA_AssaultSquad = function(o) {
 		'CombatSquad', 
 		'GrimResolve', 
 	];
-	WHUnit_Infantry.apply(this, arguments);
+	WH_Unit_Infantry.apply(this, arguments);
 }
 // Унаследовать
-DA_AssaultSquad.prototype = Object.create(WHUnit_Infantry.prototype);
+DA_AssaultSquad.prototype = Object.create(WH_Unit_Infantry.prototype);
 // Желательно и constructor сохранить
 DA_AssaultSquad.prototype.constructor = DA_AssaultSquad;
 // Методы потомка 
 DA_AssaultSquad.prototype.visibleName = 'Assault Squad';
 
+DA_AssaultSquad.prototype.pic = 'units_DA/AssaultSquad.jpg';
 
-WHOptionAddModelFabric([{
+WH_OptionAddModelFabric([{
     'optionName' : 'DA_AssaultSquad_addSpaceMarine',
     'cost' : 14,
     'maxCountAdding' : 5,

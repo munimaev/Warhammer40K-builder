@@ -21,14 +21,15 @@ var DA_Dreadnoughts = function(o) {
 		'AssaultVehicle',
 		'PowerOfTheMashineSpirit', 
 	];
-	WHUnit_Vehicle.apply(this, arguments);
+	WH_Unit_Vehicle.apply(this, arguments);
 }
 // Унаследовать
-DA_Dreadnoughts.prototype = Object.create(WHUnit_Vehicle.prototype);
+DA_Dreadnoughts.prototype = Object.create(WH_Unit_Vehicle.prototype);
 // Желательно и constructor сохранить
 DA_Dreadnoughts.prototype.constructor = DA_Dreadnoughts;
 // Методы потомка 
 DA_Dreadnoughts.prototype.visibleName = 'Dreadnought';
+DA_Dreadnoughts.prototype.pic = 'units_DA/SpaceMarineDreadnought.jpg';
 DA_Dreadnoughts.prototype.price = 35;
 
 
@@ -36,7 +37,7 @@ DA_Dreadnoughts.prototype.price = 35;
 //==============================================================================
 
 
-WHOptionAddModelFabric([{
+WH_OptionAddModelFabric([{
     'optionName' : 'DA_ScoutSquad_addDreadnought',
     'cost' : 100,
     'maxCountAdding' : 2,
@@ -45,7 +46,7 @@ WHOptionAddModelFabric([{
     	if (this.unit.dedicatedTransport) {
     		return false;
     	}
-	    return WHOptionAdditionalModel.prototype.canEnable(this, arguments)
+	    return WH_OptionAdditionalModel.prototype.canEnable(this, arguments)
     }
 }]);
 
@@ -144,9 +145,9 @@ DA_RangedWeaponsFabric([
 
 var DA_Dreadnoughts_ReplaceFist = function(o) {
     this.defaultSubOptions = [
-        'DA_DreadnoughrWeapon_MissleLuauncher',
-        'DA_DreadnoughrWeapon_TwinLinkedAutoCannon',
-        'DA_DreadnoughrWeapon_PowerFistWithBuildInHeavyFlamer',
+        'DA_DreadnoughrWeapon_ReplaceFist_MissleLuauncher',
+        'DA_DreadnoughrWeapon_ReplaceFist_TwinLinkedAutoCannon',
+        'DA_DreadnoughrWeapon_ReplaceFist_PowerFistWithBuildInHeavyFlamer',
     ]
     this.optionName = 'DA_Dreadnoughts_ReplaceFist';
     this.cost = 0;
@@ -174,21 +175,21 @@ DA_Dreadnoughts_ReplaceFist.prototype.constructor = DA_Dreadnoughts_ReplaceFist;
 DA_RangedWeaponsFabric([
 
 {
-    'optionName'      : 'DA_DreadnoughrWeapon_MissleLuauncher',
+    'optionName'      : 'DA_DreadnoughrWeapon_ReplaceFist_MissleLuauncher',
     'optionNameInModel' : 'MissleLuauncher',
     'cost' : 10,
     'changeTo' : 'MissleLuauncher',
     'actionTextUp' : '<b>MissleLuauncher</b> <i>за 10 очков</i>',
     'actionTextDown' : 'Убрать MissleLuauncher'
 }, {
-    'optionName'      : 'DA_DreadnoughrWeapon_TwinLinkedAutoCannon',
+    'optionName'      : 'DA_DreadnoughrWeapon_ReplaceFist_TwinLinkedAutoCannon',
     'optionNameInModel' : 'TwinLinkedAutoCannon',
     'cost' : 15,
     'changeTo' : 'TwinLinkedAutoCannon',
     'actionTextUp' : '<b>TwinLinkedAutoCannon</b> <i>за 15 очков</i>',
     'actionTextDown' : 'Убрать TwinLinkedAutoCannon'
 }, {
-    'optionName'      : 'DA_DreadnoughrWeapon_PowerFistWithBuildInHeavyFlamer',
+    'optionName'      : 'DA_DreadnoughrWeapon_ReplaceFist_PowerFistWithBuildInHeavyFlamer',
     'optionNameInModel' : 'PowerFistWithBuildInHeavyFlamer',
     'cost' : 10,
     'changeTo' : 'PowerFistWithBuildInHeavyFlamer',

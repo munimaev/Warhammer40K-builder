@@ -1,13 +1,13 @@
-// --------- Класс-потомок WHOption -----------
+// --------- Класс-потомок WH_Option -----------
 var PlaguebearerIconOfChaos = function(o) {
     this.optionName = 'PlaguebearerIconOfChaos';
     this.cost = 10;
     this.actionText = 'Другой чумоносец может взять икону хаоса';
-    WHOption.apply(this, arguments);
+    WH_Option.apply(this, arguments);
 }
 
 // Унаследовать
-PlaguebearerIconOfChaos.prototype = Object.create(WHOption.prototype);
+PlaguebearerIconOfChaos.prototype = Object.create(WH_Option.prototype);
 
 // Желательно и constructor сохранить
 PlaguebearerIconOfChaos.prototype.constructor = PlaguebearerIconOfChaos;

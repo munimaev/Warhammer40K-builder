@@ -22,10 +22,10 @@ var Belials = function(o) {
 		'Marked for Retribution', 
 		'Tactical Precision',
 	];
-	WHUnit_Infantry.apply(this, arguments);
+	WH_Unit_Infantry.apply(this, arguments);
 }
 // Унаследовать
-Belials.prototype = Object.create(WHUnit_Infantry.prototype);
+Belials.prototype = Object.create(WH_Unit_Infantry.prototype);
 // Желательно и constructor сохранить
 Belials.prototype.constructor = Belials;
 // Методы потомка 

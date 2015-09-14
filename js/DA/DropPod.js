@@ -15,15 +15,16 @@ var DA_DropPod = function(o) {
 		// 'Immobile', 
 		// 'InertialGuidanceSystem', 
 	];
-	WHUnit_Vehicle.apply(this, arguments);
+	WH_Unit_Vehicle.apply(this, arguments);
 }
 // Унаследовать
-DA_DropPod.prototype = Object.create(WHUnit_Vehicle.prototype);
+DA_DropPod.prototype = Object.create(WH_Unit_Vehicle.prototype);
 // Желательно и constructor сохранить
 DA_DropPod.prototype.constructor = DA_DropPod;
 // Методы потомка 
 DA_DropPod.prototype.visibleName = 'Drop Pod';
 DA_DropPod.prototype.price = 35;
+DA_DropPod.prototype.pic = 'units_DA/Droppod.jpg';
 
 
 

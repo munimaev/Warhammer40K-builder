@@ -36,24 +36,25 @@ var DA_RavenwingSquad = function(o) {
         'Ravenwing', 
         'Scout', 
 	];
-	WHUnit_Infantry.apply(this, arguments);
+	WH_Unit_Infantry.apply(this, arguments);
 }
 // Унаследовать
-DA_RavenwingSquad.prototype = Object.create(WHUnit_Infantry.prototype);
+DA_RavenwingSquad.prototype = Object.create(WH_Unit_Infantry.prototype);
 // Желательно и constructor сохранить
 DA_RavenwingSquad.prototype.constructor = DA_RavenwingSquad;
 // Методы потомка 
 DA_RavenwingSquad.prototype.visibleName = 'Ravenwing Squad';
+DA_RavenwingSquad.prototype.pic = 'units_DA/BikeSquad.jpg';
 
 
-WHOptionAddModelFabric([{
+WH_OptionAddModelFabric([{
     'optionName' : 'DA_RavenwingSquad_addRavenwing_Biker',
     'cost' : 25,
     'maxCountAdding' : 3,
     'modelToAdd' : 'DA_Ravenwing_Biker',
 }]);
 
-WHOptionAddModelFabric([{
+WH_OptionAddModelFabric([{
     'optionName' : 'DA_RavenwingSquad_addRavenwing_Attack_Bike',
     'cost' : 45,
     'maxCountAdding' : 1,

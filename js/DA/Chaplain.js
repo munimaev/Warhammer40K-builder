@@ -23,15 +23,16 @@ var DA_Chaplain = function(o) {
         'IndependentCharacter',
         'Zealot'
 	];
-	WHUnit_Infantry.apply(this, arguments);
+	WH_Unit_Infantry.apply(this, arguments);
 }
 // Унаследовать
-DA_Chaplain.prototype = Object.create(WHUnit_Infantry.prototype);
+DA_Chaplain.prototype = Object.create(WH_Unit_Infantry.prototype);
 // Желательно и constructor сохранить
 DA_Chaplain.prototype.constructor = DA_Chaplain;
 // Методы потомка 
 DA_Chaplain.prototype.visibleName = 'Chaplain';
 
+DA_Chaplain.prototype.pic = 'units_DA/Chaplain.jpg';
 
 
 

@@ -1,4 +1,4 @@
-// --------- Класс-потомок WHOptionSuper -----------
+// --------- Класс-потомок WH_OptionSuper -----------
 var PlaguebearerRewardsofChaos = function(o) {
     this.defaultSubOptions = [
         'RewardsOfChaosLesserRewards',
@@ -16,11 +16,11 @@ var PlaguebearerRewardsofChaos = function(o) {
         'RewardsOfChaosLesserRewards': 10,
         'RewardsOfChaosGreaterRewards': 20
     };
-    WHOptionSuper.apply(this, arguments);
+    WH_OptionSuper.apply(this, arguments);
 }
 
 // Унаследовать
-PlaguebearerRewardsofChaos.prototype = Object.create(WHOptionSuper.prototype);
+PlaguebearerRewardsofChaos.prototype = Object.create(WH_OptionSuper.prototype);
 
 // Желательно и constructor сохранить
 PlaguebearerRewardsofChaos.prototype.constructor = PlaguebearerRewardsofChaos;

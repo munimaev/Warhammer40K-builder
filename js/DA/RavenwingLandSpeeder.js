@@ -17,15 +17,16 @@ var DA_RavenwingLandSpeeder = function(o) {
 		'Ravenwing', 
 		'AntiGravUpwash', 
 	];
-	WHUnit_Vehicle.apply(this, arguments);
+	WH_Unit_Vehicle.apply(this, arguments);
 }
 // Унаследовать
-DA_RavenwingLandSpeeder.prototype = Object.create(WHUnit_Vehicle.prototype);
+DA_RavenwingLandSpeeder.prototype = Object.create(WH_Unit_Vehicle.prototype);
 // Желательно и constructor сохранить
 DA_RavenwingLandSpeeder.prototype.constructor = DA_RavenwingLandSpeeder;
 // Методы потомка 
-DA_RavenwingLandSpeeder.prototype.visibleName = 'Ravenwing Land Speeder';
+DA_RavenwingLandSpeeder.prototype.visibleName = 'Ravenwing lanspeeder';
 DA_RavenwingLandSpeeder.prototype.price = 50;
+DA_RavenwingLandSpeeder.prototype.pic = 'units_DA/DarkAngelsLandSpeeder.jpg';
 
 
 //========================
@@ -33,7 +34,7 @@ DA_RavenwingLandSpeeder.prototype.price = 50;
 //=========================
 
 
-WHOptionAddModelFabric([{
+WH_OptionAddModelFabric([{
     'optionName' : 'DA_RavenwingLandSpeeder_addRavenwingLandSpeeder',
     'cost' : 50,
     'maxCountAdding' : 4,

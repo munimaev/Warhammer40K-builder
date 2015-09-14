@@ -30,10 +30,10 @@ var DA_InterrogatorChaplain = function(o) {
         'PreferredEnemy_ChaosSpaceMarine',
         'Zealot'
 	];
-	WHUnit_Infantry.apply(this, arguments);
+	WH_Unit_Infantry.apply(this, arguments);
 }
 // Унаследовать
-DA_InterrogatorChaplain.prototype = Object.create(WHUnit_Infantry.prototype);
+DA_InterrogatorChaplain.prototype = Object.create(WH_Unit_Infantry.prototype);
 // Желательно и constructor сохранить
 DA_InterrogatorChaplain.prototype.constructor = DA_InterrogatorChaplain;
 // Методы потомка 

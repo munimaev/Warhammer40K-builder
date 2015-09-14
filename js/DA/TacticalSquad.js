@@ -25,17 +25,18 @@ var DA_TacticalSquad = function(o) {
 		'CombatSquad', 
 		'GrimResolve', 
 	];
-	WHUnit_Infantry.apply(this, arguments);
+	WH_Unit_Infantry.apply(this, arguments);
 }
 // Унаследовать
-DA_TacticalSquad.prototype = Object.create(WHUnit_Infantry.prototype);
+DA_TacticalSquad.prototype = Object.create(WH_Unit_Infantry.prototype);
 // Желательно и constructor сохранить
 DA_TacticalSquad.prototype.constructor = DA_TacticalSquad;
 // Методы потомка 
 DA_TacticalSquad.prototype.visibleName = 'Tactical Squad';
+DA_TacticalSquad.prototype.pic = 'units_DA/TacticakSquade.jpg';
 
 
-WHOptionAddModelFabric([{
+WH_OptionAddModelFabric([{
     'optionName' : 'DA_TacticalSquad_addSpaceMarine',
     'cost' : 14,
     'maxCountAdding' : 5,
@@ -84,10 +85,10 @@ var DA_TacticalSquad_SpecialAndHeavyWeapons = function(o) {
     this.optionName = 'DA_TacticalSquad_SpecialAndHeavyWeapons';
     this.cost = 0;
     this.headerText = 'Если в отряде меньше десяти моделей один Space Marine может оружие из списка Heavy Weapons или Special Weapons. Если в отряде 10 моделей одни Space Marine может взять оружие из Heavy Weapons, а дургой Space Marine может взять оружеие из Heavy Weapons';
-    WHOptionSuper.apply(this, arguments);
+    WH_OptionSuper.apply(this, arguments);
 }
 // Унаследовать
-DA_TacticalSquad_SpecialAndHeavyWeapons.prototype = Object.create(WHOptionSuper.prototype);
+DA_TacticalSquad_SpecialAndHeavyWeapons.prototype = Object.create(WH_OptionSuper.prototype);
 // Желательно и constructor сохранить
 DA_TacticalSquad_SpecialAndHeavyWeapons.prototype.constructor = DA_TacticalSquad_SpecialAndHeavyWeapons;
 

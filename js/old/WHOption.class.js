@@ -1,5 +1,5 @@
 // --------- Класс-Родитель ------------
-var WHOption = function(o) {
+var WH_Option = function(o) {
 
     this.$link = o.$link;
     this.unit = o.unit;
@@ -71,7 +71,7 @@ var WHOption = function(o) {
 }
 
 // Методы хранятся в прототипе
-WHOption.prototype.printOption  = function() {
+WH_Option.prototype.printOption  = function() {
     var tabText = this.getTabText();
     var canUse = '[';
     canUse += this.canEnable() ? ' ' : 'X';
@@ -83,7 +83,7 @@ WHOption.prototype.printOption  = function() {
     }
 }
 
-WHOption.prototype.canEnable  = function() {
+WH_Option.prototype.canEnable  = function() {
     if (this.usedCount >= this.usedCountMax) {
         return false;
     }
@@ -93,7 +93,7 @@ WHOption.prototype.canEnable  = function() {
     return true;
 }
 
-WHOption.prototype.enable  = function() {
+WH_Option.prototype.enable  = function() {
     if (this.canEnable()) {
         this.usedCount++;
         if (this.superOption !== 'core') {
@@ -104,7 +104,7 @@ WHOption.prototype.enable  = function() {
     }
 }
 
-WHOption.prototype.canDisable  = function() {
+WH_Option.prototype.canDisable  = function() {
     if (this.usedCount < 1) {
         return false;
     }
@@ -114,7 +114,7 @@ WHOption.prototype.canDisable  = function() {
     return true;
 }
 
-WHOption.prototype.disable  = function() {
+WH_Option.prototype.disable  = function() {
     if (this.canDisable()) {
         this.usedCount--;
         if (this.superOption !== 'core') {
@@ -126,10 +126,10 @@ WHOption.prototype.disable  = function() {
     //this.unit.printUnit();
 }
 
-WHOption.prototype.getTabText  = function() {
+WH_Option.prototype.getTabText  = function() {
     var parent = this;
     var parentCount=0;
-    while (parent.superOption !== 'core') {
+    WH_ile (parent.superOption !== 'core') {
         parentCount++;
         parent = this.superOption;
     }
@@ -141,22 +141,22 @@ WHOption.prototype.getTabText  = function() {
 }
 
 
-WHOption.prototype.getVisibleText = function() {
+WH_Option.prototype.getVisibleText = function() {
     return this.actionText;
 }
-WHOption.prototype.getVisibleHeader = function() {
+WH_Option.prototype.getVisibleHeader = function() {
     return this.headerText;
 }
 
-WHOption.prototype.isNeedShow = function() {
+WH_Option.prototype.isNeedShow = function() {
     return !this.defaultHide;
 }
 
-WHOption.prototype.iUpdated = function() {
+WH_Option.prototype.iUpdated = function() {
     this.unit.updateAllOptions();
     this.unit.updateModels();
 }
-WHOption.prototype.update = function() {
+WH_Option.prototype.update = function() {
 
     if (!this.isShow && this.isNeedShow()) {
         this.show();
@@ -168,17 +168,17 @@ WHOption.prototype.update = function() {
         this.subOptions[o].update();
     }
 }
-WHOption.prototype.show = function() {
+WH_Option.prototype.show = function() {
     this.$this.show();
     this.isShow = true;
 }
 
-WHOption.prototype.hide = function() {
+WH_Option.prototype.hide = function() {
     this.$this.hide();
     this.isShow = false;
 }
 
-WHOption.prototype.getAdditionalCost = function() {
+WH_Option.prototype.getAdditionalCost = function() {
     var result = this.cost * this.usedCount;
     if (this.superOption !== 'structure') {
         for (var o in this.subOptions) {
@@ -188,7 +188,7 @@ WHOption.prototype.getAdditionalCost = function() {
     return result;
 }
 
-WHOption.prototype.setIsUsed = function(b) {
+WH_Option.prototype.setIsUsed = function(b) {
     if (this.canSetUsed && this.isUsed!==b) {
         this.isUsed = b;
         if (this.isUsed) {

@@ -29,16 +29,17 @@ var DA_RavenwingBlackKnights = function(o) {
         'Scout', 
         'SkilledRider', 
 	];
-	WHUnit_Infantry.apply(this, arguments);
+	WH_Unit_Infantry.apply(this, arguments);
 }
 // Унаследовать
-DA_RavenwingBlackKnights.prototype = Object.create(WHUnit_Infantry.prototype);
+DA_RavenwingBlackKnights.prototype = Object.create(WH_Unit_Infantry.prototype);
 // Желательно и constructor сохранить
 DA_RavenwingBlackKnights.prototype.constructor = DA_RavenwingBlackKnights;
 // Методы потомка 
 DA_RavenwingBlackKnights.prototype.visibleName = 'Ravenwing Black Knights';
+DA_RavenwingBlackKnights.prototype.pic = 'units_DA/RavenwingBlackKnights.jpg';
 
-WHOptionAddModelFabric([{
+WH_OptionAddModelFabric([{
     'optionName' : 'DA_RavenwingBlackKnights_addRavenwing_Biker',
     'cost' : 40,
     'maxCountAdding' : 7,

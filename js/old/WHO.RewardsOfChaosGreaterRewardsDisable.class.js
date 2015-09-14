@@ -1,10 +1,10 @@
-// --------- Класс-потомок WHOption -----------
+// --------- Класс-потомок WH_Option -----------
 var RewardsOfChaosGreaterRewardsDisable = function(o) {
     this.optionName = 'RewardsOfChaosGreaterRewardsDisable';
     this.cost = 0;
     this.actionText = 'Удалить низшее вознаграждение';
     this.defaultHide = false;
-    WHOption.apply(this, arguments);
+    WH_Option.apply(this, arguments);
 
     var _this = this;
     this.$action.click(function(){
@@ -16,7 +16,7 @@ var RewardsOfChaosGreaterRewardsDisable = function(o) {
 }
 
 // Унаследовать
-RewardsOfChaosGreaterRewardsDisable.prototype = Object.create(WHOption.prototype);
+RewardsOfChaosGreaterRewardsDisable.prototype = Object.create(WH_Option.prototype);
 
 // Желательно и constructor сохранить
 RewardsOfChaosGreaterRewardsDisable.prototype.constructor = RewardsOfChaosGreaterRewardsDisable;

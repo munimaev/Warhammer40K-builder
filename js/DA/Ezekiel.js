@@ -32,15 +32,16 @@ var Ezekiels = function(o) {
     this.defaultWarlordTrait = [
         'CourageOfTheFirstLegion'
     ];
-	WHUnit_Infantry.apply(this, arguments);
+	WH_Unit_Infantry.apply(this, arguments);
 }
 // Унаследовать
-Ezekiels.prototype = Object.create(WHUnit_Infantry.prototype);
+Ezekiels.prototype = Object.create(WH_Unit_Infantry.prototype);
 // Желательно и constructor сохранить
 Ezekiels.prototype.constructor = Ezekiels;
 // Методы потомка 
 Ezekiels.prototype.visibleName = 'Ezekiel';
 Ezekiels.prototype.unique = ['Ezekiel'];
+Ezekiels.prototype.pic = 'units_DA/Ezekiel.jpg';
 
 
 

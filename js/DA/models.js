@@ -12,11 +12,11 @@ var Model_Fabric = function(a) {
                 this.modelName = modelName;
                 this.visibleModelName = visibleModelName;
                 this.defaultAbilities = defaultAbilities;   
-                window['WHModel_'+modelMainType].apply(this, arguments);
+                window['WH_Model_'+modelMainType].apply(this, arguments);
             }
         }()
 
-        window[a[i].modelName].prototype = Object.create(window['WHModel_'+a[i].modelMainType].prototype);
+        window[a[i].modelName].prototype = Object.create(window['WH_Model_'+a[i].modelMainType].prototype);
         window[a[i].modelName].prototype.constructor =  window[a[i].optionName];
         if (a[i].modelNames) {
             window[a[i].modelName].prototype.modelNames =  a[i].modelNames;
@@ -77,6 +77,13 @@ Model_Fabric([
     visibleModelName : 'Chaplain',
     defaultAbilities : {
         "WS": 4, "BS": 4, "S" : 4, "T" : 4, "W" : 2, "I" : 4, "A" : 2, "Ld": 10, "Sv": 3
+    }
+},{
+    modelMainType :'Infantry',
+    modelName : 'CompanyMaster',
+    visibleModelName : 'Company Master',
+    defaultAbilities : {
+        "WS": 6, "BS": 5, "S" : 4, "T" : 4, "W" : 3, "I" : 5, "A" : 3, "Ld": 10, "Sv": 3
     }
 },{
     modelMainType :'Infantry',
@@ -310,11 +317,19 @@ Model_Fabric([
 },{
     modelMainType : 'Vehicle',
     modelName : 'RavenwingLandSpeeder',
-    visibleModelName : 'Ravenwing land speeder',
+    visibleModelName : 'Ravenwing landspeeder',
     defaultAbilities : {
         "BS": 4, "AF" : 10, "AS" : 10, "AR" : 10, "HP": 2
     },
 },{
+    modelMainType : 'Vehicle',
+    modelName : 'RavenwingLandSpeederVengeance',
+    visibleModelName : 'Ravenwing landspeeder Vengeance',
+    defaultAbilities : {
+        "BS": 4, "AF" : 10, "AS" : 10, "AR" : 10, "HP": 3
+    },
+},{
+
     modelMainType : 'Vehicle',
     modelName : 'RavenwingDarkshroud',
     visibleModelName : 'Ravenwing Darkshroud',

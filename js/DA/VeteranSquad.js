@@ -27,21 +27,22 @@ var DA_VeteranSquad = function(o) {
 		'CombatSquad', 
 		'GrimResolve', 
 	];
-	WHUnit_Infantry.apply(this, arguments);
+	WH_Unit_Infantry.apply(this, arguments);
 }
 // Унаследовать
-DA_VeteranSquad.prototype = Object.create(WHUnit_Infantry.prototype);
+DA_VeteranSquad.prototype = Object.create(WH_Unit_Infantry.prototype);
 // Желательно и constructor сохранить
 DA_VeteranSquad.prototype.constructor = DA_VeteranSquad;
 // Методы потомка 
 DA_VeteranSquad.prototype.visibleName = 'Company Veteran Squad';
+DA_VeteranSquad.prototype.pic = 'units_DA/VeteransSquad.jpg';
 
 
 
 //==============================================================================
 
 
-WHOptionAddModelFabric([{
+WH_OptionAddModelFabric([{
     'optionName' : 'DA_VeteranSquad_addVeteran',
     'cost' : 18,
     'maxCountAdding' : 5,
