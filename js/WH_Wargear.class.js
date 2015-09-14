@@ -96,24 +96,33 @@ WH_Wargear.prototype.getAbilitiesTable = function() {
 
     $t1.append($('<td />',{'text':'Type','width':'25%'}))
 
-    $sr = null;
     var $tdType = $('<td />',{'class':'info_td_type'});
     if (this.abilities.type !== null) {
         $sr = $('<div />',{});
         for (var i in this.abilities.type ) {
-            console.log(this.abilities.type[i])
-            console.log(WH_SpecialRules[this.abilities.type[i]])
-            $tdType.append( WH_SpecialRules[this.abilities.type[i]].prototype.getSpan())
+            $tdType.append( WH_SpecialRules[this.abilities.type[i]].prototype.getSpan());
             $tdType.append($('<br />'));
 
-            $sr.append(WH_SpecialRules[this.abilities.type[i]].prototype.getTextSpan({header:true}))
         }
     }
     $t2.append($tdType);
 
     return $tt;
-}
+};
 
+WH_Wargear.prototype.getAbilitiesText = function() {
+    var $sr = null;
+    console.log(this)
+    if (this.abilities.type !== null) {
+        $sr = $('<div />',{});
+        for (var i in this.abilities.type ) {
+            $sr.append( WH_SpecialRules[this.abilities.type[i]].prototype.getTextBlock());
+            $sr.append($('<br />'));
+
+        }
+    }
+    return $sr;
+};
 
 WH_Wargear.prototype.abilities = null;
 

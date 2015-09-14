@@ -724,3 +724,7 @@ tr:last-child>td {
 .info .info_td_type {
 	text-align: left;
 }
+
+.WH_specialRules_textBlock {
+	text-align: left;
+}

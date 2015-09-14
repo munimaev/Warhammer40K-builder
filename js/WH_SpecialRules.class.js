@@ -36,7 +36,7 @@ WH_SpecialRule.prototype.getSpan = function() {
 
     //                     __this.model.wargear.splice(w,1,new window[__this.readyToChange.name]({
     //                         model: __this.model,
-    //                         createBy : __this.readyToChange.createBy,
+    //89                         createBy : __this.readyToChange.createBy,
     //                         usedOption : __this.readyToChange.createBy,
     //                         changedFrom : {
     //                             name : __this.wargearName,
@@ -69,36 +69,47 @@ WH_SpecialRule.prototype.getSpan = function() {
         var __this = _this;
         return function() {
             WH_info.showRule(__this);
-        }
+        };
     }();
 
     var $span = $('<span />',{
         'class': this.getRulesSpanHtmlClass(),
         'click': this.click
-    })
+    });
     if (this.icon) {
         text = ' <img src="pics/'+this.icon+'.png"> '+text;
     }
     $span.html(text);
     return $span;
-}
+};
 
 
-WH_SpecialRule.prototype.getTextSpan = function(o) {
+WH_SpecialRule.prototype.getTextBlock = function(o) {
     var o = o || {};
-    var o.header = o.header || false;
-    var result = $('<div />');
-    return
-}
+    o.header = o.header || false;
+    var result = $('<div />',{
+        'class' : 'WH_specialRules_textBlock'
+    });
+    var h = $('<h4 />',{
+        text : this.visibleName
+    });
+    var p = $('<p />',{
+        text : this.visibleName
+    });
+    result.append(h);
 
-WH_SpecialRule.prototype.htmlClass = 'WH_army_unit_specialRules_span'
+    result.append(p);
+    return result;
+};
+
+WH_SpecialRule.prototype.htmlClass = 'WH_army_unit_specialRules_span';
 
 WH_SpecialRule.prototype.getRulesSpanHtmlClass = function() {
     // if (this.unit instanceof WH_Roster) {
     //     return ''
     // }
     return 'WH_specialRules';
-}
+};
 
 // Методы хранятся в прототипе
 

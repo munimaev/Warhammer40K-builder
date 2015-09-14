@@ -77,16 +77,18 @@ WH_Info.prototype.showWargear = function(wargear){
     }
     var $infoTable = $('<div />',{
         'class' : 'info_table'
-    })
+    });
 
-    console.log(wargear)
     if (wargear.wargearType == 'MeleeWeapon' || wargear.wargearType == 'RangedWeapon' ) {
         $table = wargear.getAbilitiesTable();
         $infoTable.append($table);
+
+        $specialRules = wargear.getAbilitiesText();
+        $infoTable.append($specialRules);
     }
     this.$this.append($infoTable);
 
     this.show();
-}
+};
 
 var WH_info = new WH_Info();
