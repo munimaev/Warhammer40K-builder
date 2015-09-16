@@ -130,12 +130,12 @@ WH_WargearFabric([
     visibleName: 'Power lance',
     wargearType: 'MeleeWeapon',
     abilities : [{
-        name : 'Charge'
+        name : 'Charge',
         S : '+1',
         AP : 3,
         type:['Melee'],
     },{
-        name : 'Normal'
+        name : 'Normal',
         AP : 4,
         type:['Melee'],
     }]
@@ -144,7 +144,7 @@ WH_WargearFabric([
     visibleName: 'Power fist with build in Heavy-Bolter',
     wargearType: 'MeleeWeapon',
     abilities : [{
-        name : 'Power fist'
+        name : 'Power fist',
         S : 'x2',
         AP : 2,
         type:['Melee','SpecialistWeapon','Unwieldy'],
@@ -154,7 +154,7 @@ WH_WargearFabric([
     visibleName: 'Power fist with build in Heavy-Flamer',
     wargearType: 'MeleeWeapon',
     abilities : [{
-        name : 'Power fist'
+        name : 'Power fist',
         S : 'x2',
         AP : 2,
         type:['Melee','SpecialistWeapon','Unwieldy'],

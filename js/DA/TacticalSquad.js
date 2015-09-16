@@ -136,7 +136,7 @@ var DA_TacticalSquad_SpecialWeapons = function(o) {
         'DA_SpecialWeapons_Flamer',
         'DA_SpecialWeapons_MeltaGun',
         'DA_SpecialWeapons_GravGun',
-        'DA_SpecialWeapons_PlasmsGun',
+        'DA_SpecialWeapons_PlasmaGun',
     ]
     this.optionName = 'DA_TacticalSquad_SpecialWeapons';
     this.cost = 0;

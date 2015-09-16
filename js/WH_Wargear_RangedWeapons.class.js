@@ -22,7 +22,7 @@ WH_WargearFabric([{
     abilities : {
         range : 24,
         S : 6,
-        AP : 4
+        AP : 4,
         type:['Heavy_4','Rending'],
     }
 }, {
@@ -31,7 +31,7 @@ WH_WargearFabric([{
     abilities : {
         range : 48,
         S : 7,
-        AP : 4
+        AP : 4,
         type:['Heavy_2'],
     }
 }, {
@@ -333,7 +333,7 @@ WH_WargearFabric([{
         type:['Pistol'],
     }
 }, {
-    wargearName: 'Meltagun',
+    wargearName: 'MeltaGun',
     visibleName: 'Meltagun',
     wargearType: 'RangedWeapon',
     abilities : {
@@ -357,13 +357,13 @@ WH_WargearFabric([{
     visibleName: 'Missle luauncher',
     wargearType: 'RangedWeapon',
     abilities : [{
-        name : 'Frag missile'
+        name : 'Frag missile',
         range : 48,
         S : 4,
         AP: 6,
         type:['Heavy_1','Blast'],
     },{
-        name : 'Flakk missile'
+        name : 'Flakk missile',
         range : 48,
         S : 4,
         AP: 6,
@@ -374,19 +374,19 @@ WH_WargearFabric([{
     visibleName: 'MissleLuauncherFlakk',
     wargearType: 'RangedWeapon',
     abilities : [{
-        name : 'Frag missile'
+        name : 'Frag missile',
         range : 48,
         S : 4,
         AP: 6,
         type:['Heavy_1','Blast'],
     },{
-        name : 'Flakk missile'
+        name : 'Flakk missile',
         range : 48,
         S : 4,
         AP: 6,
         type:['Heavy_1','Blast'],
     },{
-        name : 'Krakk missile'
+        name : 'Krakk missile',
         range : 48,
         S : 8,
         AP: 3,
@@ -421,7 +421,7 @@ WH_WargearFabric([{
         S : 3,
         type:['Assault_2'],
     }
-}, 
+}, {
     wargearName: 'SniperRifle',
     visibleName: 'Sniper rifle',
     wargearType: 'RangedWeapon',
@@ -430,7 +430,7 @@ WH_WargearFabric([{
         S : 'X',
         type:['Heavy_1','Sniper'],
     }
-}, {{
+}, {
     wargearName: 'SpaceMarineShotgun',
     visibleName: 'Space Marine Shotgun',
     wargearType: 'RangedWeapon',

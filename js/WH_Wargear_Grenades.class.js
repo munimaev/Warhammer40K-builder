@@ -19,7 +19,7 @@ WH_WargearFabric([
         S : 4,
         AP : 4,
         type:['Assault_1','Blast','PlasmaGrenade'],
-    }{
+    },{
         name: 'Assault',
         S : 4,
         AP : 4,
@@ -45,7 +45,7 @@ WH_WargearFabric([
         range : 8,
         S : 2,
         type:['Assault_1','Blast','HaywireGrenade'],
-    }{
+    },{
         name: 'Assault',
         S : 2,
         type:['HaywireGrenade'],
@@ -61,7 +61,7 @@ WH_WargearFabric([
         S : 6,
         S : 4,
         type:['Assault_1','KrakGrenade'],
-    }{
+    },{
         name: 'Assault',
         S : 6,
         S : 4,
@@ -76,6 +76,6 @@ WH_WargearFabric([
         S : 8,
         S : 1,
         type:['Armourbane','Unwieldy','MeltaBomb'],
-    }]
+    }
 },
 ]);

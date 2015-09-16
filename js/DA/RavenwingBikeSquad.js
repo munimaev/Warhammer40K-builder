@@ -91,7 +91,7 @@ var DA_RavenwingSquad_BoltPistolChange = function(o) {
         'DA_RavenwingSquad_BoltPistolChange_Flamer',
         'DA_RavenwingSquad_BoltPistolChange_MeltaGun',
         'DA_RavenwingSquad_BoltPistolChange_GravGun',
-        'DA_RavenwingSquad_BoltPistolChange_PlasmsGun',
+        'DA_RavenwingSquad_BoltPistolChange_PlasmaGun',
     ]
     this.optionName = 'DA_RavenwingSquad_BoltPistolChange';
     this.cost = 0;
@@ -155,10 +155,10 @@ DA_RangedWeaponsFabric([
     removeItems : ['BoltPistol'],
     addItems : ['GravGun'],
 },{
-    optionName : 'DA_RavenwingSquad_BoltPistolChange_PlasmsGun',
+    optionName : 'DA_RavenwingSquad_BoltPistolChange_PlasmaGun',
     cost : 15,
     removeItems : ['BoltPistol'],
-    addItems : ['PlasmsGun'],
+    addItems : ['PlasmaGun'],
 },
 
 ]);

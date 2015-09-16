@@ -588,9 +588,9 @@ DA_RangedWeaponsFabric([{
     changeTo: 'GravGun',
     removeItems : ['Boltgun'],
 }, {
-    optionName: 'DA_SpecialWeapons_PlasmsGun',
+    optionName: 'DA_SpecialWeapons_PlasmaGun',
     cost: 15,
-    changeTo: 'PlasmsGun',
+    changeTo: 'PlasmaGun',
     removeItems : ['Boltgun'],
 },{
     optionName: 'DA_SpecialWeapons_PlasmaPistol',
