@@ -158,7 +158,7 @@ WH_Model.prototype.printName = function () {
     var click = function () {
         console.log(_this);
     }
-    var htmlClass = 'WH_army_unit_header_unit_modelName';
+    var htmlClass = 'WH_unit_header';
     if (this.readyToChange !== null
         && 
         (
@@ -211,17 +211,17 @@ WH_Model.prototype.printWargear = function () {
     // console.log(this.wargear)
     // var result = '<small style="padding-left: 2em;">';
     var result = $('<div />',{
-        'class' : 'WH_army_unit_header_unit_wargearList',
-        'text': 'Wargear: '
+        'class' : 'WH_unit_linkList',
+        // 'text': 'Wargear: '
     })
     // result += 'Wargear: ';
     // 
 
     for (var i in this.wargear) {
         result.append(this.wargear[i].getSpan());
+        result.append($('<span/>',{'text':' '}));
     }
     // result += '</small><br>';
-    result.append($('<br/>'));
     return result;
 }
 WH_Model.prototype.printSpecial = function () {
@@ -231,9 +231,7 @@ WH_Model.prototype.printSpecial = function () {
         result += 'Options: ';
         var arr = [];
         var o1;
-        // console.log(this.getedOptions);
         for (var go in this.getedOptions) {
-            // console.log(this.getedOptions[go]);
             o1 = this.getedOptions[go].option.optionNameInModel;
             if (this.getedOptions[go].count > 1) {
                 o1 += ' x'+this.getedOptions[go].count;
@@ -255,33 +253,62 @@ WH_Model.prototype.printAbilities = function () {
     var $t = $('<tbody />',{'class':'WH_army_unit_tbody'})
     var $t1 = $('<tr />',{'class':'WH_army_unit_tr'})
     var $t2 = $('<tr />',{'class':'WH_army_unit_tr'})
+    if (this.abilities.hasOwnProperty('WS')) {
+        $t1.append($('<th />', {'text':'WS'}))
+        $t2.append($('<td />', {'text': this.abilities.WS}))
+    }
+    if (this.abilities.hasOwnProperty('BS')) {
+        $t1.append($('<th />', {'text':'BS'}))
+        $t2.append($('<td />', {'text': this.abilities.BS}))
+    }
 
-    $t1.append($('<th />', {'text':'WS'}))
-    $t2.append($('<td />', {'text': this.abilities.WS}))
 
-    $t1.append($('<th />', {'text':'BS'}))
-    $t2.append($('<td />', {'text': this.abilities.BS}))
+    if (this.abilities.hasOwnProperty('AF')) {
+        $t1.append($('<th />', {'text':'AF'}))
+        $t2.append($('<td />', {'text': this.abilities.AF}))
+    }
+    if (this.abilities.hasOwnProperty('AS')) {
+        $t1.append($('<th />', {'text':'AS'}))
+        $t2.append($('<td />', {'text': this.abilities.AS}))
+    }
+    if (this.abilities.hasOwnProperty('AR')) {
+        $t1.append($('<th />', {'text':'AR'}))
+        $t2.append($('<td />', {'text': this.abilities.AR}))
+    }
 
-    $t1.append($('<th />', {'text':'S'}))
-    $t2.append($('<td />', {'text': this.abilities.S}))
 
-    $t1.append($('<th />', {'text':'T'}))
-    $t2.append($('<td />', {'text': this.abilities.T}))
-
-    $t1.append($('<th />', {'text':'W'}))
-    $t2.append($('<td />', {'text': this.abilities.W}))
-
-    $t1.append($('<th />', {'text':'I'}))
-    $t2.append($('<td />', {'text': this.abilities.I}))
-
-    $t1.append($('<th />', {'text':'A'}))
-    $t2.append($('<td />', {'text': this.abilities.A}))
-
-    $t1.append($('<th />', {'text':'Ld'}))
-    $t2.append($('<td />', {'text': this.abilities.Ld}))
-
-    $t1.append($('<th />', {'text':'Sv'}))
-    $t2.append($('<td />', {'text': this.abilities.Sv+'+'}))
+    if (this.abilities.hasOwnProperty('S')) {
+        $t1.append($('<th />', {'text':'S'}))
+        $t2.append($('<td />', {'text': this.abilities.S}))
+    }
+    if (this.abilities.hasOwnProperty('T')) {
+        $t1.append($('<th />', {'text':'T'}))
+        $t2.append($('<td />', {'text': this.abilities.T}))
+    }
+    if (this.abilities.hasOwnProperty('W')) {
+        $t1.append($('<th />', {'text':'W'}))
+        $t2.append($('<td />', {'text': this.abilities.W}))
+    }
+    if (this.abilities.hasOwnProperty('.I')) {
+        $t1.append($('<th />', {'text':'I'}))
+        $t2.append($('<td />', {'text': this.abilities.I}))
+    }
+    if (this.abilities.hasOwnProperty('.A')) {
+        $t1.append($('<th />', {'text':'A'}))
+        $t2.append($('<td />', {'text': this.abilities.A}))
+    }
+    if (this.abilities.hasOwnProperty('Ld')) {
+        $t1.append($('<th />', {'text':'Ld'}))
+        $t2.append($('<td />', {'text': this.abilities.Ld}))
+    }
+    if (this.abilities.hasOwnProperty('Sv')) {
+        $t1.append($('<th />', {'text':'Sv'}))
+        $t2.append($('<td />', {'text': this.abilities.Sv+'+'}))
+    }
+    if (this.abilities.hasOwnProperty('HP')) {
+        $t1.append($('<th />', {'text':'HP'}))
+        $t2.append($('<td />', {'text': this.abilities.HP}))
+    }
 
 
     $t.append($t1);
@@ -315,7 +342,7 @@ WH_Model_Vehicle.prototype.constructor = WH_Model_Vehicle;
 
 
 var WH_Model_Bike = function() {
-    this.modelType = 'vehicle' ;
+    this.modelType = 'bike' ;
     WH_Model.apply(this, arguments);
 }
 // Унаследовать

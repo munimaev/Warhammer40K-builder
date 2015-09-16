@@ -289,7 +289,7 @@ body {
 	height: 16px;
 }
 .WH_army_unit_header_unit {
-	padding:11px 11px 11px 11px;
+	padding:1px 11px 1px;
 	border-top: 1px dashed #bdbcbb;
 
 	font-size: 13px;
@@ -298,36 +298,18 @@ body {
 	background-color: rgb(252,252,252);
 }
 
-.WH_army_unit_header_special {
-	padding:0px 11px 11px 11px;
-	border-top: 1px dashed #bdbcbb;
-
-	font-size: 13px;
-	display: none;
-	background-color: rgb(252,252,252);
-}
-
-.WH_army_unit_header_special div {
-	margin-top: 11px; 
-}
-
-.WH_army_unit_header_special h5 {
-	margin: 1em 0 1em;
-}
 
 .WH_army_unit_wargear_span,
 .WH_army_unit_warlordTrait_span,
 .WH_army_unit_specialRules_span {
 	font-size: 12px;
 }
-.modelName--readyToChange,
-.WH_army_unit_wargear_span--readyToChange {
+.WH_wargear.WH_wargear--readyToChange {
 	color: darkred;
-	color: #1496BB;
-	font-weight: bold;
-	cursor: pointer;
-	border-bottom: 1px dashed  #1496BB;
-	font-size: 12px;
+	border-bottom: 1px dotted  darkred;
+}
+.modelName--readyToChange {
+	color: darkred;
 }
 .WH_army_unit_wargear_span img {
 	width: 12px;
@@ -647,11 +629,13 @@ body {
 	top:8px;
 }
 
-.WH_army_unit_header_unit_modelName {
-	margin: 0.5em 0 1em;
+.WH_unit_header {
+	margin: 1em 0 0.5em;
 }
-.WH_army_unit_header_unit_wargearList {
+.WH_unit_linkList {
 	margin-bottom: 1em; 
+	line-height: 1.5em;
+	display: block;
 }
 
 .WH_army_unit_header_unit_modelAbilities {
@@ -659,7 +643,7 @@ body {
 	min-height: 38px;
 	min-width:200px;
 	/*background-color: grey;*/
-	margin: 0 0px 5px 5px;
+	margin: 0px 0px 0px 10px;
 	font-size: 12px;
 }
 .WH_army_unit_table {
@@ -688,6 +672,7 @@ padding-bottom: calc(.3em + 1px);
 text-align: left;
 border-bottom: 1px solid #e5e5e5;
 	text-align: center;
+min-width: 11px;
 }
 
 .WH_army_unit_tr td+td, 
@@ -703,23 +688,20 @@ tr:last-child>td {
 	border-bottom-style: none;
 }
 
-.info {
-	padding:10px; 
-}
-.info_table {
-}
 .info .WH_specialRules {
 	/*display: block;*/
 	text-align: left;
 	line-height: 150%;
 
 }
+.WH_wargear,
 .WH_specialRules {
 	color: #0082c6;
 	border-bottom: 1px dotted #0082c6;
 	/*padding-bottom: 0px;*/
 	/*border-radius: 3px;*/
-	margin-right: 10px;
+	margin-right: 0.75em;
+	cursor: pointer;
 }
 .info .info_td_type {
 	text-align: left;
@@ -727,4 +709,26 @@ tr:last-child>td {
 
 .WH_specialRules_textBlock {
 	text-align: left;
+}
+
+
+
+#infoHeader {
+	-webkit-border-radius: 5px 5px 0 0;
+	border-radius: 5px 5px 0 0;
+	border-bottom: 1px solid rgba(0,0,0,0.12);
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+	box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+	text-shadow: 0 1px 0 #fff;
+	word-wrap: break-word;
+	height: 41px;
+}
+
+#infoBlock {
+	padding: 15px;
+	-webkit-border-radius: 5px 5px 0 0;
+	border-radius: 5px 5px 0 0;
+	position: absolute;
+	bottom: 0px;
+	top: 60px;
 }

@@ -210,7 +210,8 @@ WH_Roster.prototype.getArmySelectOptions = function(slot,obj) {
             'text' : 'Formation rules'
         }));
         for (var i in WH_Armies[obj].prototype.defaultFormationRules) {
-            var rul = new WH_SpecialRules[WH_Armies[obj].prototype.defaultFormationRules[i]]({unit:this,createBy:this,forFormation:true});
+            var rulName = WH_Armies[obj].prototype.defaultFormationRules[i];
+            var rul = new WH_SpecialRules[rulName]({unit:this,createBy:this,forFormation:true});
             rules.append( $('<div />',{
                 'class':"WH_select_army_rule_span",
             }).append(rul.getSpan()));

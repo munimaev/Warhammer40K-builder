@@ -18,9 +18,9 @@ var Belials = function(o) {
 	this.defaultSpecialRules = [
 		'Deathwing',
 		'GrimResolve', 
-		'Independent Character', 
-		'Marked for Retribution', 
-		'Tactical Precision',
+		'IndependentCharacter', 
+		'MarkedForRetribution', 
+		'TacticalPrecision',
 	];
 	WH_Unit_Infantry.apply(this, arguments);
 }

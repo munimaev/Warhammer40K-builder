@@ -866,16 +866,7 @@ DA_RangedWeaponsFabric([
 
 
 
-DA_RangedWeaponsFabric([{
-    'optionName'      : 'DA_Standart_CompanyStandart',
-    'optionNameInModel': 'CompanyStandart',
-    'cost' : 15,
-    'changeTo' : 'CompanyStandart',
-    'actionTextUp' : '<b>CompanyStandart</b> <i>за 15 очков</i>',
-    // 'actionIconUp' : 'def',
-    'actionTextDown' : 'Удалить CompanyStandart',
-    // 'actionIconDown' : 'rewards1',
-},{
+DA_RangedWeaponsFabric([,{
     'optionName'      : 'DA_Standart_ChapterBanner',
     'optionNameInModel': 'ChapterBanner',
     'cost' : 25,
@@ -883,15 +874,6 @@ DA_RangedWeaponsFabric([{
     'actionTextUp' : '<b>ChapterBanner</b> <i>за 25 очков</i>',
     // 'actionIconUp' : 'def',
     'actionTextDown' : 'Удалить ChapterBanner',
-    // 'actionIconDown' : 'rewards1',
-},{
-    'optionName'      : 'DA_Standart_SacredStandart',
-    'optionNameInModel': 'SacredStandart',
-    'cost' : 35,
-    'changeTo' : 'SacredStandart',
-    'actionTextUp' : '<b>SacredStandart</b> <i>за 35 очков</i>',
-    // 'actionIconUp' : 'def',
-    'actionTextDown' : 'Удалить SacredStandart',
     // 'actionIconDown' : 'rewards1',
 }
 ])

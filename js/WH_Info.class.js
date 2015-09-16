@@ -4,9 +4,12 @@ var WH_Info = function(o) {
     this.$popup = $('#popup');
     this.$popupBG = $('#popup__overlay');
 
-    this.$this = $('#info');
+    this.$thisInfo = $('#info');
+
+    this.$header =  $('#infoHeader');
+    this.$this =  $('#infoBlock');
+
     this.$thisBG = $('#info__overlay');
-    this.$this.html('dfadfads')
 
     var self = this;
     this.$hide = $('<div />',{
@@ -14,7 +17,6 @@ var WH_Info = function(o) {
         click : function() {
             var _this = self;
             return function() {
-                console.log(_this)
                 _this.hide();
             }
         }()
@@ -29,27 +31,26 @@ WH_Info.prototype.hide = function(){
 }
 WH_Info.prototype.empty = function(){
     this.$hide.detach();
+    this.$header.empty();
     this.$this.empty();
 }
 WH_Info.prototype.showRule = function(rule){
     this.empty();
 
-    
-    this.$this.append(this.$hide);
+    this.$header.append(this.$hide);
 
     $header = $('<h2 />', {
         'text':rule.visibleName
     });
-    this.$this.append($header);
+    this.$header.append($header);
 
-    $hr = $('<hr />');
-    this.$this.append($hr);
     
-    if (rule.shortTextEng) {
-        $div = $('<div />');
-        $div.html(rule.shortTextEng);
-        this.$this.append($div);
+    $div = $('<div />');
+    if (Global.lang == 'Eng') {
+        $div.html(rule.textRus);
     }
+    this.$this.append($div);
+
 
 
     this.show();
@@ -60,15 +61,12 @@ WH_Info.prototype.showWargear = function(wargear){
     var self = this;
 
 
-    this.$this.append(this.$hide);
+    this.$header.append(this.$hide);
 
     $header = $('<h2 />', {
         'text':wargear.visibleName
     });
-    this.$this.append($header);
-
-    $hr = $('<hr />');
-    this.$this.append($hr);
+    this.$header.append($header);
     
     if (wargear.shortTextEng) {
         $div = $('<div />');
@@ -78,6 +76,7 @@ WH_Info.prototype.showWargear = function(wargear){
     var $infoTable = $('<div />',{
         'class' : 'info_table'
     });
+
 
     if (wargear.wargearType == 'MeleeWeapon' || wargear.wargearType == 'RangedWeapon' ) {
         $table = wargear.getAbilitiesTable();

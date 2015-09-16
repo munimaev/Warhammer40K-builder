@@ -18,8 +18,8 @@ var WH_PsyhoPower = function(o) {
 
 WH_PsyhoPower.prototype.getSpan = function() {
     var _this = this;
-    var htmlClass = 'WH_army_unit_warlordTrait_span';
-    var text = _this.visibleName + ', ';
+    var htmlClass = 'WH_specialRules';
+    var text = _this.visibleName + '';
     var $span = $('<span />',{
         'class': htmlClass,
     })

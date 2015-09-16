@@ -85,7 +85,7 @@ WH_Groupe.prototype.check = function () {
         }
         return true;
     }
-
+    // debugger;
     var hasFirstEmptyOptional = false;
     var allNecessarilyIsFull = true;
     for (var i in this.slots) {
@@ -99,7 +99,8 @@ WH_Groupe.prototype.check = function () {
         if (this.slots[i].slotType === 'necessarily') {
         }
         else if (this.slots[i].slotType === 'optional') {
-            if (!allNecessarilyIsFull || (this.slots[i].isEmpty() && hasFirstEmptyOptional)) {
+            if ((!allNecessarilyIsFull && this.slots[i].isEmpty())
+              || (this.slots[i].isEmpty() && hasFirstEmptyOptional)) {
                 this.slots[i].notNeeden();
             } else {
                 this.slots[i].needen();

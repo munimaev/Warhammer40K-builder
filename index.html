@@ -32,7 +32,10 @@
 
 
 	<div id="info__overlay" class="info__overlay">
-	    <div id="info" class="info"></div>
+	    <div id="info" class="info">
+	    	<div id="infoHeader"></div>
+	    	<div id="infoBlock"></div>
+	    </div>
 	</div> 
 
 	<script type="text/javascript" src="js/WH_Wargear.class.js" ></script>
@@ -58,6 +61,7 @@
 
 
 	<script type="text/javascript" src="js/WH_Wargear.class.js" ></script>
+	<script type="text/javascript" src="js/WH_Wargear_RangedWeapons.class.js" ></script>
 	<script type="text/javascript" src="js/WH_Model.raw.js" ></script>
 	<script type="text/javascript" src="js/WH_Model.class.js" ></script>
 	<script type="text/javascript" src="js/WH_Unit.class.js" ></script>
@@ -65,6 +69,7 @@
 
 	<script type="text/javascript" src="js/DA/models.js" ></script>
 	<script type="text/javascript" src="js/WH_SpecialRules.class.js" ></script>
+	<script type="text/javascript" src="js/WH_SpecialRules_DarkAngels.class.js" ></script>
 	<script type="text/javascript" src="js/WH_WarlordTrait.class.js" ></script>
 	<script type="text/javascript" src="js/WH_PsyhoPower.class.js" ></script>
 	
@@ -113,12 +118,18 @@
 
 	<script type="text/javascript">
 		//plaguebearers = new Plaguebearers();
+		var Global = {
+			lang : 'RusEng',
+			// lang : 'Rus',
+			// lang : 'Eng', 
+		}
 		var rosters = [
 			new WH_Roster()
 		];
 
 		$("#WH_army").niceScroll();
 		$("#popup").niceScroll();
+		$("#infoBlock").niceScroll();
 		
 		$('.WH_roster_open_closed').click();
 		$('.WH_roster_add').click();
@@ -129,7 +140,7 @@
 		$('.WH_army_slot')[0].click();
 		$('.WH_popup_option_s_unit_img')[0].click();
 		$('.WH_army_unit_name')[0].click();
-		$('.WH_army_unit_wargear_span')[2].click();
+		// $('.WH_wargear')[2].click();
 		// $('.WH_options_body').scrollTop(0)
 		// rosters[0].print(true);
 	</script>

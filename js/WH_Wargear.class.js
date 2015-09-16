@@ -18,7 +18,7 @@ var WH_Wargear = function(o) {
 
 WH_Wargear.prototype.getSpan = function() {
     var _this = this;
-    var htmlClass = 'WH_army_unit_wargear_span'
+    var htmlClass = 'WH_wargear'
     if (this.readyToChange !== null
         && (!this.readyToChange.needChekEnambleEachTime
         || this.readyToChange.createBy.superOption.canEnableWeapon(null,this.readyToChange.createBy))) {
@@ -52,7 +52,7 @@ WH_Wargear.prototype.getSpan = function() {
                 }
             }
         }();
-        htmlClass += ' WH_army_unit_wargear_span--readyToChange';
+        htmlClass += ' WH_wargear--readyToChange';
     } 
     else {
         this.click = function() {
@@ -61,7 +61,7 @@ WH_Wargear.prototype.getSpan = function() {
 
         };
     }
-    var text = _this.visibleName + ', ';
+    var text = _this.visibleName.split(' ').join('&nbsp;') + '';
     if (_this.wargearName == 'emptySlot') {
         text = '<i>' + _this.readyToChange.name + '</i>';
     }
@@ -117,7 +117,7 @@ WH_Wargear.prototype.getAbilitiesText = function() {
         $sr = $('<div />',{});
         for (var i in this.abilities.type ) {
             $sr.append( WH_SpecialRules[this.abilities.type[i]].prototype.getTextBlock());
-            $sr.append($('<br />'));
+            // $sr.append($('<br />'));
 
         }
     }
@@ -208,42 +208,17 @@ WH_WargearFabric([
     wargearName: 'ArtificerArmor',
     visibleName: 'Artificer armor',
 }, {
-    wargearName: 'AssaultCannon',
-    visibleName: 'Assault cannon',
-}, {
     wargearName: 'AvengerMegaBolter',
     visibleName: 'Avenger mega bolter',
 }, {
     wargearName: 'Auspex',
     visibleName: 'Auspex',
 }, {
-    wargearName: 'Autocannon',
-    visibleName: 'Autocannon',
-}, {
     wargearName: 'BladesOfReason',
     visibleName: 'Blades of Reason',
 }, {
-    wargearName: 'Boltgun',
-    visibleName: 'Boltgun',
-}, {
-    wargearName: 'BoltPistol',
-    visibleName: 'Bolt pistol',
-    wargearType: 'RangedWeapon',
-}, {
     wargearName: 'BookOfSalvation',
     visibleName: 'Book of Salvation',
-}, {
-    wargearName: 'Chainsword',
-    visibleName: 'Chainsword',
-    wargearType: 'MeleeWeapon',
-}, {
-    wargearName: 'ChainswordWithAnEviscerator',
-    visibleName: 'Chainsword with an eviscerator',
-    wargearType: 'MeleeWeapon',
-}, {
-    wargearName: 'Chainfist',
-    visibleName: 'Chainfist',
-    wargearType: 'MeleeWeapon',
 }, {    
     wargearName: 'ChapterBanner',
     visibleName: 'Chapter banner',
@@ -256,18 +231,6 @@ WH_WargearFabric([
 }, {
     wargearName: 'CombatShield',
     visibleName: 'Combat shield',
-}, {
-    wargearName: 'CombiFlamer',
-    visibleName: 'Combi-flamer',
-}, {
-    wargearName: 'CombiGrav',
-    visibleName: 'Combi-grav',
-}, {
-    wargearName: 'CombiMelta',
-    visibleName: 'Combi-melta',
-}, {
-    wargearName: 'CombiPlasma',
-    visibleName: 'Combi-plasma',
 }, {
     wargearName: 'CompanyBanner',
     visibleName: 'Company banner',
@@ -306,18 +269,11 @@ WH_WargearFabric([
     wargearName: 'FlailOfTheUnforgiven',
     visibleName: 'Flail Of The Unforgiven',
 }, {
-    wargearName: 'Flamer',
-    visibleName: 'Flamer',
-}, {
     wargearName: 'FlammerstormCannon',
     visibleName: 'Flammerstorm cannon',
 }, {
     wargearName: 'FoeSmitter',
     visibleName: 'Foe smitter',
-}, {
-    wargearName: 'ForceWeapon',
-    visibleName: 'Force weapon',
-    wargearType: 'MeleeWeapon',
 }, {
     wargearName: 'FragAssaultCannon',
     visibleName: 'Frag assault cannon',
@@ -325,26 +281,11 @@ WH_WargearFabric([
     wargearName: 'FragGrenades',
     visibleName: 'Frag grenades',
 }, {
-    wargearName: 'GravCannonWithAmp',
-    visibleName: 'GravCannonWithAmp',
-}, {
-    wargearName: 'GravGun',
-    visibleName: 'GravGun',
-}, {
-    wargearName: 'GraviPistol',
-    visibleName: 'Gravi-pistol',
-}, {
     wargearName: 'HalberdOfCaliban',
     visibleName: 'Halberd Of Caliban',
 }, {
-    wargearName: 'HeavyBolter',
-    visibleName: 'Heavy bolter',
-}, {
     wargearName: 'HeavyBolterWithHellfireShells',
     visibleName: 'Heavy bolter with Hellfire shells',
-}, {
-    wargearName: 'HeavyFlamer',
-    visibleName: 'Heavy flamer',
 }, {
     wargearName: 'HunterKillerMissle',
     visibleName: 'Hunter-killer missle',
@@ -363,10 +304,6 @@ WH_WargearFabric([
 }, {
     wargearName: 'Lascannon',
     visibleName: 'Lascannon',
-}, {
-    wargearName: 'LightningClaws',
-    visibleName: 'Lightning claws',
-    wargearType: 'MeleeWeapon',
 }, {
     wargearName: 'LionHelm',
     visibleName: 'Lion Helm',
@@ -395,58 +332,14 @@ WH_WargearFabric([
     wargearName: 'MeltaBomb',
     visibleName: 'Melta bomb',
 }, {
-    wargearName: 'MeltaGun',
-    visibleName: 'MeltaGun',
-}, {
-    wargearName: 'MissleLuauncher',
-    visibleName: 'MissleLuauncher',
-}, {
-    wargearName: 'MissleLuauncherFlakk',
-    visibleName: 'MissleLuauncherFlakk',
-}, {
     wargearName: 'MonsterSlayerOfCaliban',
     visibleName: 'Monster slayer of Caliban',
-}, {
-    wargearName: 'MultiMelta',
-    visibleName: 'Multi-melta',
-}, {
-    wargearName: 'PlasmaCannon',
-    visibleName: 'PlasmaCannon',
-}, {
-    wargearName: 'PlasmaPistol',
-    visibleName: 'Plasma pistol',
 }, {
     wargearName: 'PlasmaStormBattary',
     visibleName: 'Plasma storm battary',
 }, {
     wargearName: 'PlasmaTalon',
     visibleName: 'Plasma talon',
-}, {
-    wargearName: 'PlasmsGun',
-    visibleName: 'Plasma gun',
-}, {
-    wargearName: 'PowerAxe',
-    visibleName: 'Power axe',
-    wargearType: 'MeleeWeapon',
-}, {
-    wargearName: 'PowerFist',
-    visibleName: 'Power fist',
-    icon: 'options/PowerFist',
-    wargearType: 'MeleeWeapon',
-}, {
-    wargearName: 'PowerFistWithBuildInHeavyBolter',
-    visibleName: 'Power fist with build in Heavy-Bolter',
-}, {
-    wargearName: 'PowerFistWithBuildInHeavyFlamer',
-    visibleName: 'Power fist with build in Heavy-Flamer',
-}, {
-    wargearName: 'PowerSword',
-    visibleName: 'Power Sword',
-    wargearType: 'MeleeWeapon',
-},  {
-    wargearName: 'PowerWeapon',
-    visibleName: 'PowerWeapon',
-    wargearType: 'MeleeWeapon',
 }, {
     wargearName: 'PrediusRelicOfTheUnforgiven',
     visibleName: 'Predius Relic Of The Unforgiven',
@@ -500,12 +393,6 @@ WH_WargearFabric([
     wargearName: 'SmokeLounchers',
     visibleName: 'Smoke lounchers',
 }, {
-    wargearName: 'SniperRifle',
-    visibleName: 'Sniper rifle',
-}, {
-    wargearName: 'SpaceMarineShotgun',
-    visibleName: 'Space marine shotgun',
-}, {
     wargearName: 'SpaceMarineBike',
     visibleName: 'Space marine bike',
 }, {
@@ -520,9 +407,6 @@ WH_WargearFabric([
 }, {
     wargearName: 'StasisBomb',
     visibleName: 'Stasis bomb',
-}, {
-    wargearName: 'StormBolter',
-    visibleName: 'Strom bolter',
 }, {
     wargearName: 'StormShield',
     visibleName: 'Storm shield',
@@ -547,10 +431,7 @@ WH_WargearFabric([
 }, {
     wargearName: 'TheEyeOfTheUnseen',
     visibleName: 'The eye of the unseen',
-}, {
-    wargearName: 'ThunderHammer',
-    visibleName: 'Thunder hammer',
-}, {
+},{
     wargearName: 'TwinLinkedAssaultCannon',
     visibleName: 'Twin-linked Assault cannon',
 }, {

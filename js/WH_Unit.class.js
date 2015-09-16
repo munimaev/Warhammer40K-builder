@@ -65,7 +65,7 @@ var WH_Unit = function(o) {
 		'class': 'WH_army_unit_header_unit',
 	})
     this.$lSpecial = $('<div />', {
-		'class': 'WH_army_unit_header_special',
+		'class': 'WH_army_unit_header_unit',
 		'text': 'Special Rules'
 	})
 
@@ -279,19 +279,23 @@ WH_Unit.prototype.updateModels = function() {
 
 	if (this.warlordTraits.length) {
 		var $lWarlordTraits = $('<div />');
-		$lWarlordTraits.append($('<h5>',{text:'Warlord Trait'}));
+		$lWarlordTraits.append($('<h5>',{text:'Warlord Trait','class':'WH_unit_header'}));
+		var $lWarlordTraitsSub = $('<div />', {'class':'WH_unit_linkList'});
 		for (var r in this.warlordTraits) {
-			$lWarlordTraits.append(this.warlordTraits[r].getSpan());
+			$lWarlordTraitsSub.append(this.warlordTraits[r].getSpan());
 		}
+		$lWarlordTraits.append($lWarlordTraitsSub);
 		this.$lSpecial.append($lWarlordTraits);
 	}
 
 	if (this.disciplines.length) {
 		var $lDisciplines = $('<div />');
-		$lDisciplines.append($('<h5>',{text:'Psyker disciplines'}));
+		$lDisciplines.append($('<h5>',{text:'Psyker disciplines', 'class':'WH_unit_header'}));
+		var $lDisciplinesSub = $('<div />',{'class':'WH_unit_linkList'});
 		for (var r in this.disciplines) {
-			$lDisciplines.append(this.disciplines[r].getSpan());
+			$lDisciplinesSub.append(this.disciplines[r].getSpan());
 		}
+		$lDisciplines.append($lDisciplinesSub);
 		this.$lSpecial.append($lDisciplines);
 	}
 
@@ -304,8 +308,13 @@ WH_Unit.prototype.getSpecialRulesHtml = function() {
 
 	var general = this.getSpecialRulesArr({general:true});
 	if (general.length) {
-		var $general = $('<div />');
-		$general.append($('<h5>',{text:'Special Rules'}));
+
+		$div.append($('<h5>',{
+			text:'Special Rules',
+			class : 'WH_unit_header'
+		}));
+
+		var $general = $('<div />',{'class':'WH_unit_linkList'});
 		for (var r in general) {
 			$general.append(general[r].getSpan());
 		}
@@ -314,8 +323,11 @@ WH_Unit.prototype.getSpecialRulesHtml = function() {
 
 	if (this.speccialRules.hasOwnProperty('onModelName')) {
 		for (var n in this.speccialRules.onModelName) {
-			var $onModelName = $('<div />');
-			$onModelName.append($('<h5>',{text: 'Special Rules - '+window[n].prototype.visibleModelName}));
+			$div.append($('<h5>', {
+				text: 'Special Rules - ' + window[n].prototype.visibleModelName,
+				class: 'WH_unit_header'
+			}));
+			var $onModelName = $('<div />',{'class':'WH_unit_linkList'});
 			for (var r in this.speccialRules.onModelName[n]) {
 				$onModelName.append(this.speccialRules.onModelName[n][r].getSpan());	
 			}
@@ -403,7 +415,7 @@ WH_Unit.prototype.modelDataForm = function(M) {
 
 
 
-WH_Unit.prototype.toogleModels = function() { 
+WH_Unit.prototype.toogleModels = function(b) { 
 
 	if (!this.isShowModels) {
 		this.isShowModels = true;
@@ -421,11 +433,11 @@ WH_Unit.prototype.removeSelf = function(e) {
 	for (var g in this.army.structure){
 		for (var s in this.army.structure[g].slots) {
 			if (this.army.structure[g].slots[s].unit === this) {
+				this.army.unselectAllUnit();
 				this.army.structure[g].slots[s].returnToDefault()
-				this.army.structure[g].unselectAllUnit();
 				this.army.checkAllGroup();
 				this.army.updateCost();
-				break;
+				return;
 			}
 		}
 	}
