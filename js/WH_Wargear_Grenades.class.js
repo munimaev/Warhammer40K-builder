@@ -52,8 +52,8 @@ WH_WargearFabric([
     }]
 },
 {
-    wargearName: 'KrakGrenade',
-    visibleName: 'Krak grenade',
+    wargearName: 'KrakGrenades',
+    visibleName: 'Krak grenades',
     wargearType: 'Grenades',
     abilities : [{
         name: 'Shooting',
