@@ -152,7 +152,7 @@ DA_RangedWeaponsFabric([
 
 var DA_DeathwingCommandSquad_Standart = function(o) {
     this.defaultSubOptions = [
-        'DA_Standart_CompanyBanner',
+        'DA_Standart_DeathwingCompanyBanner',
         'DA_Standart_SacredStandart',
     ]
     this.optionName = 'DA_DeathwingCommandSquad_Standart';
@@ -172,7 +172,7 @@ DA_DeathwingCommandSquad_Standart.prototype.canEnable = function(){
             for (var s in this.unit.army.roster.armies[a].structure[g].slots) {
                 if (this.unit.army.roster.armies[a].structure[g].slots[s].unit !== null) {
                     for (var m in this.unit.army.roster.armies[a].structure[g].slots[s].unit.models) {                        
-                        if (~this.unit.army.roster.armies[a].structure[g].slots[s].unit.models[m].hasWargear({name:'CompanyBanner'})
+                        if (~this.unit.army.roster.armies[a].structure[g].slots[s].unit.models[m].hasWargear({name:'DeathwingCompanyBanner'})
                             || 
                             ~this.unit.army.roster.armies[a].structure[g].slots[s].unit.models[m].hasWargear({name:'SacredStandart'})
                         ) {
@@ -277,7 +277,7 @@ var DA_DeathwingCommandSquad_TerminatorHeavyWargear = function(o) {
     ]
     this.optionName = 'DA_DeathwingCommandSquad_TerminatorHeavyWargear';
     this.cost = 0;
-    this.headerText = 'Заменить Strom bolter на одно из мледущего';
+    this.headerText = 'Заменить Storm bolter на одно из мледущего';
     this.isModelCanGet =  function(m, superOption) {
         return this.canEnable();
     }

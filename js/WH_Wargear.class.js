@@ -80,45 +80,57 @@ WH_Wargear.prototype.getAbilitiesTable = function() {
     var $tt = $('<table />',{'class':'WH_army_unit_table'})
     var $t = $('<tbody />',{'class':'WH_army_unit_tbody'})
     var $t1 = $('<tr />',{'class':'WH_army_unit_tr'})
-    var $t2 = $('<tr />',{'class':'WH_army_unit_tr'})
 
     $tt.append($t);
     $t.append($t1);
-    $t.append($t2);
-    $t1.append($('<td />',{'text':'Range','width':'25%'}))
-    $t2.append($('<td />',{'text':(this.abilities.range ? this.abilities.range : '-')}))
 
-    $t1.append($('<td />',{'text':'S','width':'25%'}))
-    $t2.append($('<td />',{'text':(this.abilities.S ? this.abilities.S : 'User')}))
+    $t1.append($('<td />',{'text':'Name','width':'24%','style':'text-align:left'}))
+    $t1.append($('<td />',{'text':'Range','width':'16%'}))
+    $t1.append($('<td />',{'text':'S','width':'16%'}))
+    $t1.append($('<td />',{'text':'AP','width':'16%'}))
+    $t1.append($('<td />',{'text':'Type','width':'24%'}))
 
-    $t1.append($('<td />',{'text':'AP','width':'25%'}))
-    $t2.append($('<td />',{'text':(this.abilities.AP ? this.abilities.AP : '-')}))
 
-    $t1.append($('<td />',{'text':'Type','width':'25%'}))
+    for (var j in this.abilities) {
+        var $t2 = $('<tr />',{'class':'WH_army_unit_tr'})
 
-    var $tdType = $('<td />',{'class':'info_td_type'});
-    if (this.abilities.type !== null) {
+        $t2.append($('<td />',{'text':(this.abilities[j].name ? this.abilities[j].name : this.visibleName),'style':'text-align:left'}))
+        $t2.append($('<td />',{'text':(this.abilities[j].range ? this.abilities[j].range : '-')}))
+        $t2.append($('<td />',{'text':(this.abilities[j].S ? this.abilities[j].S : 'User')}))
+        $t2.append($('<td />',{'text':(this.abilities[j].AP ? this.abilities[j].AP : '-')}))
+        var $tdType = $('<td />',{'class':'info_td_type'});
         $sr = $('<div />',{});
-        for (var i in this.abilities.type ) {
-            $tdType.append( WH_SpecialRules[this.abilities.type[i]].prototype.getSpan());
+        for (var i in this.abilities[j].type ) {
+            $tdType.append( WH_SpecialRules[this.abilities[j].type[i]].prototype.getSpan());
             $tdType.append($('<br />'));
 
         }
+        $t2.append($tdType);
+        $t.append($t2);
     }
-    $t2.append($tdType);
 
     return $tt;
 };
 
+
+
+WH_Wargear.prototype.getAbilitiesTableOneRow = function() {
+
+}
+
+
 WH_Wargear.prototype.getAbilitiesText = function() {
     var $sr = null;
-    console.log(this)
     if (this.abilities.type !== null) {
         $sr = $('<div />',{});
-        for (var i in this.abilities.type ) {
-            $sr.append( WH_SpecialRules[this.abilities.type[i]].prototype.getTextBlock());
-            // $sr.append($('<br />'));
-
+        var types = {};
+        for (var j in this.abilities ) {
+            for (var i in this.abilities[j].type ) {
+                types[this.abilities[j].type[i]] = true;
+            }
+        }
+        for (var i in types) {
+            $sr.append( WH_SpecialRules[i].prototype.getTextBlock());
         }
     }
     return $sr;
@@ -195,33 +207,26 @@ var WH_WargearFabric = function(a) {
         window[a[i].wargearName].prototype.constructor =  window[a[i].wargearName];
         window[a[i].wargearName].prototype.visibleName =  a[i].visibleName;
         if (a[i].hasOwnProperty('abilities')) {
-            window[a[i].wargearName].prototype.abilities =  a[i].abilities;
+            if (a[i].abilities.hasOwnProperty('length')) {
+                window[a[i].wargearName].prototype.abilities =  a[i].abilities;
+            } else {
+                window[a[i].wargearName].prototype.abilities =  [a[i].abilities];
+            }
         } 
     }
 }
 
-WH_WargearFabric([
-{
-    wargearName: 'ArmoriumCherub',
-    visibleName: 'Armorium cherub',
-}, {
+WH_WargearFabric([{
     wargearName: 'ArtificerArmor',
     visibleName: 'Artificer armor',
 }, {
-    wargearName: 'AvengerMegaBolter',
-    visibleName: 'Avenger mega bolter',
-}, {
     wargearName: 'Auspex',
     visibleName: 'Auspex',
-}, {
-    wargearName: 'BladesOfReason',
-    visibleName: 'Blades of Reason',
-}, {
-    wargearName: 'BookOfSalvation',
-    visibleName: 'Book of Salvation',
-}, {    
-    wargearName: 'ChapterBanner',
-    visibleName: 'Chapter banner',
+    specialRules : [{
+        textEng : 'A model with an auspex can use it in place of making a shooting attack. If he does so, target an enemy unit within 12" (this does not count as choosing a target for his unit to shoot at). A unit that is targeted by one or more auspexes has its cover save reduced by 1 until the end of the phase.',
+        nameRus : '',    
+        textRus : ''
+    }]
 }, {    
     wargearName: 'CicloneMissleLauncher',
     visibleName: 'Ciclone missle launcher',
@@ -231,31 +236,27 @@ WH_WargearFabric([
 }, {
     wargearName: 'CombatShield',
     visibleName: 'Combat shield',
-}, {
-    wargearName: 'CompanyBanner',
-    visibleName: 'Company banner',
-}, {
-    wargearName: 'CompanyStandart',
-    visibleName: 'Company standart',
+    specialRules : [{
+        textEng : 'A combat shield confers a 6+ invulnerable save.',
+        nameRus : '',    
+        textRus : ''
+    }]
 }, {
     wargearName: 'ConversionField',
     visibleName: 'Conversion field',
-}, {
-    wargearName: 'CorvusHammer',
-    visibleName: 'Corvus hammer',
-}, {
-    wargearName: 'CroziusArcanum',
-    visibleName: 'Crozius arcanum',
-    wargearType: 'PowerWeapon',
-}, {
-    wargearName: 'DeathwindLauncher',
-    visibleName: 'Deathwind launcher',
-}, {
-    wargearName: 'DemolisherCannon',
-    visibleName: 'Demolisher cannon',
+    specialRules : [{
+        textEng : 'A conversion field confers a 4+ invulnerable save. At the end of a phase in which the bearer passes one or more invulnerable saves granted by the conversion field, all units within D6" of the bearer must test as if they had been hit by a weapon with the Blind special rule. Friendly units can re-roll this test.',
+        nameRus : '',    
+        textRus : ''
+    }]
 }, {
     wargearName: 'DigitalWeapon',
     visibleName: 'Digital weapon',
+    specialRules : [{
+        textEng : 'A model armed with digital weapons can re-roll a single failed roll To Wound in each Assault phase.',
+        nameRus : '',    
+        textRus : ''
+    }]
 }, {
     wargearName: 'DozerBlade',
     visibleName: 'Dozer blade',
@@ -266,9 +267,6 @@ WH_WargearFabric([
     wargearName: 'ExtraArmour',
     visibleName: 'Extra armour',
 }, {
-    wargearName: 'FlailOfTheUnforgiven',
-    visibleName: 'Flail Of The Unforgiven',
-}, {
     wargearName: 'FlammerstormCannon',
     visibleName: 'Flammerstorm cannon',
 }, {
@@ -278,44 +276,33 @@ WH_WargearFabric([
     wargearName: 'FragAssaultCannon',
     visibleName: 'Frag assault cannon',
 }, {
-    wargearName: 'FragGrenades',
-    visibleName: 'Frag grenades',
-}, {
-    wargearName: 'HalberdOfCaliban',
-    visibleName: 'Halberd Of Caliban',
-}, {
-    wargearName: 'HeavyBolterWithHellfireShells',
-    visibleName: 'Heavy bolter with Hellfire shells',
-}, {
     wargearName: 'HunterKillerMissle',
     visibleName: 'Hunter-killer missle',
 }, {
-    wargearName: 'HurricaneBolter',
-    visibleName: 'Hurricane bolters',
-}, {
     wargearName: 'IronHalo',
     visibleName: 'Iron halo',
+    specialRules : [{
+        textEng : 'An iron halo confers a 4+ invulnerable save.',
+        nameRus : '',    
+        textRus : ''
+    }]
 }, {
     wargearName: 'JumpPack',
     visibleName: 'Jump pack',
-}, {
-    wargearName: 'KrakGrenades',
-    visibleName: 'Krak grenades',
+    specialRules : [{
+        textEng : 'Models equipped with jump packs gain the Jump unit type as described in Warhammer 40,000: The Rules.',
+        nameRus : '',    
+        textRus : ''
+    }]
 }, {
     wargearName: 'Lascannon',
     visibleName: 'Lascannon',
-}, {
-    wargearName: 'LionHelm',
-    visibleName: 'Lion Helm',
 }, {
     wargearName: 'LionsRoar',
     visibleName: 'Lion\'s roar',
 }, {
     wargearName: 'LocatorBeacon',
     visibleName: 'Locator beacon',
-}, {
-    wargearName: 'MaceOfAbsolution',
-    visibleName: 'Mace Of Absolution',
 }, {
     wargearName: 'MaceOfRedemption',
     visibleName: 'Mace Of Redemption',
@@ -335,12 +322,6 @@ WH_WargearFabric([
     wargearName: 'MonsterSlayerOfCaliban',
     visibleName: 'Monster slayer of Caliban',
 }, {
-    wargearName: 'PlasmaStormBattary',
-    visibleName: 'Plasma storm battary',
-}, {
-    wargearName: 'PlasmaTalon',
-    visibleName: 'Plasma talon',
-}, {
     wargearName: 'PrediusRelicOfTheUnforgiven',
     visibleName: 'Predius Relic Of The Unforgiven',
     wargearType: 'Relic',
@@ -348,20 +329,8 @@ WH_WargearFabric([
     wargearName: 'PsychicHood',
     visibleName: 'Psychic hood',
 }, {
-    wargearName: 'RavenSword',
-    visibleName: 'Raven Sword',
-}, {
-    wargearName: 'RavenwingGrenadeLouncher',
-    visibleName: 'Ravenwing grenade louncher',
-}, {
-    wargearName: 'RavenwingCompanyBanner',
+    wargearName: 'RavenwingDeathwingCompanyBanner',
     visibleName: 'Ravenwing company banner',
-}, {
-    wargearName: 'RelicBlade',
-    visibleName: 'Relic blade',
-}, {
-    wargearName: 'RiftCannon',
-    visibleName: 'Rift cannon',
 }, {
     wargearName: 'Rosarius',
     visibleName: 'Rosarius',
@@ -374,6 +343,12 @@ WH_WargearFabric([
 }, {
     wargearName: 'ServoArm',
     visibleName: 'Servo-arm',
+    wargearType: 'MeleeWeapon',
+    abilities : {
+        S:'x2',
+        AP:1,
+        type:['Melee','SpecialistWeapon','Unwieldy'],
+    }
 }, {
     wargearName: 'ServoHarness',
     visibleName: 'Servo-hsrness',
@@ -386,9 +361,6 @@ WH_WargearFabric([
 }, {
     wargearName: 'SiegeShield',
     visibleName: 'Siege shield',
-}, {
-    wargearName: 'SixBlackswordMissiles',
-    visibleName: 'Six blacksword missiles',
 }, {
     wargearName: 'SmokeLounchers',
     visibleName: 'Smoke lounchers',
@@ -404,24 +376,14 @@ WH_WargearFabric([
 }, {
     wargearName: 'ScoutCloak',
     visibleName: 'Scout cloak',
-}, {
-    wargearName: 'StasisBomb',
-    visibleName: 'Stasis bomb',
+    specialRules : [{
+        textEng : 'A model wearing a camo cloak has +1 cover save. If it does not already have a cover save, it gains a 6+ cover save.',
+        nameRus : '',    
+        textRus : ''
+    }]
 }, {
     wargearName: 'StormShield',
     visibleName: 'Storm shield',
-}, {
-    wargearName: 'SwordOfSecrets',
-    visibleName: 'Sword of Secrets',
-    wargearType: 'MeleeWeapon',
-}, {
-    wargearName: 'SwordOfSilence',
-    visibleName: 'Sword of Silence',
-    wargearType: 'MeleeWeapon',
-    abilities : {
-        AP:'3',
-        type:['Melee','Fleshbane','MasterCrafted'],
-    }
 }, {
     wargearName: 'TeleportHommer',
     visibleName: 'Teleport hommer',
@@ -451,13 +413,10 @@ WH_WargearFabric([
     visibleName: 'Twin-linked Plasma gun',
 }, {
     wargearName: 'TwinLinkedStormBolter',
-    visibleName: 'Twin-linked strom bolter',
+    visibleName: 'Twin-linked Storm bolter',
 }, {
     wargearName: 'TyphoonMissleLauncher',
     visibleName: 'Typhoon missle launcher',
-}, {
-    wargearName: 'BladeOfCaliban',
-    visibleName: 'Blade Of Caliban',
 }, {
     wargearName: 'Nathecium',
     visibleName: 'Nathecium',
@@ -488,7 +447,7 @@ WH_WargearFabric([
 
 // var StormBolter  = function() {
 //     this.wargearName = 'StormBolter';
-//     this.optionNameInModel = 'Strom Bolter';
+//     this.optionNameInModel = 'Storm bolter';
 
 // }
 // // Унаследовать

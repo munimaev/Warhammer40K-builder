@@ -153,6 +153,22 @@ WH_WargearFabric([{
         type:['Heavy_3'],
     }
 }, {
+    wargearName: 'HeavyBolterWithHellfireShells',
+    visibleName: 'Heavy bolter with Hellfire shells',
+    wargearType: 'RangedWeapon',
+    abilities : [{
+        name : 'Heavy bolter',
+        range : 36,
+        S : 5,
+        AP : 4,
+        type:['Heavy_3','HellfireShells'],
+    },{
+        name : 'Heavy bolter with Hellfire shells',
+        range : 24,
+        S : 1,
+        type:['Heavy_1','Blast','Poisoned_2'],
+    }]
+}, {
     wargearName: 'HeavyFlamer',
     visibleName: 'Heavy flamer',
     wargearType: 'RangedWeapon',
@@ -234,6 +250,13 @@ WH_WargearFabric([{
 }, {
     wargearName: 'GravCannonWithAmp',
     visibleName: 'Grav-cannon with amp',
+    wargearType: 'RangedWeapon',
+    abilities : {
+        range : 24,
+        S : '*',
+        AP : 2,
+        type:['Salvo_3_5','Concussive','Graviton','GravAmp'],
+    }
 }, {
     wargearName: 'GravGun',
     visibleName: 'Grav-gun',
@@ -368,6 +391,11 @@ WH_WargearFabric([{
         S : 4,
         AP: 6,
         type:['Heavy_1','Blast'],
+    }],
+    specialRules : [{
+        textEng : 'All missile launchers come with frag and krak missiles as standard, and some have the option to upgrade to include flakk missiles. Each time a missile launcher fires, the controlling player must choose which type of missile is being used.',
+        nameRus : '',    
+        textRus : ''
     }]
 }, {
     wargearName: 'MissleLuauncherFlakk',
@@ -509,7 +537,7 @@ WH_WargearFabric([{
     }
 }, {
     wargearName: 'StormBolter',
-    visibleName: 'Strom bolter',
+    visibleName: 'Storm bolter',
     wargearType: 'RangedWeapon',
     abilities : {
         range : 24,

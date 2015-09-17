@@ -25,6 +25,13 @@ WH_WargearFabric([
         type:['Melee','Armourbane','TwoHanded','Unwieldy'],
     }
 }, {
+    wargearName: 'DCloseCombatWeapon',
+    visibleName: 'close combat weapon',
+    wargearType: 'MeleeWeapon',
+    abilities : {
+        type:['Melee'],
+    }
+}, {
     wargearName: 'DreadnoughtCloseCombatWeapon',
     visibleName: 'Dreadnought close combat weapon',
     wargearType: 'MeleeWeapon',

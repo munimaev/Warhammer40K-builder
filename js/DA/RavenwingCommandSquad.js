@@ -58,10 +58,10 @@ fabric_option_multiChange([{
     cost: 0,
     headerText: 'Один Ravenwing Black Knight в армии может взять одно из следующего',
     defaultSubOptions: [{
-        optionName: 'DA_RavenwingCommandSquad_Standart_RavenwingCompanyBanner',
+        optionName: 'DA_RavenwingCommandSquad_Standart_RavenwingDeathwingCompanyBanner',
         cost: 20,
         actionTextUp: '',
-        addItems: ['RavenwingCompanyBanner'],
+        addItems: ['RavenwingDeathwingCompanyBanner'],
     }, {
         optionName: 'DA_RavenwingCommandSquad_Standart_SacredStandart',
         cost: 35,

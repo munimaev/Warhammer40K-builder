@@ -250,7 +250,7 @@ var DA_DeathwingTerminatorSquad_TerminatorHeavyWargear = function(o) {
     this.optionName = 'DA_DeathwingTerminatorSquad_TerminatorHeavyWargear';
     this.cost = 0;
     this.needChekEnambleEachTime =true;
-    this.headerText = 'Заменить Strom bolter на одно из мледущего';
+    this.headerText = 'Заменить Storm bolter на одно из мледущего';
     this.isWargearToChange = function(w,m) {
         var modelCount = m.unit.models.length;
         for (var m1 in m.unit.models) {

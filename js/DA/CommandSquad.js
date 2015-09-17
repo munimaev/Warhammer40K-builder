@@ -23,7 +23,7 @@ var DA_CommandSquad = function(o) {
 	this.defaultSpecialRules = [
 		'AndTheyShallKnowNoFear',
 		'GrimResolve',
-		'HonorOrDeath',
+		'HonourOrDeath',
 	];
 	WH_Unit_Infantry.apply(this, arguments);
 }

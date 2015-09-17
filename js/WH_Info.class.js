@@ -46,9 +46,9 @@ WH_Info.prototype.showRule = function(rule){
 
     
     $div = $('<div />');
-    if (Global.lang == 'Eng') {
-        $div.html(rule.textRus);
-    }
+
+    $div.append(rule.getTextBlock());
+
     this.$this.append($div);
 
 

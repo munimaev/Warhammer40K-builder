@@ -459,9 +459,9 @@ DA_RangedWeaponsFabric([{
     'optionNameInModel': 'StormBolter',
     'cost' : 5,
     'changeTo' : 'StormBolter',
-    'actionTextUp' : '<b>Strom Bolter</b> <i>за 5 очков.</i>',
+    'actionTextUp' : '<b>Storm bolter</b> <i>за 5 очков.</i>',
     // 'actionIconUp' : 'def',
-    'actionTextDown' : 'Удалить Strom Bolter.',
+    'actionTextDown' : 'Удалить Storm bolter.',
     // 'actionIconDown' : 'rewards1',
 },{
     'optionName'      : 'DA_RangedWeapons_CombiFlamer',
@@ -850,10 +850,10 @@ DA_RangedWeaponsFabric([
     addItems : ['CompanyStandart'],
 },
 {
-    'optionName'      : 'DA_Standart_CompanyBanner',
-    'optionNameInModel': 'CompanyBanner',
+    'optionName'      : 'DA_Standart_DeathwingCompanyBanner',
+    'optionNameInModel': 'DeathwingCompanyBanner',
     'cost' : 25,
-    addItems : ['CompanyBanner'],
+    addItems : ['DeathwingCompanyBanner'],
 },{
     'optionName'      : 'DA_Standart_SacredStandart',
     'optionNameInModel': 'SacredStandart',
