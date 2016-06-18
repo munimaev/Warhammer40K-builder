@@ -15,11 +15,6 @@ var WH_Roster = function(o) {
             'DarkAngels_RavenwingSilenceSquadron',
             'DarkAngels_HammerOfCaliban',
         ]
-    }, {
-        name: 'DeamonsOfChaos',
-        armies: [
-            'DeamonsOfChaos',
-        ]
     }];
 
     this.$popup = $('#popup');
