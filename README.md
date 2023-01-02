@@ -3,7 +3,7 @@ Warhammer40K-builder
 
 Army constructor for the Warhammer 40000 desktop wargame. In the current implementation, it allows you to fully assemble and calculate the cost in game points of the Dark Angels army.
 
-#### Особенности 
+#### Features 
 *	Has all the units of the Dark Angels
 *	There are all models and their characteristics
 *	There are all the rules for models and units (not all, however, have a description of the rules)
@@ -11,10 +11,10 @@ Army constructor for the Warhammer 40000 desktop wargame. In the current impleme
 *	All unit options are implemented, even the following: "If there are 10 models in a combat unit, then one model can replace its weapon with one weapon from the list of heavy weapons and another model can replace its weapon with one weapon from the list of special weapons. If in a squad less than 10 models, then one model can take a weapon from the list of heavy weapons or from the list of special weapons."
 *	The created roster can be beautifully printed directly from the browser
 
-#### Демка
+#### Live Demo
 <a href="http://munimaev.github.io/Warhammer40K-builder/">Create an army of the unforgiven for the glory of the Emperor!</a>
 
-#### Дополнительно
+#### Additional
 Смотри так же <a href="https://github.com/munimaev/Warhammer40K-unitmaster">Unit maker</a>
 
 Warhammer40K-builder (RU)
