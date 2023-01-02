@@ -36,4 +36,4 @@ Warhammer40K-builder (RU)
 <a href="http://munimaev.github.io/Warhammer40K-builder/">Создать армию непрощенных во славу Императора!</a>
 
 #### Дополнительно
-Смотри так же <a href="https://github.com/munimaev/Warhammer40K-unitmaster">Конструктор отрядов</a>
+Also see <a href="https://github.com/munimaev/Warhammer40K-unitmaster">Конструктор отрядов</a>
